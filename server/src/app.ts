@@ -52,11 +52,15 @@ export function createApp() {
 
   // ── Production: serve the built client + SPA fallback ────────────────
   if (env.isProd && fs.existsSync(CLIENT_DIST)) {
-    app.use(express.static(CLIENT_DIST, { maxAge: '1h', index: false }));
+    // Vite emits content-hashed asset filenames → cache those hard;
+    // index.html must always revalidate so deploys show up immediately.
+    app.use(express.static(CLIENT_DIST, { maxAge: '30d', immutable: true, index: false }));
     app.get('*', (req, res, next) => {
       // API/uploads 404s should fall through to the JSON handler.
       if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) return next();
-      return res.sendFile(path.join(CLIENT_DIST, 'index.html'));
+      return res.sendFile(path.join(CLIENT_DIST, 'index.html'), {
+        headers: { 'Cache-Control': 'no-cache' },
+      });
     });
   }
 
