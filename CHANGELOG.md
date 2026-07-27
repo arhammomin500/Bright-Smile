@@ -17,6 +17,11 @@ Every code/content/config change must add an entry under the current date
   (sx multiplier on the theme radius) and the button was a full pill. Now a
   crisp 16px card with field + button sharing a 12px radius.
 
+### Caching fix for deploys
+- Phones kept showing stale pages after deploys. The server now sends
+  `Cache-Control: no-cache` for the SPA's `index.html` (always revalidates)
+  while content-hashed JS/CSS assets cache hard for 30 days (`immutable`).
+
 ### Project docs
 - Added this `CHANGELOG.md` (with retroactive history) and `CLAUDE.md`
   project rules requiring every future change to be logged here in the same
