@@ -1,0 +1,611 @@
+// Bright Smile Dental Clinic — data model
+// Provider: PostgreSQL (hosted free on Neon; originally authored for SQL
+// Server and kept deliberately provider-portable):
+//   • Status/role/type fields are String, validated in-app via Zod + the
+//     union types in src/constants/enums.ts.
+//   • Structured content (steps, faqs, tags…) is stored as JSON in text
+//     columns and (de)serialised in the app layer.
+//   • Relations default to NoAction; owned child rows use Cascade where the
+//     path is unique.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// AUTH & USERS
+// ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String   
+  role         String    @default("PATIENT") // PATIENT | RECEPTION | DOCTOR | ADMIN
+  firstName    String
+  lastName     String
+  phone        String?
+  avatarUrl    String?  
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Optional links to domain entities.
+  // NOTE: not @unique — SQL Server unique indexes treat NULL as a value, so a
+  // nullable unique FK would allow only ONE user without a patient/doctor.
+  // One-user-per-patient/doctor is enforced at the application layer.
+  patient   Patient? @relation(fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patientId Int?
+  doctor    Doctor?  @relation(fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  doctorId  Int?
+
+  refreshTokens  RefreshToken[]
+  passwordResets PasswordReset[]
+  notifications  Notification[]
+  auditLogs      AuditLog[]
+
+  @@index([role])
+  @@index([patientId])
+  @@index([doctorId])
+}
+
+model RefreshToken {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  tokenHash String   
+  userAgent String?  
+  ip        String?
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model PasswordReset {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  otpHash   String   
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// DOCTORS & STAFF
+// ─────────────────────────────────────────────────────────────────────
+
+model Doctor {
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  firstName       String
+  lastName        String
+  title           String? // e.g. "Dr.", "Prof."
+  photoUrl        String? 
+  qualification   String  
+  specialization  String
+  experienceYears Int      @default(0)
+  languages       String   // JSON array of strings
+  bio             String  
+  availableDays   String   // JSON array of ints 0..6 (Sun..Sat)
+  consultStart    String   @default("09:00")
+  consultEnd      String   @default("17:00")
+  consultFeeMin   Decimal  @default(0) @db.Decimal(10, 2)
+  consultFeeMax   Decimal  @default(0) @db.Decimal(10, 2)
+
+  // Slot configuration
+  slotDurationMin     Int @default(30)
+  maxPatientsPerSlot  Int @default(1)
+  emergencyReserved   Int @default(0) // slots/day reserved for emergencies
+
+  isActive     Boolean @default(true)
+  displayOrder Int     @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  users           User[]
+  schedules       DoctorSchedule[]
+  leaves          DoctorLeave[]
+  slotBlocks      SlotBlock[]
+  appointments    Appointment[]
+  clinicalRecords ClinicalRecord[]
+  prescriptions   Prescription[]
+
+  @@index([isActive])
+}
+
+model DoctorSchedule {
+  id         Int     @id @default(autoincrement())
+  doctor     Doctor  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId   Int
+  dayOfWeek  Int // 0 = Sunday … 6 = Saturday
+  isWorking  Boolean @default(true)
+  startTime  String  @default("09:00")
+  endTime    String  @default("17:00")
+  breakStart String?
+  breakEnd   String?
+
+  @@unique([doctorId, dayOfWeek])
+}
+
+model DoctorLeave {
+  id        Int      @id @default(autoincrement())
+  doctor    Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId  Int
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([doctorId])
+}
+
+model SlotBlock {
+  id        Int      @id @default(autoincrement())
+  doctor    Doctor?  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId  Int?
+  date      DateTime @db.Date
+  startTime String
+  endTime   String
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([doctorId, date])
+}
+
+model Holiday {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @unique @db.Date
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// TREATMENTS
+// ─────────────────────────────────────────────────────────────────────
+
+model Treatment {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  name         String
+  category     String // General | Cosmetic | Restorative | Orthodontics | Surgical | Pediatric | Preventive | Emergency
+  icon         String? // MUI icon key
+  imageUrl     String? 
+  shortDesc    String  
+  overview     String  
+  symptoms     String   // JSON array
+  process      String   // JSON array of { title, description }
+  benefits     String   // JSON array
+  recovery     String  
+  faqs         String   // JSON array of { question, answer }
+  priceMin     Decimal  @default(0) @db.Decimal(10, 2)
+  priceMax     Decimal  @default(0) @db.Decimal(10, 2)
+  durationMin  Int      @default(30)
+  isFeatured   Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  appointments  Appointment[]
+  costInquiries CostInquiry[]
+
+  @@index([category])
+  @@index([isFeatured])
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// PATIENTS (EMR)
+// ─────────────────────────────────────────────────────────────────────
+
+model Patient {
+  id            Int       @id @default(autoincrement())
+  patientCode   String    @unique // e.g. BSP-000123
+  firstName     String
+  lastName      String
+  dob           DateTime? @db.Date
+  gender        String? // MALE | FEMALE | OTHER
+  bloodGroup    String?
+  mobile        String
+  email         String?
+  address       String?  
+  city          String?
+  emergencyName String?
+  emergencyPhone String?
+  notes         String?  
+  isActive      Boolean   @default(true)
+  createdById   Int?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  users           User[]
+  medicalProfile  MedicalProfile?
+  appointments    Appointment[]
+  clinicalRecords ClinicalRecord[]
+  prescriptions   Prescription[]
+  documents       Document[]
+  invoices        Invoice[]
+  notifications   Notification[]
+
+  @@index([mobile])
+  @@index([lastName, firstName])
+}
+
+model MedicalProfile {
+  id                 Int     @id @default(autoincrement())
+  patient            Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId          Int     @unique
+  medicalHistory     String?
+  allergies          String?
+  currentMedications String?
+  dentalHistory      String?
+  previousTreatments String?
+  chronicDiseases    String?
+  updatedAt          DateTime @updatedAt
+}
+
+model ClinicalRecord {
+  id            Int       @id @default(autoincrement())
+  patient       Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId     Int
+  doctor        Doctor?   @relation(fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  doctorId      Int?
+  appointmentId Int?
+  visitDate     DateTime  @default(now())
+  chiefComplaint String? 
+  diagnosis     String?  
+  treatmentPlan String?  
+  procedures    String?  
+  clinicalNotes String?  
+  followUpDate  DateTime? @db.Date
+  createdAt     DateTime  @default(now())
+
+  prescriptions Prescription[]
+
+  @@index([patientId])
+}
+
+model Prescription {
+  id               Int             @id @default(autoincrement())
+  patient          Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId        Int
+  doctor           Doctor?         @relation(fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  doctorId         Int?
+  clinicalRecord   ClinicalRecord? @relation(fields: [clinicalRecordId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  clinicalRecordId Int?
+  notes            String?        
+  createdAt        DateTime        @default(now())
+
+  items PrescriptionItem[]
+
+  @@index([patientId])
+}
+
+model PrescriptionItem {
+  id             Int          @id @default(autoincrement())
+  prescription   Prescription @relation(fields: [prescriptionId], references: [id], onDelete: Cascade)
+  prescriptionId Int
+  drug           String
+  dosage         String?
+  frequency      String?
+  duration       String?
+  instructions   String?
+}
+
+model Document {
+  id           Int      @id @default(autoincrement())
+  patient      Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId    Int
+  type         String // XRAY | REPORT | IMAGE | PDF | CONSENT
+  title        String
+  fileName     String
+  filePath     String  
+  mimeType     String?
+  sizeBytes    Int      @default(0)
+  uploadedById Int?
+  createdAt    DateTime @default(now())
+
+  @@index([patientId])
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// BILLING
+// ─────────────────────────────────────────────────────────────────────
+
+model Invoice {
+  id         Int      @id @default(autoincrement())
+  invoiceNo  String   @unique // e.g. BSI-000123
+  patient    Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId  Int
+  appointmentId Int?
+  subtotal   Decimal  @default(0) @db.Decimal(10, 2)
+  discount   Decimal  @default(0) @db.Decimal(10, 2)
+  tax        Decimal  @default(0) @db.Decimal(10, 2)
+  total      Decimal  @default(0) @db.Decimal(10, 2)
+  paidAmount Decimal  @default(0) @db.Decimal(10, 2)
+  status     String   @default("UNPAID") // UNPAID | PARTIAL | PAID | REFUNDED
+  notes      String? 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  items    InvoiceItem[]
+  payments Payment[]
+
+  @@index([patientId])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id          Int     @id @default(autoincrement())
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId   Int
+  description String
+  quantity    Int     @default(1)
+  unitPrice   Decimal @default(0) @db.Decimal(10, 2)
+  amount      Decimal @default(0) @db.Decimal(10, 2)
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId Int
+  amount    Decimal  @db.Decimal(10, 2)
+  method    String   @default("CASH") // CASH | CARD | INSURANCE | ONLINE | UPI
+  reference String?
+  paidAt    DateTime @default(now())
+
+  @@index([invoiceId])
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// APPOINTMENTS & SLOTS
+// ─────────────────────────────────────────────────────────────────────
+
+model Appointment {
+  id              Int      @id @default(autoincrement())
+  appointmentCode String   @unique // e.g. BSA-20260720-0001
+
+  patient    Patient?   @relation(fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patientId  Int?
+  doctor     Doctor     @relation(fields: [doctorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  doctorId   Int
+  treatment  Treatment? @relation(fields: [treatmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  treatmentId Int?
+
+  // Snapshot of contact details (supports guest / walk-in booking)
+  contactName  String
+  contactEmail String?
+  contactPhone String
+
+  scheduledDate DateTime @db.Date
+  startTime     String // "HH:mm"
+  endTime       String // "HH:mm"
+
+  status      String   @default("PENDING") // PENDING | CONFIRMED | RESCHEDULED | COMPLETED | CANCELLED | NO_SHOW
+  source      String   @default("ONLINE") // ONLINE | WALK_IN | PHONE
+  isEmergency Boolean  @default(false)
+
+  reason        String? 
+  medicalNotes  String? 
+  internalNotes String? 
+
+  createdById Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  statusHistory AppointmentStatusHistory[]
+  documents     AppointmentDocument[]
+
+  @@index([scheduledDate])
+  @@index([doctorId, scheduledDate])
+  @@index([status])
+  @@index([patientId])
+}
+
+model AppointmentStatusHistory {
+  id            Int         @id @default(autoincrement())
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  appointmentId Int
+  fromStatus    String?
+  toStatus      String
+  note          String?    
+  changedById   Int?
+  createdAt     DateTime    @default(now())
+
+  @@index([appointmentId])
+}
+
+// Files uploaded during booking (previous reports), separate from patient EMR docs
+model AppointmentDocument {
+  id            Int         @id @default(autoincrement())
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  appointmentId Int
+  title         String
+  fileName      String
+  filePath      String     
+  mimeType      String?
+  sizeBytes     Int         @default(0)
+  createdAt     DateTime    @default(now())
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// NOTIFICATIONS
+// ─────────────────────────────────────────────────────────────────────
+
+model Notification {
+  id           Int      @id @default(autoincrement())
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int?
+  patient      Patient? @relation(fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patientId    Int?
+  audienceRole String? // broadcast to a role when userId is null: RECEPTION | ADMIN
+  type         String // APPOINTMENT_NEW | APPOINTMENT_CONFIRMED | APPOINTMENT_CANCELLED | APPOINTMENT_RESCHEDULED | FOLLOW_UP | PAYMENT_REMINDER | SYSTEM
+  channel      String   @default("IN_APP") // IN_APP | EMAIL | SMS | WHATSAPP | PUSH
+  title        String
+  message      String  
+  relatedType  String?
+  relatedId    Int?
+  isRead       Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([userId, isRead])
+  @@index([audienceRole, isRead])
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// WEBSITE CONTENT (CMS)
+// ─────────────────────────────────────────────────────────────────────
+
+model Testimonial {
+  id           Int      @id @default(autoincrement())
+  patientName  String
+  avatarUrl    String? 
+  location     String?
+  rating       Int      @default(5)
+  title        String?
+  content      String  
+  treatment    String?
+  videoUrl     String? 
+  source       String?  @default("GOOGLE") // GOOGLE | VIDEO | STORY | DIRECT
+  isFeatured   Boolean  @default(false)
+  isApproved   Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model BlogPost {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  excerpt     String   
+  content     String   
+  coverImage  String?  
+  category    String
+  author      String
+  tags        String    @default("[]") // JSON array
+  readMinutes Int       @default(5)
+  views       Int       @default(0)
+  isPublished Boolean   @default(true)
+  publishedAt DateTime? @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([category])
+  @@index([isPublished])
+}
+
+model GalleryItem {
+  id           Int      @id @default(autoincrement())
+  type         String // PHOTO | BEFORE_AFTER | VIDEO | EQUIPMENT | ROOM
+  title        String
+  category     String?
+  imageUrl     String? 
+  beforeUrl    String? 
+  afterUrl     String? 
+  videoUrl     String? 
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([type])
+}
+
+model Faq {
+  id           Int      @id @default(autoincrement())
+  question     String  
+  answer       String  
+  category     String   @default("General")
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+}
+
+model InsurancePartner {
+  id           Int      @id @default(autoincrement())
+  name         String
+  logoUrl      String? 
+  displayOrder Int      @default(0)
+}
+
+model Award {
+  id           Int      @id @default(autoincrement())
+  title        String
+  issuer       String?
+  year         Int?
+  imageUrl     String? 
+  description  String? 
+  displayOrder Int      @default(0)
+}
+
+model TeamMember {
+  id           Int      @id @default(autoincrement())
+  name         String
+  role         String
+  photoUrl     String? 
+  bio          String? 
+  displayOrder Int      @default(0)
+}
+
+model ClinicStat {
+  id           Int      @id @default(autoincrement())
+  label        String
+  value        Int      @default(0)
+  suffix       String?
+  icon         String?
+  displayOrder Int      @default(0)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String  
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model CostInquiry {
+  id          Int        @id @default(autoincrement())
+  treatment   Treatment? @relation(fields: [treatmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  treatmentId Int?
+  name        String
+  email       String?
+  phone       String
+  message     String?   
+  isHandled   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// SYSTEM
+// ─────────────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  user       User?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userId     Int?
+  action     String
+  entityType String?
+  entityId   Int?
+  metadata   String? 
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String  
+  updatedAt DateTime @updatedAt
+}

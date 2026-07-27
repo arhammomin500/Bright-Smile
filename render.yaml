@@ -1,0 +1,30 @@
+# Render Blueprint — one free web service that runs the API and serves the
+# built React app from the same origin (so auth cookies just work).
+#
+# Setup: push this repo to GitHub → Render Dashboard → New → Blueprint →
+# pick the repo. Render reads this file and prompts for DATABASE_URL.
+services:
+  - type: web
+    name: bright-smile
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build && npm run db:deploy
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # paste your Neon connection string in the dashboard
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://bright-smile.onrender.com # update if Render assigns a different URL
+      - key: CLINIC_NAME
+        value: Bright Smile Dental Clinic
+      - key: CLINIC_PHONE
+        value: "+91 93732 23464"
+      - key: CLINIC_WHATSAPP
+        value: "919373223464"
