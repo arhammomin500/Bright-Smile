@@ -23,7 +23,7 @@ services:
       - key: JWT_REFRESH_SECRET
         generateValue: true
       - key: CLIENT_URL
-        value: https://bright-smile.onrender.com # update if Render assigns a different URL
+        value: https://bright-smile-qt7h.onrender.com
       - key: CLINIC_NAME
         value: Bright Smile Dental Clinic
       - key: CLINIC_PHONE
