@@ -8,14 +8,13 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-07-27
 
-### Mobile polish — quick-booking box
-- On phones the "Find a Slot" box no longer overlaps the hero video (it was
-  crowding the hero text); it now sits cleanly below with even spacing. The
-  date field and button are locked to the same 52px height and width. The
-  floating-over-the-hero look is kept on desktop.
-- Removed the "circle" look: the card's corner radius was accidentally 80px
-  (sx multiplier on the theme radius) and the button was a full pill. Now a
-  crisp 16px card with field + button sharing a 12px radius.
+### Quick-booking box styling (final, per owner)
+- Final look after iterating with the owner: the box **floats over the hero's
+  bottom edge on all screen sizes** with the **soft rounded / pill style**
+  (large card radius, pill button) — the owner preferred the original shape.
+- Kept from the interim fixes: the date field and button are locked to equal
+  52px heights so the stack always lines up. (Interim below-the-hero /
+  square-corner variants were tried and reverted.)
 
 ### Caching fix for deploys
 - Phones kept showing stale pages after deploys. The server now sends
