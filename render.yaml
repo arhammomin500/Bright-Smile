@@ -8,7 +8,9 @@ services:
     name: bright-smile
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build && npm run db:deploy
+    # --include=dev is required: NODE_ENV=production would otherwise make npm
+    # skip devDependencies (tsc, vite, prisma CLI) that the build itself needs.
+    buildCommand: npm install --include=dev && npm run build && npm run db:deploy
     startCommand: npm run start
     healthCheckPath: /api/health
     envVars:
