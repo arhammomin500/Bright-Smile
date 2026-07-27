@@ -13,6 +13,9 @@ Every code/content/config change must add an entry under the current date
   crowding the hero text); it now sits cleanly below with even spacing. The
   date field and button are locked to the same 52px height and width. The
   floating-over-the-hero look is kept on desktop.
+- Removed the "circle" look: the card's corner radius was accidentally 80px
+  (sx multiplier on the theme radius) and the button was a full pill. Now a
+  crisp 16px card with field + button sharing a 12px radius.
 
 ### Project docs
 - Added this `CHANGELOG.md` (with retroactive history) and `CLAUDE.md`

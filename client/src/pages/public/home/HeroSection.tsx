@@ -252,10 +252,11 @@ function QuickBookingWidget() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Card sx={{ p: { xs: 2.5, md: 2.5 }, borderRadius: 5, boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
+      {/* Crisp, professional bar: one modest corner radius (12px) shared by
+          the card, the field, and the button — no pill/circle shapes. */}
+      <Card sx={{ p: 2, borderRadius: '16px', boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
         <Grid container spacing={1.5} alignItems="stretch">
           <Grid size={{ xs: 12, sm: 7 }}>
-            {/* Height locked to 52px to match the button exactly */}
             <TextField
               type="date"
               fullWidth
@@ -264,7 +265,7 @@ function QuickBookingWidget() {
               inputProps={{ min: dayjs().format('YYYY-MM-DD') }}
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              sx={{ '& .MuiOutlinedInput-root': { height: 52 } }}
+              sx={{ '& .MuiOutlinedInput-root': { height: 52, borderRadius: '12px' } }}
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 5 }}>
@@ -273,7 +274,7 @@ function QuickBookingWidget() {
               variant="contained"
               startIcon={<SearchIcon />}
               onClick={() => navigate(`/book${date ? `?date=${date}` : ''}`)}
-              sx={{ height: 52, fontSize: '1rem' }}
+              sx={{ height: 52, fontSize: '1rem', borderRadius: '12px' }}
             >
               Find a Slot
             </Button>
