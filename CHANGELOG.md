@@ -8,6 +8,20 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-07-27
 
+### Booking v2 — under-30-second mobile-first flow
+- /book rebuilt as one slim centered column: doctor mini-header (photo,
+  verified badge, rating — always visible) → date strip → time slots →
+  Name + Mobile → Confirm.
+- **Only open slots are shown** (booked ones hidden — no strikethrough
+  clutter); all targets ≥48px for thumbs.
+- **Auto-advances to the first day that has open slots** on load, so the
+  visitor starts with bookable times immediately.
+- **Sticky bottom Confirm bar on mobile** showing doctor + selected
+  day/time live; prominent inline confirm on desktop.
+- Floating WhatsApp/booking buttons hidden on /book (distraction-free);
+  page sits on a soft tinted background with white section cards.
+- Verified end-to-end: 1 tap on a slot + 2 fields + Confirm = booked.
+
 ### Booking page redesign + homepage widget removed
 - Removed the "Preferred date" quick-booking box from the homepage entirely —
   the hero's Book Appointment button navigates straight to /book.

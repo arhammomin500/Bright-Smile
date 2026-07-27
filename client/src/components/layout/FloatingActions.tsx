@@ -3,16 +3,20 @@ import { Box, Fab, Tooltip, Zoom, useScrollTrigger } from '@mui/material';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { whatsappLink } from '@/lib/clinic';
 
 // Floating WhatsApp, sticky "Book" (mobile), and scroll-to-top buttons.
 export function FloatingActions() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showTop, setShowTop] = useState(false);
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 400 });
 
   useEffect(() => setShowTop(scrolled), [scrolled]);
+
+  // The booking page has its own sticky confirm bar — keep it distraction-free.
+  if (location.pathname.startsWith('/book')) return null;
 
   return (
     <Box
