@@ -8,6 +8,12 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-07-27
 
+### Mobile polish — quick-booking box
+- On phones the "Find a Slot" box no longer overlaps the hero video (it was
+  crowding the hero text); it now sits cleanly below with even spacing. The
+  date field and button are locked to the same 52px height and width. The
+  floating-over-the-hero look is kept on desktop.
+
 ### Project docs
 - Added this `CHANGELOG.md` (with retroactive history) and `CLAUDE.md`
   project rules requiring every future change to be logged here in the same

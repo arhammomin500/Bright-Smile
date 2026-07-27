@@ -192,8 +192,9 @@ export function HeroSection() {
         </Container>
       </Box>
 
-      {/* ── Floating quick-booking bar, straddling the hero's bottom edge ── */}
-      <Container sx={{ position: 'relative', zIndex: 2, mt: { xs: -4.5, md: -5.5 } }}>
+      {/* ── Quick-booking bar: floats over the hero edge on desktop, sits
+             cleanly below it on mobile (overlap looks cramped on phones) ── */}
+      <Container sx={{ position: 'relative', zIndex: 2, mt: { xs: 3, md: -5.5 } }}>
         <QuickBookingWidget />
       </Container>
     </>
@@ -251,28 +252,28 @@ function QuickBookingWidget() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Card sx={{ p: { xs: 2, md: 2.5 }, borderRadius: 5, boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
-        <Grid container spacing={1.5} alignItems="center">
+      <Card sx={{ p: { xs: 2.5, md: 2.5 }, borderRadius: 5, boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
+        <Grid container spacing={1.5} alignItems="stretch">
           <Grid size={{ xs: 12, sm: 7 }}>
+            {/* Height locked to 52px to match the button exactly */}
             <TextField
               type="date"
               fullWidth
-              size="small"
               label="Preferred date"
               InputLabelProps={{ shrink: true }}
               inputProps={{ min: dayjs().format('YYYY-MM-DD') }}
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              sx={{ '& .MuiOutlinedInput-root': { height: 52 } }}
             />
           </Grid>
           <Grid size={{ xs: 12, sm: 5 }}>
             <Button
               fullWidth
               variant="contained"
-              size="large"
               startIcon={<SearchIcon />}
               onClick={() => navigate(`/book${date ? `?date=${date}` : ''}`)}
-              sx={{ py: 1.15 }}
+              sx={{ height: 52, fontSize: '1rem' }}
             >
               Find a Slot
             </Button>
