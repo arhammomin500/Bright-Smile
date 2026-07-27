@@ -1,25 +1,12 @@
 import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-  Rating,
-} from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import { Link, useNavigate } from 'react-router-dom';
+import { Box, Button, Container, Stack, Typography, Rating } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import dayjs from 'dayjs';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import SearchIcon from '@mui/icons-material/Search';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
-import { brand, hoverShadow } from '@/theme/theme';
+import { brand } from '@/theme/theme';
 
 
 const MotionBox = motion.create(Box);
@@ -192,11 +179,6 @@ export function HeroSection() {
         </Container>
       </Box>
 
-      {/* ── Floating quick-booking bar, straddling the hero's bottom edge
-             on every screen size (owner's preferred look) ── */}
-      <Container sx={{ position: 'relative', zIndex: 2, mt: { xs: -4.5, md: -5.5 } }}>
-        <QuickBookingWidget />
-      </Container>
     </>
   );
 }
@@ -238,50 +220,5 @@ function HeroVideo() {
       onError={() => setFailed(true)}
       sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
     />
-  );
-}
-
-// One-tap "find a slot" bar: pick a day, jump straight into the slot picker.
-function QuickBookingWidget() {
-  const navigate = useNavigate();
-  const [date, setDate] = useState(dayjs().add(1, 'day').format('YYYY-MM-DD'));
-
-  return (
-    <MotionBox
-      initial={{ opacity: 0, y: 26 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {/* Rounded floating bar. Card radius is a fixed 24px — big enough to
-          feel soft, small enough that the corner curve never cuts into the
-          "Preferred date" label. Placement (floating on the hero) unchanged. */}
-      <Card sx={{ p: { xs: 2.5, md: 2.5 }, borderRadius: '24px', boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
-        <Grid container spacing={1.5} alignItems="stretch">
-          <Grid size={{ xs: 12, sm: 7 }}>
-            <TextField
-              type="date"
-              fullWidth
-              label="Preferred date"
-              InputLabelProps={{ shrink: true }}
-              inputProps={{ min: dayjs().format('YYYY-MM-DD') }}
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              sx={{ '& .MuiOutlinedInput-root': { height: 52 } }}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 5 }}>
-            <Button
-              fullWidth
-              variant="contained"
-              startIcon={<SearchIcon />}
-              onClick={() => navigate(`/book${date ? `?date=${date}` : ''}`)}
-              sx={{ height: 52, fontSize: '1rem' }}
-            >
-              Find a Slot
-            </Button>
-          </Grid>
-        </Grid>
-      </Card>
-    </MotionBox>
   );
 }

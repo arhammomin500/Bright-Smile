@@ -1,8 +1,24 @@
 import { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Container, Stack, TextField, Typography, CircularProgress } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Rating,
+  Stack,
+  TextField,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import { motion } from 'framer-motion';
 import dayjs, { type Dayjs } from 'dayjs';
 
 import { PageHero } from '@/components/ui/PageHero';
@@ -10,10 +26,12 @@ import { useToast } from '@/components/feedback/ToastProvider';
 import { apiPost, errorMessage } from '@/lib/api';
 import { useDoctors, useAvailability } from '@/lib/queries';
 import { formatTime12h } from '@/lib/format';
-import { brand } from '@/theme/theme';
+import { brand, softShadow } from '@/theme/theme';
 import type { Appointment } from '@/lib/types';
 import { SlotPicker } from './SlotPicker';
 import { BookingSuccess } from './BookingSuccess';
+
+const MotionBox = motion.create(Box);
 
 // Ultra-simple booking: pick a time, leave a name and number — done.
 export default function Booking() {
@@ -22,10 +40,9 @@ export default function Booking() {
   const [params] = useSearchParams();
 
   const { data: doctors } = useDoctors();
-  // The clinic's sole doctor — provides working days for the day strip.
+  // The clinic's sole doctor — powers the day strip and the summary card.
   const doctor = doctors?.[0];
 
-  // Pre-fill the date when arriving from the homepage quick-booking widget.
   const [date, setDate] = useState<Dayjs | null>(() => {
     const d = params.get('date');
     return d && dayjs(d).isValid() && !dayjs(d).isBefore(dayjs(), 'day') ? dayjs(d) : dayjs();
@@ -55,7 +72,6 @@ export default function Booking() {
       toast.success('Appointment requested successfully!');
     } catch (e) {
       toast.error(errorMessage(e, 'Could not book the appointment.'));
-      // If the slot was just taken, clear it so a fresh one can be picked.
       setStartTime(undefined);
     } finally {
       setSubmitting(false);
@@ -70,70 +86,131 @@ export default function Booking() {
     <>
       <PageHero
         title="Book Your Appointment"
-        subtitle="Pick a time with Dr. Afaque Khan and leave your name and number — that's it."
+        subtitle="Pick a time, leave your name and number — done in under a minute."
         crumbs={[{ label: 'Book Appointment' }]}
       />
-      <Container sx={{ py: { xs: 4, md: 6 } }} maxWidth="md">
+      <Container sx={{ py: { xs: 4, md: 6 } }}>
         {submitting ? (
-          <Box sx={{ display: 'grid', placeItems: 'center', py: 8, gap: 2 }}>
+          <Box sx={{ display: 'grid', placeItems: 'center', py: 10, gap: 2 }}>
             <CircularProgress />
             <Typography color="text.secondary">Securing your slot…</Typography>
           </Box>
         ) : (
-          <Stack spacing={3}>
-            {/* 1 · When */}
-            <Card sx={{ p: { xs: 2.5, md: 3.5 } }}>
-              <SlotPicker
-                doctor={doctor}
-                date={date}
-                onDateChange={(d) => {
-                  setDate(d);
-                  setStartTime(undefined);
-                }}
-                availability={availability}
-                loadingSlots={loadingSlots}
-                startTime={startTime}
-                onSlotChange={setStartTime}
-              />
-            </Card>
+          <Grid container spacing={{ xs: 3, md: 4 }}>
+            {/* ── Left: pick day & time ── */}
+            <Grid size={{ xs: 12, md: 7.5 }}>
+              <MotionBox initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                <Card sx={{ p: { xs: 2.5, md: 3.5 } }}>
+                  <SlotPicker
+                    doctor={doctor}
+                    date={date}
+                    onDateChange={(d) => {
+                      setDate(d);
+                      setStartTime(undefined);
+                    }}
+                    availability={availability}
+                    loadingSlots={loadingSlots}
+                    startTime={startTime}
+                    onSlotChange={setStartTime}
+                  />
+                </Card>
+              </MotionBox>
+            </Grid>
 
-            {/* 2 · Who */}
-            <Card sx={{ p: { xs: 2.5, md: 3.5 } }}>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2 }}>
-                Your details
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid size={{ xs: 12, sm: 6 }}>
-                  <TextField label="Full name" required fullWidth value={name} onChange={(e) => setName(e.target.value)} />
-                </Grid>
-                <Grid size={{ xs: 12, sm: 6 }}>
-                  <TextField label="Mobile number" required fullWidth value={phone} onChange={(e) => setPhone(e.target.value)} />
-                </Grid>
-              </Grid>
-            </Card>
-
-            {/* Confirm */}
-            <Box sx={{ textAlign: 'center' }}>
-              {date && startTime && (
-                <Typography variant="body2" sx={{ mb: 1.5, color: 'text.secondary' }}>
-                  Booking <b style={{ color: brand.primary }}>{date.format('dddd, MMM D')}</b> at{' '}
-                  <b style={{ color: brand.primary }}>{formatTime12h(startTime)}</b> with Dr. Afaque Khan
-                </Typography>
-              )}
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<EventAvailableIcon />}
-                disabled={!canSubmit}
-                onClick={submit}
-                sx={{ px: 6, py: 1.5, fontSize: '1.05rem' }}
+            {/* ── Right: summary + your details ── */}
+            <Grid size={{ xs: 12, md: 4.5 }}>
+              <MotionBox
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.12 }}
+                sx={{ position: { md: 'sticky' }, top: { md: 124 } }}
               >
-                Confirm Booking
-              </Button>
-            </Box>
-          </Stack>
+                <Card sx={{ p: { xs: 2.5, md: 3 }, boxShadow: softShadow }}>
+                  {/* Doctor header */}
+                  <Stack direction="row" spacing={1.75} alignItems="center" sx={{ mb: 2.5 }}>
+                    <Avatar src={doctor?.photoUrl ?? undefined} sx={{ width: 54, height: 54 }} />
+                    <Box sx={{ minWidth: 0 }}>
+                      <Stack direction="row" spacing={0.5} alignItems="center">
+                        <Typography sx={{ fontWeight: 800 }} noWrap>
+                          {doctor?.fullName ?? 'Dr. Afaque Khan'}
+                        </Typography>
+                        <VerifiedIcon sx={{ fontSize: 17, color: brand.primary }} />
+                      </Stack>
+                      <Rating value={5} readOnly size="small" />
+                    </Box>
+                  </Stack>
+
+                  {/* Selected day & time */}
+                  <Stack spacing={1.25} sx={{ mb: 2.5 }}>
+                    <SummaryRow
+                      icon={<CalendarMonthIcon sx={{ fontSize: 19 }} />}
+                      label="Day"
+                      value={date ? date.format('ddd, MMM D, YYYY') : 'Not selected'}
+                      active={!!date}
+                    />
+                    <SummaryRow
+                      icon={<AccessTimeIcon sx={{ fontSize: 19 }} />}
+                      label="Time"
+                      value={startTime ? formatTime12h(startTime) : 'Pick a time slot'}
+                      active={!!startTime}
+                    />
+                  </Stack>
+
+                  <Divider sx={{ mb: 2.5 }} />
+
+                  {/* Details */}
+                  <Typography sx={{ fontWeight: 800, mb: 1.5, fontSize: '1.02rem' }}>
+                    Your details
+                  </Typography>
+                  <Stack spacing={1.75}>
+                    <TextField label="Full name" fullWidth value={name} onChange={(e) => setName(e.target.value)} />
+                    <TextField label="Mobile number" fullWidth type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <Button
+                      variant="contained"
+                      size="large"
+                      startIcon={<EventAvailableIcon />}
+                      disabled={!canSubmit}
+                      onClick={submit}
+                      sx={{ py: 1.4, fontSize: '1.02rem' }}
+                    >
+                      Confirm Booking
+                    </Button>
+                  </Stack>
+
+                  <Typography variant="caption" sx={{ display: 'block', mt: 2, color: 'text.secondary', textAlign: 'center' }}>
+                    Free rescheduling · Our reception will confirm your visit
+                  </Typography>
+                </Card>
+              </MotionBox>
+            </Grid>
+          </Grid>
         )}
       </Container>
     </>
+  );
+}
+
+function SummaryRow({ icon, label, value, active }: { icon: React.ReactNode; label: string; value: string; active: boolean }) {
+  return (
+    <Stack
+      direction="row"
+      spacing={1.5}
+      alignItems="center"
+      sx={{
+        p: 1.25,
+        borderRadius: '12px',
+        bgcolor: active ? brand.mist : '#fff',
+        border: `1.5px ${active ? 'solid' : 'dashed'} ${active ? 'rgba(31,111,235,0.35)' : brand.line}`,
+        transition: 'all .2s ease',
+      }}
+    >
+      <Box sx={{ color: active ? brand.primary : 'text.disabled', display: 'grid', placeItems: 'center' }}>{icon}</Box>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.5, minWidth: 34 }}>
+        {label}
+      </Typography>
+      <Typography variant="body2" sx={{ fontWeight: 700, color: active ? 'text.primary' : 'text.disabled' }}>
+        {value}
+      </Typography>
+    </Stack>
   );
 }

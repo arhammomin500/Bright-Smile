@@ -8,7 +8,17 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-07-27
 
-### Quick-booking box styling (final, per owner)
+### Booking page redesign + homepage widget removed
+- Removed the "Preferred date" quick-booking box from the homepage entirely —
+  the hero's Book Appointment button navigates straight to /book.
+- Rebuilt /book as a friendly two-panel layout: left = "Choose a day" strip
+  (day cards) + "Choose a time" with uniformly sized time buttons grouped by
+  Morning/Afternoon/Evening (each showing how many slots are open, selected
+  state with check mark); right = sticky summary card with Dr. Afaque Khan,
+  live day/time summary rows, name + mobile fields, and Confirm. Mobile
+  stacks the panels. Verified end-to-end with a live booking.
+
+### Quick-booking box styling (superseded by the redesign above)
 - Final look after iterating with the owner: the box **floats over the hero's
   bottom edge on all screen sizes**, pill button kept, and the **card corner
   radius settled at 24px** — rounded and soft, but the corner curve no longer
