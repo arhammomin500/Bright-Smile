@@ -252,9 +252,10 @@ function QuickBookingWidget() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Soft rounded bar (owner's preferred style), with the field and
-          button locked to equal 52px heights so the stack stays aligned. */}
-      <Card sx={{ p: { xs: 2, md: 2.5 }, borderRadius: 5, boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
+      {/* Rounded floating bar. Card radius is a fixed 24px — big enough to
+          feel soft, small enough that the corner curve never cuts into the
+          "Preferred date" label. Placement (floating on the hero) unchanged. */}
+      <Card sx={{ p: { xs: 2.5, md: 2.5 }, borderRadius: '24px', boxShadow: hoverShadow, maxWidth: 640, mx: 'auto' }}>
         <Grid container spacing={1.5} alignItems="stretch">
           <Grid size={{ xs: 12, sm: 7 }}>
             <TextField

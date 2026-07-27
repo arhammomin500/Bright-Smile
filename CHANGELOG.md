@@ -10,11 +10,11 @@ Every code/content/config change must add an entry under the current date
 
 ### Quick-booking box styling (final, per owner)
 - Final look after iterating with the owner: the box **floats over the hero's
-  bottom edge on all screen sizes** with the **soft rounded / pill style**
-  (large card radius, pill button) — the owner preferred the original shape.
-- Kept from the interim fixes: the date field and button are locked to equal
-  52px heights so the stack always lines up. (Interim below-the-hero /
-  square-corner variants were tried and reverted.)
+  bottom edge on all screen sizes**, pill button kept, and the **card corner
+  radius settled at 24px** — rounded and soft, but the corner curve no longer
+  cuts into the "Preferred date" label (the original 80px curve did).
+- Also kept: date field and button locked to equal 52px heights. (Interim
+  below-the-hero and square-corner variants were tried and reverted.)
 
 ### Caching fix for deploys
 - Phones kept showing stale pages after deploys. The server now sends
