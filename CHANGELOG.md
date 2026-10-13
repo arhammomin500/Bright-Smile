@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-13
 
+### Custom domain: brightsmiledent.in
+- Domain purchased on GoDaddy. Baked into the site: `sitemap.xml` (35 URLs),
+  `robots.txt` sitemap line, Open Graph URL, and per-page canonical tags via
+  `usePageMeta`. DNS/Render connection is done in the dashboards (see README).
+
 ### v2.0 — Frontend-only static website (backend & admin removed)
 - **Removed the entire backend and admin system** at the owner's request:
   Express/Prisma server, Neon database wiring, staff portal (/staff),

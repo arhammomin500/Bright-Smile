@@ -46,7 +46,7 @@ One-time switch from the old Node web service:
 1. Render → the static site → **Settings → Custom Domains → Add** your domain (add both `yourdomain.com` and `www.yourdomain.com`).
 2. At your domain registrar, add the DNS records Render shows you — typically a **CNAME** for `www` → `<your-site>.onrender.com`, and an **A/ALIAS** record for the root domain to Render's IP.
 3. Wait for DNS to propagate; Render then issues the HTTPS certificate automatically.
-4. Afterwards: put the final URL in `client/public/robots.txt` (sitemap line) and consider adding a `sitemap.xml`.
+4. Afterwards: the domain **brightsmiledent.in** is already baked into robots.txt, sitemap.xml, and canonical tags.
 
 ## History
 

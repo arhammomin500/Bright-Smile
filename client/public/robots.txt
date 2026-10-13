@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap: add your custom domain once connected, e.g.
-# Sitemap: https://www.yourdomain.com/sitemap.xml
+Sitemap: https://brightsmiledent.in/sitemap.xml
