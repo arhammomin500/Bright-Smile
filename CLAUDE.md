@@ -38,6 +38,5 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   BrightSmile tooth-badge logo.
 
 ## Build & deploy
-- `npm run build` → `client/dist`. Deploy: push to `main` → Render **static
-  site** per `render.yaml` (SPA rewrite included). Free tier, always-on, CDN.
+- `npm run build` → `client/dist`. Deploy: push to `main` → **GitHub Pages** via `.github/workflows/deploy.yml` (repo is public; 404.html = SPA fallback). Domain: brightsmiledent.in (GoDaddy DNS).
 - Client: MUI v6 `Grid2` (`size={{xs,md}}`), `@/` path alias.

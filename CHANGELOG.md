@@ -8,6 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-13
 
+### Hosting moved to GitHub Pages (owner chose over Render)
+- Repo made public (required for free Pages; no secrets were ever committed)
+  and a GitHub Actions workflow now builds and publishes `client/dist` to
+  GitHub Pages on every push to main, with a 404.html SPA fallback for deep
+  links. Custom domain `brightsmiledent.in` registered in Pages settings;
+  `render.yaml` removed. Remaining step: GoDaddy DNS (A @ → GitHub Pages IPs,
+  CNAME www → arhammomin500.github.io), then enforce HTTPS.
+
 ### Custom domain: brightsmiledent.in
 - Domain purchased on GoDaddy. Baked into the site: `sitemap.xml` (35 URLs),
   `robots.txt` sitemap line, Open Graph URL, and per-page canonical tags via

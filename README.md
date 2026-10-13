@@ -7,7 +7,7 @@ A **frontend-only static website** for Bright Smile Dental Clinic (Dr. Afaque Kh
 | **Stack** | React 18 · TypeScript · Vite · MUI v6 · React Router · Framer Motion |
 | **Content** | Static TypeScript data modules in `client/src/data/` (doctor, 20 treatments, FAQs, testimonials, gallery, blog) |
 | **Booking** | Honest frontend-only flow: visitor picks a preferred day/time from the clinic's published hours and sends the request via **WhatsApp**, email, or a call. The site never claims an appointment is confirmed. |
-| **Hosting** | Static site (Render blueprint included) — works on any static host |
+| **Hosting** | GitHub Pages (auto-deploys from `main` via GitHub Actions) — custom domain `brightsmiledent.in` |
 
 ## Develop & build
 
@@ -32,21 +32,18 @@ All text/images the clinic will want to change live in `client/src/data/`:
 
 Photos are hotlinked Unsplash placeholders — swap in real clinic photography when available.
 
-## Deploying on Render (current setup)
+## Deployment (GitHub Pages)
 
-`render.yaml` defines a **free static site** (always-on, CDN, custom domains + HTTPS included).
-
-One-time switch from the old Node web service:
-1. Render Dashboard → delete the old **bright-smile** *web service* (static sites are a different type; Render can't convert in place).
-2. Blueprints → bright-smile → **Manual sync** → it creates the static site from `render.yaml`.
-3. Done — every push to `main` publishes automatically. SPA refreshes are handled by the rewrite rule in `render.yaml`.
+Every push to `main` triggers `.github/workflows/deploy.yml`, which builds the
+site and publishes `client/dist` to GitHub Pages (with a `404.html` SPA
+fallback so deep links work). Custom domain: **brightsmiledent.in**.
 
 ## Connecting a custom domain
 
-1. Render → the static site → **Settings → Custom Domains → Add** your domain (add both `yourdomain.com` and `www.yourdomain.com`).
-2. At your domain registrar, add the DNS records Render shows you — typically a **CNAME** for `www` → `<your-site>.onrender.com`, and an **A/ALIAS** record for the root domain to Render's IP.
-3. Wait for DNS to propagate; Render then issues the HTTPS certificate automatically.
-4. Afterwards: the domain **brightsmiledent.in** is already baked into robots.txt, sitemap.xml, and canonical tags.
+GoDaddy DNS for brightsmiledent.in → GitHub Pages:
+- `A` record, name `@`, value `185.199.108.153` (optionally also .109/.110/.111)
+- `CNAME` record, name `www`, value `arhammomin500.github.io`
+Then in the repo: Settings → Pages → tick **Enforce HTTPS** once the certificate is issued.
 
 ## History
 
