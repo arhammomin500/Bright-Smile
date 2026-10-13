@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-13
 
+### 🌐 brightsmiledent.in IS LIVE
+- GoDaddy DNS connected (A @ → 185.199.108.153, CNAME www → GitHub Pages);
+  the site now serves at http://brightsmiledent.in from GitHub Pages' CDN.
+  HTTPS certificate provisioning + enforcement in progress.
+
 ### Hosting moved to GitHub Pages (owner chose over Render)
 - Repo made public (required for free Pages; no secrets were ever committed)
   and a GitHub Actions workflow now builds and publishes `client/dist` to
