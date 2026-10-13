@@ -29,8 +29,10 @@ import { errorMessage } from '@/lib/api';
 import { formatDate } from '@/lib/format';
 import { brand, gradients } from '@/theme/theme';
 import type { BlogPost } from '@/lib/types';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 export default function BlogList() {
+  usePageMeta('Dental Health Blog — Bright Smile Dental Clinic', 'Dental tips and insights from Bright Smile Dental Clinic.');
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');

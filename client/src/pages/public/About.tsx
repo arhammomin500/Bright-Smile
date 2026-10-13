@@ -23,6 +23,7 @@ import { useAwards, useTeam, useStats } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { CLINIC } from '@/lib/clinic';
 import { brand, gradients } from '@/theme/theme';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 const cardHover = {
   transition: 'transform .28s ease, box-shadow .28s ease',
@@ -48,6 +49,7 @@ const MILESTONES: { year: string; title: string; text: string }[] = [
 ];
 
 export default function About() {
+  usePageMeta('About Us — Bright Smile Dental Clinic', 'Learn about Bright Smile Dental Clinic — our story, values, and the team behind gentle, modern dental care.');
   const awards = useAwards();
   const team = useTeam();
   const stats = useStats();
@@ -67,7 +69,7 @@ export default function About() {
             <Reveal>
               <Box
                 component="img"
-                src="https://picsum.photos/seed/clinicstory/800/600"
+                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=75&auto=format&fit=crop"
                 alt="Inside Bright Smile Dental Clinic"
                 sx={{
                   width: '100%',
@@ -234,7 +236,12 @@ export default function About() {
                     <Reveal delayIndex={i % 2}>
                       <Box
                         component="img"
-                        src={`https://picsum.photos/seed/${seed}/600/450`}
+                        src={[
+                          'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&q=75&auto=format&fit=crop',
+                          'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=75&auto=format&fit=crop',
+                          'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=75&auto=format&fit=crop',
+                          'https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=600&q=75&auto=format&fit=crop',
+                        ][i]}
                         alt="Clinic infrastructure"
                         sx={{
                           width: '100%',

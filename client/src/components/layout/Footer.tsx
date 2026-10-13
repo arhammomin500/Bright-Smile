@@ -94,14 +94,6 @@ export function Footer() {
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             © {new Date().getFullYear()} {CLINIC.name}. All rights reserved.
           </Typography>
-          <Stack direction="row" spacing={3}>
-            <MuiLink component={Link} to="/contact" underline="hover" sx={{ color: 'text.secondary', fontSize: 14 }}>
-              Privacy Policy
-            </MuiLink>
-            <MuiLink component={Link} to="/contact" underline="hover" sx={{ color: 'text.secondary', fontSize: 14 }}>
-              Terms of Service
-            </MuiLink>
-          </Stack>
         </Stack>
       </Container>
     </Box>

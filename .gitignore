@@ -6,7 +6,6 @@ node_modules/
 # builds
 dist/
 build/
-server/dist/
 client/dist/
 
 # env
@@ -16,11 +15,6 @@ client/dist/
 !.env.example
 
 # prisma
-server/prisma/*.db
-
-# uploads (user-generated)
-server/uploads/*
-!server/uploads/.gitkeep
 
 # logs
 logs/

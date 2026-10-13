@@ -25,10 +25,12 @@ import { errorMessage } from '@/lib/api';
 import { formatPriceRange } from '@/lib/format';
 import { brand, gradients } from '@/theme/theme';
 import type { Treatment } from '@/lib/types';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 const ALL = 'All';
 
 export default function TreatmentsList() {
+  usePageMeta('Dental Treatments — Bright Smile Dental Clinic', 'Explore our dental treatments: implants, aligners, whitening, root canal, cosmetic dentistry and more.');
   const { data: treatments, isLoading, isError, error, refetch } = useTreatments();
   const [category, setCategory] = useState<string>(ALL);
 

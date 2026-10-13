@@ -14,12 +14,13 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
-import { apiPost, errorMessage } from '@/lib/api';
 import { useToast } from '@/components/feedback/ToastProvider';
-import { CLINIC } from '@/lib/clinic';
+import { CLINIC, mailtoLink, whatsappLink } from '@/lib/clinic';
 import { brand, gradients } from '@/theme/theme';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Please enter your name'),
@@ -39,31 +40,36 @@ const socials = [
 ];
 
 export default function Contact() {
+  usePageMeta('Contact Us — Bright Smile Dental Clinic', 'Visit, call, or message Bright Smile Dental Clinic. Address, working hours, and quick WhatsApp contact.');
   const toast = useToast();
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
+    getValues,
+    trigger,
+    formState: { errors },
   } = useForm<ContactForm>({
     resolver: zodResolver(contactSchema),
     defaultValues: { name: '', email: '', phone: '', subject: '', message: '' },
   });
 
-  const onSubmit = async (values: ContactForm) => {
-    try {
-      await apiPost('/content/contact', {
-        name: values.name,
-        email: values.email,
-        phone: values.phone || undefined,
-        subject: values.subject || undefined,
-        message: values.message,
-      });
-      toast.success("Thanks for reaching out! We'll be in touch very soon.");
-      reset();
-    } catch (e) {
-      toast.error(errorMessage(e));
-    }
+  // Frontend-only site: the form composes the message and hands it to the
+  // visitor's own email or WhatsApp app — the website stores nothing.
+  const composeBody = (v: ContactForm) =>
+    `Name: ${v.name}\nEmail: ${v.email}${v.phone ? `\nPhone: ${v.phone}` : ''}\n\n${v.message}`;
+
+  const onSubmit = (values: ContactForm) => {
+    const subject = values.subject?.trim() || `Website enquiry from ${values.name}`;
+    window.location.href = mailtoLink(subject, composeBody(values));
+    toast.info('Your email app has opened with the message ready — just press send.');
+  };
+
+  const sendViaWhatsApp = async () => {
+    const valid = await trigger();
+    if (!valid) return;
+    const v = getValues();
+    window.open(whatsappLink(`Hi Bright Smile 👋\n\n${composeBody(v)}`), '_blank', 'noopener');
+    toast.info('WhatsApp has opened with the message ready — just press send.');
   };
 
   return (
@@ -142,15 +148,24 @@ export default function Contact() {
                       />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        disabled={isSubmitting}
-                        startIcon={<SendIcon />}
-                      >
-                        {isSubmitting ? 'Sending…' : 'Send Message'}
-                      </Button>
+                      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
+                        <Button type="submit" variant="contained" size="large" startIcon={<SendIcon />}>
+                          Send via Email
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          size="large"
+                          startIcon={<WhatsAppIcon />}
+                          onClick={sendViaWhatsApp}
+                          sx={{ color: '#1da851', borderColor: '#1da85166', '&:hover': { borderColor: '#1da851', bgcolor: '#1da8510d' } }}
+                        >
+                          Send via WhatsApp
+                        </Button>
+                      </Stack>
+                      <Typography variant="caption" sx={{ display: 'block', mt: 1.5, color: 'text.secondary' }}>
+                        This opens your own email or WhatsApp app with the message prepared — you review and send it
+                        directly to the clinic.
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Box>

@@ -12,8 +12,10 @@ import { useDoctors } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { brand, gradients } from '@/theme/theme';
 import type { Doctor } from '@/lib/types';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 export default function DoctorsList() {
+  usePageMeta('Our Doctor — Bright Smile Dental Clinic', 'Meet Dr. Afaque Khan — BDS, MDS, 15+ years of gentle, modern dentistry.');
   const { data: doctors, isLoading, isError, error, refetch } = useDoctors();
 
   // Single-doctor clinic: go straight to Dr. Afaque Khan's full profile.

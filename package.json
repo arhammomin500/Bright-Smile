@@ -1,27 +1,15 @@
 {
   "name": "bright-smile",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Bright Smile Dental Clinic — premium website + clinic management system",
+  "description": "Bright Smile Dental Clinic — frontend-only static website",
   "workspaces": [
-    "server",
     "client"
   ],
   "scripts": {
-    "dev": "concurrently -n server,client -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
-    "dev:server": "npm run dev --workspace server",
-    "dev:client": "npm run dev --workspace client",
-    "build": "npm run db:generate && npm run build --workspace server && npm run build --workspace client",
-    "start": "npm run start --workspace server",
-    "db:deploy": "npm run db:deploy --workspace server",
-    "db:generate": "npm run db:generate --workspace server",
-    "db:push": "npm run db:push --workspace server",
-    "db:migrate": "npm run db:migrate --workspace server",
-    "db:seed": "npm run db:seed --workspace server",
-    "setup": "npm install && npm run db:generate"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
+    "dev": "npm run dev --workspace client",
+    "build": "npm run build --workspace client",
+    "preview": "npm run preview --workspace client"
   },
   "engines": {
     "node": ">=20"

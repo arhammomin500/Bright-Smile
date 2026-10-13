@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Container, Stack, Typography, Rating } from '@mui/material';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
@@ -13,7 +13,7 @@ const MotionBox = motion.create(Box);
 
 // The clinic's own hero footage, served from client/public/videos/.
 const HERO_VIDEO = '/videos/hero-clinic.mp4';
-const HERO_POSTER = 'https://picsum.photos/seed/brightclinic/1600/900';
+const HERO_POSTER = 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1600&q=75&auto=format&fit=crop';
 
 // Height of the fixed header (top strip + nav) the hero must clear.
 const NAV_OFFSET = { xs: '64px', md: '108px' };
@@ -62,15 +62,15 @@ export function HeroSection() {
                   bgcolor: 'rgba(255,255,255,0.14)',
                   backdropFilter: 'blur(8px)',
                   border: '1px solid rgba(255,255,255,0.25)',
-                  borderRadius: 999,
+                  borderRadius: '10px',
                   px: 1.75,
-                  py: 0.6,
+                  py: 0.75,
                   mb: 3,
                 }}
               >
-                <Rating value={5} readOnly size="small" sx={{ '& .MuiRating-iconFilled': { color: '#ffd66b' } }} />
+                <VerifiedOutlinedIcon sx={{ fontSize: 17, color: '#7fe9e5' }} />
                 <Typography variant="body2" sx={{ color: '#fff', fontWeight: 700 }}>
-                  4.9/5 · 2,000+ reviews
+                  Dr. Afaque Khan · BDS, MDS · 15+ years
                 </Typography>
               </Stack>
             </MotionBox>
@@ -101,44 +101,27 @@ export function HeroSection() {
                   textShadow: '0 1px 12px rgba(7,25,55,0.3)',
                 }}
               >
-                Modern, painless dentistry by Dr. Afaque Khan in a calm, welcoming space — trusted
-                by more than 15,000 patients over 15 years.
+                Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
+                complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
               </Typography>
             </MotionBox>
 
             <MotionBox {...fadeUp(0.42)}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                {/* Reference-style pill: white with a circular arrow */}
                 <Button
                   component={Link}
                   to="/book"
                   size="large"
+                  endIcon={<ArrowOutwardIcon sx={{ fontSize: 19 }} />}
                   sx={{
                     bgcolor: '#fff',
                     color: brand.ink,
-                    pl: 3.5,
-                    pr: 1.25,
-                    py: 1,
+                    px: 3.5,
+                    py: 1.4,
                     fontSize: '1rem',
-                    boxShadow: '0 14px 34px rgba(7,25,55,0.35)',
+                    boxShadow: '0 12px 30px rgba(7,25,55,0.35)',
                     '&:hover': { bgcolor: '#f2f7ff', transform: 'translateY(-2px)' },
                   }}
-                  endIcon={
-                    <Box
-                      sx={{
-                        width: 38,
-                        height: 38,
-                        ml: 1,
-                        borderRadius: '50%',
-                        bgcolor: brand.primary,
-                        color: '#fff',
-                        display: 'grid',
-                        placeItems: 'center',
-                      }}
-                    >
-                      <ArrowOutwardIcon sx={{ fontSize: 19 }} />
-                    </Box>
-                  }
                 >
                   Book Appointment
                 </Button>
@@ -162,9 +145,9 @@ export function HeroSection() {
             <MotionBox {...fadeUp(0.56)}>
               <Stack direction="row" spacing={3} flexWrap="wrap" useFlexGap sx={{ mt: 4.5 }}>
                 {[
-                  { icon: <MedicalServicesOutlinedIcon sx={{ fontSize: 18 }} />, label: 'Experienced Specialists' },
+                  { icon: <MedicalServicesOutlinedIcon sx={{ fontSize: 18 }} />, label: 'Painless Treatments' },
                   { icon: <VerifiedOutlinedIcon sx={{ fontSize: 18 }} />, label: 'Modern Equipment' },
-                  { icon: <LocalHospitalOutlinedIcon sx={{ fontSize: 18 }} />, label: '24/7 Emergency' },
+                  { icon: <LocalHospitalOutlinedIcon sx={{ fontSize: 18 }} />, label: 'Same-day Emergency Care' },
                 ].map((b) => (
                   <Stack key={b.label} direction="row" spacing={1} alignItems="center" sx={{ color: 'rgba(255,255,255,0.9)' }}>
                     {b.icon}

@@ -6,6 +6,43 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-10-13
+
+### v2.0 — Frontend-only static website (backend & admin removed)
+- **Removed the entire backend and admin system** at the owner's request:
+  Express/Prisma server, Neon database wiring, staff portal (/staff),
+  reception & doctor dashboards, EMR, auth, notifications. All of it remains
+  in git history (last full-stack commit `9bf191d`). Legacy URLs
+  (/staff, /dashboard, /login, /booking/:code) redirect to public pages.
+- **Static content layer:** all doctors/treatments/testimonials/FAQs/gallery/
+  blog content ported from the old DB seed into typed modules under
+  `client/src/data/`; `lib/queries.ts` now serves it synchronously with the
+  same hook signatures (no react-query, no axios, zero network calls).
+  Removed deps: axios, @tanstack/react-query, @mui/lab, @mui/x-charts,
+  @mui/x-date-pickers (bundle 1.33 MB → 0.94 MB).
+- **Honest frontend-only booking:** /book shows the clinic's published weekly
+  hours (never fake "live availability"), visitor picks a preferred day/time,
+  enters name + mobile, reviews the exact request, and sends it themselves
+  via WhatsApp / email / call — with a clear "not confirmed until the clinic
+  replies" notice. Contact form and treatment cost-enquiry likewise open the
+  visitor's own email/WhatsApp app; the site stores nothing.
+- **Design refinements:** deep-navy section headings (blue kept for eyebrow
+  labels/accents), consistent corner radii (12px buttons / 16px cards — no
+  more pill/80px shapes), hero CTA simplified; 55 random placeholder photos
+  (picsum/wood-table images) replaced with verified dental/clinic
+  photography; new favicon.
+- **Truthfulness pass:** removed invented stats counters (18,500 smiles,
+  4.9/2,000 reviews), awards and insurance-partner sections, and the
+  before/after strip (placeholder images); claims now match the doctor's
+  profile (BDS, MDS, 15+ years). Testimonials/blog remain but are flagged
+  as placeholder content to replace before promotion.
+- **Static hosting & SEO:** render.yaml now defines a free Render **static
+  site** (always-on, CDN, SPA rewrite for deep links, immutable asset
+  caching); per-page titles/meta descriptions, Open Graph tags, robots.txt;
+  instant first render (no API cold-start, no loading screens).
+- Fixed the initial-render issue at its root: pages no longer wait on a
+  sleeping backend — content is in the bundle.
+
 ## 2026-07-27
 
 ### Booking v2 — under-30-second mobile-first flow

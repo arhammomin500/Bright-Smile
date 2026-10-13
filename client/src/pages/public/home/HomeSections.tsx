@@ -104,9 +104,9 @@ export function StatsSection() {
 
 // ── Why choose us ─────────────────────────────────────────────────────
 const REASONS = [
-  'Internationally trained, board-certified dentist',
-  'State-of-the-art 3D imaging & digital dentistry',
-  'Transparent pricing with no hidden costs',
+  'Qualified BDS, MDS dentist with 15+ years in practice',
+  'Modern digital dentistry equipment',
+  'Transparent pricing discussed before treatment',
   'Comfort-first, anxiety-free environment',
   'Same-day emergency appointments',
   'Personalised treatment plans for every patient',
@@ -121,7 +121,7 @@ export function WhyChooseUsSection() {
             <Box sx={{ position: 'relative' }}>
               <Box
                 component="img"
-                src="https://picsum.photos/seed/whychooseus/760/580"
+                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=75&auto=format&fit=crop"
                 alt="Modern dental treatment room"
                 sx={{ width: '100%', borderRadius: 6, border: `1px solid ${brand.line}`, boxShadow: softShadow }}
               />
@@ -141,7 +141,7 @@ export function WhyChooseUsSection() {
                     <EmojiEventsOutlinedIcon />
                   </IconChip>
                   <Box>
-                    <Typography sx={{ fontWeight: 800, lineHeight: 1.1 }}>20+ Years</Typography>
+                    <Typography sx={{ fontWeight: 800, lineHeight: 1.1 }}>15+ Years</Typography>
                     <Typography variant="caption" color="text.secondary">
                       of trusted care
                     </Typography>
@@ -156,7 +156,7 @@ export function WhyChooseUsSection() {
             align="left"
             eyebrow="About Us"
             title="Bright Smile — dentistry designed around your comfort"
-            subtitle="For over 20 years we've blended clinical excellence with a genuinely human touch — every visit feels calm, clear, and completely in your control."
+            subtitle="For over 15 years we've blended clinical excellence with a genuinely human touch — every visit feels calm, clear, and completely in your control."
           />
           <Grid container spacing={1.75}>
             {REASONS.map((r, i) => (
@@ -299,10 +299,10 @@ export function DoctorsSection() {
                     alt={doctor.fullName}
                     sx={{ width: '100%', aspectRatio: '4/4.6', objectFit: 'cover', borderRadius: 6, border: `1px solid ${brand.line}`, boxShadow: softShadow }}
                   />
-                  <Card sx={{ position: 'absolute', bottom: -20, left: '50%', transform: 'translateX(-50%)', px: 2.5, py: 1.5, borderRadius: 4, boxShadow: hoverShadow, whiteSpace: 'nowrap' }}>
+                  <Card sx={{ position: 'absolute', bottom: -20, left: '50%', transform: 'translateX(-50%)', px: 2.5, py: 1.5, borderRadius: '14px', boxShadow: hoverShadow, whiteSpace: 'nowrap' }}>
                     <Typography sx={{ fontWeight: 800, lineHeight: 1.2 }}>{doctor.experienceYears}+ Years Experience</Typography>
                     <Typography variant="caption" color="text.secondary">
-                      15,000+ smiles transformed
+                      {doctor.qualification.split('—')[0].trim()}
                     </Typography>
                   </Card>
                 </Box>
@@ -394,8 +394,8 @@ export function TestimonialsSection() {
       <Container sx={{ py: { xs: 8, md: 12 } }}>
         <SectionHeading
           eyebrow="Patient Stories"
-          title="Loved by thousands of patients"
-          subtitle="Real experiences from people who trusted us with their smiles."
+          title="What our patients say"
+          subtitle="Experiences from patients who trusted us with their smiles."
         />
         <Grid container spacing={2.5}>
           {items.map((t, i) => (

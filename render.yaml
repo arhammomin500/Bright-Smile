@@ -1,32 +1,23 @@
-# Render Blueprint — one free web service that runs the API and serves the
-# built React app from the same origin (so auth cookies just work).
+# Render Blueprint — free static site (no backend, no database).
 #
-# Setup: push this repo to GitHub → Render Dashboard → New → Blueprint →
-# pick the repo. Render reads this file and prompts for DATABASE_URL.
+# NOTE for first-time switch from the old Node web service: Render cannot
+# convert a web service into a static site. Delete the old "bright-smile"
+# web service in the dashboard, then Blueprint → Manual sync to create this
+# static site. Static sites on Render are free, always-on (no cold starts),
+# served over a global CDN, and support custom domains with automatic HTTPS.
 services:
   - type: web
     name: bright-smile
-    runtime: node
-    plan: free
-    # --include=dev is required: NODE_ENV=production would otherwise make npm
-    # skip devDependencies (tsc, vite, prisma CLI) that the build itself needs.
-    buildCommand: npm install --include=dev && npm run build && npm run db:deploy
-    startCommand: npm run start
-    healthCheckPath: /api/health
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: DATABASE_URL
-        sync: false # paste your Neon connection string in the dashboard
-      - key: JWT_ACCESS_SECRET
-        generateValue: true
-      - key: JWT_REFRESH_SECRET
-        generateValue: true
-      - key: CLIENT_URL
-        value: https://bright-smile-qt7h.onrender.com
-      - key: CLINIC_NAME
-        value: Bright Smile Dental Clinic
-      - key: CLINIC_PHONE
-        value: "+91 93732 23464"
-      - key: CLINIC_WHATSAPP
-        value: "919373223464"
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: client/dist
+    routes:
+      # SPA fallback — refreshing any route serves the app instead of a 404.
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      # Hashed build assets can be cached hard; index.html is revalidated by default.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=2592000, immutable

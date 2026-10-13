@@ -11,18 +11,33 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
 - Commits that change anything else must include the matching `CHANGELOG.md`
   update in the same commit.
 
-## Quick facts
-- Single-doctor clinic: **Dr. Afaque Khan**. Public booking is ONE screen
-  (day pills + time chips + name/mobile only) — keep public flows minimal;
-  the owner consistently rejects extra steps.
-- Design: light premium blue/white — white surfaces, `brand.mist` tinted
-  bands, solid-blue buttons, "+ EYEBROW" labels, blue section titles. No dark
-  backgrounds or heavy gradients on the public site.
-- Staff portal: unlisted `/staff` (never link it from the public site; legacy
-  auth paths redirect home). Two logins only: reception@brightsmile.com and
-  dr.afaque@brightsmile.com (ADMIN + linked doctor profile).
-- DB: Neon PostgreSQL (shared by dev and prod). Prisma provider `postgresql`.
-- Deploy: push to `main` → Render auto-deploys
-  https://bright-smile-qt7h.onrender.com (render.yaml; Express serves
-  client/dist same-origin; build needs `npm install --include=dev`).
-- Client: MUI v6 `Grid2` (`size={{xs,md}}`), `@/` path alias, TanStack Query.
+## Architecture (since 2026-10-13): FRONTEND-ONLY STATIC SITE
+- **No backend, no database, no admin/staff portal, no auth.** The previous
+  full-stack build (Express + Prisma + Neon, /staff portal, EMR) was removed
+  at the owner's request; it lives in git history (last full-stack commit
+  `9bf191d`). Do not reintroduce servers, API calls, or fake
+  confirmations/availability.
+- All content is static TypeScript in `client/src/data/*`; the data-access
+  hooks in `client/src/lib/queries.ts` are synchronous wrappers with the old
+  react-query signatures.
+- **Honest booking:** /book lets visitors pick a preferred day/time from the
+  clinic's published weekly hours (never "live availability") and sends the
+  request via WhatsApp (+91 93732 23464), email, or call. Always disclose that
+  the clinic confirms the appointment. Forms open the visitor's own
+  email/WhatsApp app — the site stores and sends nothing.
+- **No invented claims:** no patient counts, review scores, awards, or
+  insurance partners unless the owner confirms them. Testimonials/blog are
+  flagged placeholder content.
+
+## Owner preferences
+- Single-doctor clinic: **Dr. Afaque Khan** (BDS, MDS, 15+ yrs, Mon–Sat).
+- Keep public flows minimal — the owner consistently rejects extra steps.
+- Design: light premium blue/white; white surfaces, `brand.mist` tinted bands,
+  solid-blue buttons (12px radius), navy headings with "+ EYEBROW" blue
+  labels, no dark backgrounds/heavy gradients/pill shapes. Keep the original
+  BrightSmile tooth-badge logo.
+
+## Build & deploy
+- `npm run build` → `client/dist`. Deploy: push to `main` → Render **static
+  site** per `render.yaml` (SPA rewrite included). Free tier, always-on, CDN.
+- Client: MUI v6 `Grid2` (`size={{xs,md}}`), `@/` path alias.

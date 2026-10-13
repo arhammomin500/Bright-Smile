@@ -49,11 +49,12 @@ export function SectionHeading({ eyebrow, title, subtitle, align = 'center', lig
           </Typography>
         </Stack>
       )}
+      {/* Deep-navy headings (brand.ink) — the blue accent lives in the eyebrow. */}
       <Typography
         variant="h2"
         sx={{
-          fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.6rem' },
-          color: light ? '#fff' : brand.primary,
+          fontSize: { xs: '1.75rem', sm: '2.1rem', md: '2.5rem' },
+          color: light ? '#fff' : 'text.primary',
         }}
       >
         {title}

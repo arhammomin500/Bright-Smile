@@ -1,12 +1,18 @@
-import type { TreatmentSeed } from './types.js';
+// Static treatment catalog (adapted from server/prisma/seed-data/treatments.ts).
+// `related` is computed below: up to 3 other treatments of the same category,
+// topped up with featured treatments when the category has fewer than 3 others.
+import type { Treatment } from '@/lib/types';
 
-export const treatments: TreatmentSeed[] = [
+type BaseTreatment = Omit<Treatment, 'related'>;
+
+const BASE: BaseTreatment[] = [
   {
+    id: 1,
     slug: 'general-dentistry',
     name: 'General Dentistry',
     category: 'General',
     icon: 'tooth',
-    imageUrl: 'https://picsum.photos/seed/general-dentistry/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Routine checkups, diagnostics, and everyday care that keep your whole family smiling.',
     overview:
       'General dentistry is the foundation of a healthy mouth and the front line against problems before they become painful or costly. At Bright Smile Dental Clinic, our general care combines thorough examinations, digital imaging, and gentle cleanings to catch cavities, gum concerns, and wear early, when treatment is simplest.\n\nEvery visit is unhurried and personal. We take time to explain what we see, answer your questions, and build a care plan that fits your life, your budget, and your comfort level. Whether you are here for a six-month checkup or addressing a nagging concern, you are treated as a partner in your own health.\n\nRegular general care also protects more than your teeth. The mouth is a window into overall wellness, and consistent visits help us spot signs that matter far beyond your smile.',
@@ -81,14 +87,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 200,
     durationMin: 45,
     isFeatured: true,
-    displayOrder: 1,
   },
   {
+    id: 2,
     slug: 'cosmetic-dentistry',
     name: 'Cosmetic Dentistry',
     category: 'Cosmetic',
     icon: 'sparkle',
-    imageUrl: 'https://picsum.photos/seed/cosmetic-dentistry/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Refine the color, shape, and harmony of your smile with artistry and precision.',
     overview:
       'Cosmetic dentistry blends dental science with a designer eye to create smiles that look natural, balanced, and unmistakably yours. From subtle refinements to complete transformations, our approach begins with understanding what you would change if you could, then engineering a result that fits your face and personality.\n\nWe use conservative, tooth-preserving techniques wherever possible, treating your natural enamel as a valuable resource. Digital previews let you see potential outcomes before any work begins, so there are no surprises, only confident decisions.\n\nA beautiful smile is more than aesthetics. Patients consistently tell us that renewed confidence changes how they speak, laugh, and show up in the world.',
@@ -164,14 +170,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 3000,
     durationMin: 60,
     isFeatured: false,
-    displayOrder: 2,
   },
   {
+    id: 3,
     slug: 'root-canal-treatment',
     name: 'Root Canal Treatment',
     category: 'Restorative',
     icon: 'tooth',
-    imageUrl: 'https://picsum.photos/seed/root-canal-treatment/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Save a badly infected tooth and relieve severe pain with modern, comfortable endodontics.',
     overview:
       'A root canal has an outdated reputation for discomfort, but modern techniques make it no more eventful than a routine filling. The procedure removes infected tissue from inside the tooth, relieving the intense pain that comes with a deep infection while preserving your natural tooth.',
@@ -246,14 +252,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 1200,
     durationMin: 90,
     isFeatured: true,
-    displayOrder: 3,
   },
   {
+    id: 4,
     slug: 'dental-implants',
     name: 'Dental Implants',
     category: 'Surgical',
     icon: 'implant',
-    imageUrl: 'https://picsum.photos/seed/dental-implants/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Replace missing teeth with permanent, natural-looking implants that feel like your own.',
     overview:
       'Dental implants are the gold standard for replacing missing teeth, restoring not just the visible crown but the root beneath it. A small titanium post integrates with your jawbone to create a stable foundation that looks, feels, and functions like a natural tooth.\n\nUnlike bridges, implants do not rely on neighboring teeth for support, and they help preserve the jawbone that naturally shrinks after tooth loss. The result is a confident bite and a smile that stays secure through everything you eat and say.\n\nAt Bright Smile Dental Clinic we plan each implant with precise digital imaging, ensuring ideal placement and a comfortable, predictable journey from consultation to final crown.',
@@ -329,14 +335,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 3500,
     durationMin: 90,
     isFeatured: true,
-    displayOrder: 4,
   },
   {
+    id: 5,
     slug: 'braces',
     name: 'Braces',
     category: 'Orthodontics',
     icon: 'braces',
-    imageUrl: 'https://picsum.photos/seed/braces/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1643297654416-05795d62e39c?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Straighten crowded or crooked teeth and correct your bite with proven orthodontic care.',
     overview:
       'Braces remain one of the most reliable ways to correct crowding, spacing, and bite problems for both teens and adults. By applying steady, gentle pressure over time, braces guide teeth into their ideal positions, improving both the look and the long-term health of your smile.\n\nModern brackets are smaller and more comfortable than ever, and we tailor each treatment plan to your goals and timeline. Beyond a straighter smile, proper alignment makes teeth easier to clean and reduces uneven wear on your bite.',
@@ -411,14 +417,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 6000,
     durationMin: 60,
     isFeatured: false,
-    displayOrder: 5,
   },
   {
+    id: 6,
     slug: 'invisible-aligners',
     name: 'Invisible Aligners',
     category: 'Orthodontics',
     icon: 'aligner',
-    imageUrl: 'https://picsum.photos/seed/invisible-aligners/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Straighten your smile discreetly with clear, removable aligners and no metal brackets.',
     overview:
       'Invisible aligners offer a nearly undetectable way to straighten your teeth using a series of clear, custom-made trays. Each set is worn for a couple of weeks before progressing to the next, gradually guiding your teeth into alignment without wires or brackets.\n\nBecause the aligners are removable, you can eat what you love and clean your teeth normally, making them a convenient choice for busy adults and older teens. Digital planning shows you a preview of your final smile before you even begin.',
@@ -494,14 +500,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 7000,
     durationMin: 45,
     isFeatured: true,
-    displayOrder: 6,
   },
   {
+    id: 7,
     slug: 'teeth-whitening',
     name: 'Teeth Whitening',
     category: 'Cosmetic',
     icon: 'whitening',
-    imageUrl: 'https://picsum.photos/seed/teeth-whitening/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Brighten your smile several shades with safe, professional-grade whitening.',
     overview:
       'Professional teeth whitening is one of the fastest, most affordable ways to refresh your smile. Using dental-grade whitening agents and controlled application, we can lift years of stains from coffee, tea, and everyday life while protecting your enamel and gums.\n\nUnlike over-the-counter kits, our treatments are supervised for safety and tailored to your sensitivity level, delivering brighter, more even results you can trust. Whether you choose in-office whitening for immediate impact or a custom take-home kit, the difference is noticeable.',
@@ -576,14 +582,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 700,
     durationMin: 60,
     isFeatured: true,
-    displayOrder: 7,
   },
   {
+    id: 8,
     slug: 'veneers',
     name: 'Veneers',
     category: 'Cosmetic',
     icon: 'veneer',
-    imageUrl: 'https://picsum.photos/seed/veneers/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Transform chipped, stained, or uneven teeth with thin, custom porcelain shells.',
     overview:
       'Veneers are thin, custom-made shells bonded to the front of your teeth to instantly correct color, shape, and minor alignment concerns. Crafted from high-quality porcelain, they mimic the light-reflecting qualities of natural enamel for a result that is both beautiful and believable.\n\nBecause veneers can address several issues at once, they are a popular choice for a comprehensive smile upgrade with minimal removal of natural tooth structure. Each veneer is designed to suit your facial features and desired look, then bonded securely for lasting wear.',
@@ -659,14 +665,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 2500,
     durationMin: 90,
     isFeatured: false,
-    displayOrder: 8,
   },
   {
+    id: 9,
     slug: 'smile-makeover',
     name: 'Smile Makeover',
     category: 'Cosmetic',
     icon: 'smile',
-    imageUrl: 'https://picsum.photos/seed/smile-makeover/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'A fully personalized combination of treatments to redesign your entire smile.',
     overview:
       'A smile makeover is a comprehensive, custom plan that combines multiple treatments to transform your smile as a whole rather than one tooth at a time. It is the ultimate expression of cosmetic dentistry, tailored to your face, goals, and lifestyle.\n\nAt Bright Smile Dental Clinic, your makeover might blend whitening, veneers, crowns, gum contouring, and alignment into one cohesive design. We begin with a detailed consultation and digital preview so you can see and shape the outcome before treatment begins.\n\nThe result is more than a beautiful smile. It is a renewed sense of confidence that shows in every conversation, photograph, and first impression.',
@@ -742,14 +748,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 15000,
     durationMin: 120,
     isFeatured: true,
-    displayOrder: 9,
   },
   {
+    id: 10,
     slug: 'pediatric-dentistry',
     name: 'Pediatric Dentistry',
     category: 'Pediatric',
     icon: 'child',
-    imageUrl: 'https://picsum.photos/seed/pediatric-dentistry/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Gentle, friendly dental care that helps children build healthy habits for life.',
     overview:
       'Pediatric dentistry focuses on the unique needs of growing smiles, from a baby’s first tooth through the teenage years. Our goal is to make every visit positive and reassuring so children grow up viewing the dentist as a friend rather than a fear.\n\nWe combine gentle techniques with plenty of patience and encouragement, teaching young patients how to care for their teeth in ways they can understand and enjoy. Early, consistent care sets the stage for a lifetime of strong, healthy smiles.',
@@ -824,14 +830,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 300,
     durationMin: 45,
     isFeatured: false,
-    displayOrder: 10,
   },
   {
+    id: 11,
     slug: 'wisdom-tooth-removal',
     name: 'Wisdom Tooth Removal',
     category: 'Surgical',
     icon: 'wisdom',
-    imageUrl: 'https://picsum.photos/seed/wisdom-tooth-removal/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Safe, comfortable removal of problematic wisdom teeth to protect your smile.',
     overview:
       'Wisdom teeth often lack the room to emerge properly, leading to pain, crowding, or infection. When these third molars become impacted or difficult to clean, removing them protects the health of your surrounding teeth and gums.\n\nOur team makes the experience as smooth and comfortable as possible, using careful planning and gentle technique. We explain every step in advance and provide clear aftercare so your recovery is calm and predictable.',
@@ -906,14 +912,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 900,
     durationMin: 60,
     isFeatured: false,
-    displayOrder: 11,
   },
   {
+    id: 12,
     slug: 'tooth-extraction',
     name: 'Tooth Extraction',
     category: 'Surgical',
     icon: 'extraction',
-    imageUrl: 'https://picsum.photos/seed/tooth-extraction/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Gentle removal of a damaged or unrestorable tooth with comfort as the priority.',
     overview:
       'Although we always aim to preserve natural teeth, sometimes a tooth is too damaged, decayed, or infected to save. In these cases, a careful extraction relieves pain and protects the rest of your mouth from further problems.\n\nWe prioritize your comfort throughout, using effective numbing and a gentle approach. After removal, we discuss replacement options such as implants or bridges so you can restore both function and appearance.',
@@ -988,14 +994,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 450,
     durationMin: 45,
     isFeatured: false,
-    displayOrder: 12,
   },
   {
+    id: 13,
     slug: 'crowns-and-bridges',
     name: 'Crowns & Bridges',
     category: 'Restorative',
     icon: 'crown',
-    imageUrl: 'https://picsum.photos/seed/crowns-and-bridges/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Restore damaged or missing teeth with durable, natural-looking crowns and bridges.',
     overview:
       'Crowns and bridges are time-tested restorations that rebuild strength and fill gaps in your smile. A crown caps a weakened or damaged tooth to restore its shape and function, while a bridge replaces one or more missing teeth by anchoring to healthy neighbors.\n\nCrafted from strong, tooth-colored materials, these restorations blend naturally with your smile while standing up to daily use. We design each one for a precise, comfortable fit that protects your bite for years to come.',
@@ -1071,14 +1077,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 2500,
     durationMin: 90,
     isFeatured: false,
-    displayOrder: 13,
   },
   {
+    id: 14,
     slug: 'dentures',
     name: 'Dentures',
     category: 'Restorative',
     icon: 'denture',
-    imageUrl: 'https://picsum.photos/seed/dentures/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Comfortable, natural-looking full or partial dentures to restore your smile and bite.',
     overview:
       'Dentures remain a trusted, cost-effective way to replace missing teeth and restore the ability to eat, speak, and smile with confidence. Modern dentures are far more comfortable and natural-looking than those of the past, custom-fitted to the contours of your mouth.\n\nWhether you need a full set or a partial to fill specific gaps, we focus on a secure fit and a lifelike appearance. We also guide you through the adjustment period so your new dentures feel like a natural part of your daily life.',
@@ -1153,14 +1159,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 3000,
     durationMin: 60,
     isFeatured: false,
-    displayOrder: 14,
   },
   {
+    id: 15,
     slug: 'gum-treatment',
     name: 'Gum Treatment',
     category: 'General',
     icon: 'gum',
-    imageUrl: 'https://picsum.photos/seed/gum-treatment/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1643297654416-05795d62e39c?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Treat and reverse gum disease to protect your teeth and overall health.',
     overview:
       'Healthy gums are the foundation of a healthy smile, yet gum disease often develops quietly until it threatens the bone and teeth. Our gum treatments target infection and inflammation early, halting progression and helping your gums heal.\n\nFrom deep cleanings to more advanced periodontal care, we tailor treatment to the stage of the disease. Because gum health is closely linked to overall wellness, caring for your gums protects far more than your smile.',
@@ -1235,14 +1241,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 1500,
     durationMin: 60,
     isFeatured: false,
-    displayOrder: 15,
   },
   {
+    id: 16,
     slug: 'laser-dentistry',
     name: 'Laser Dentistry',
     category: 'General',
     icon: 'laser',
-    imageUrl: 'https://picsum.photos/seed/laser-dentistry/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Precise, minimally invasive treatments using advanced dental laser technology.',
     overview:
       'Laser dentistry uses focused light energy to perform a range of treatments with remarkable precision and comfort. From gum contouring to treating decay and infection, lasers often mean less bleeding, reduced discomfort, and faster healing than traditional methods.\n\nBecause laser treatment is so precise, it targets only the intended tissue while preserving the healthy area around it. Many procedures can be done with less need for anesthesia, making visits calmer and more comfortable.',
@@ -1318,14 +1324,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 1200,
     durationMin: 45,
     isFeatured: false,
-    displayOrder: 16,
   },
   {
+    id: 17,
     slug: 'dental-cleaning',
     name: 'Dental Cleaning',
     category: 'Preventive',
     icon: 'cleaning',
-    imageUrl: 'https://picsum.photos/seed/dental-cleaning/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'A thorough professional cleaning to remove plaque, tartar, and stains.',
     overview:
       'A professional dental cleaning removes the hardened plaque and tartar that brushing alone cannot reach, keeping your teeth and gums healthy between checkups. It is one of the simplest and most effective ways to prevent cavities and gum disease.\n\nOur hygienists work gently and thoroughly, leaving your teeth polished and your mouth feeling fresh. Along the way we point out any areas that need extra attention at home, helping you keep your smile in top condition.',
@@ -1400,14 +1406,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 180,
     durationMin: 30,
     isFeatured: false,
-    displayOrder: 17,
   },
   {
+    id: 18,
     slug: 'dental-filling',
     name: 'Dental Filling',
     category: 'Restorative',
     icon: 'filling',
-    imageUrl: 'https://picsum.photos/seed/dental-filling/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Repair cavities quickly with durable, natural-looking tooth-colored fillings.',
     overview:
       'A dental filling restores a tooth damaged by decay, sealing out further problems and returning it to full function. Modern tooth-colored fillings blend seamlessly with your natural enamel, so repairs are virtually invisible.\n\nThe procedure is quick and comfortable, and catching cavities early keeps treatment simple. We remove only the decayed portion and restore the tooth with a strong, lifelike material designed to last.',
@@ -1482,14 +1488,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 400,
     durationMin: 45,
     isFeatured: false,
-    displayOrder: 18,
   },
   {
+    id: 19,
     slug: 'full-mouth-rehabilitation',
     name: 'Full Mouth Rehabilitation',
     category: 'Restorative',
     icon: 'rehab',
-    imageUrl: 'https://picsum.photos/seed/full-mouth-rehabilitation/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Comprehensive restoration of function, health, and beauty across your entire mouth.',
     overview:
       'Full mouth rehabilitation is a comprehensive approach for patients with extensive dental concerns affecting multiple teeth, the bite, and overall function. It combines restorative and cosmetic treatments into one coordinated plan to rebuild a healthy, comfortable, and attractive smile.\n\nThis is transformative dentistry for those dealing with worn, broken, or missing teeth, chronic bite problems, or the effects of long-term neglect or trauma. At Bright Smile Dental Clinic, we plan each phase meticulously, balancing health, function, and aesthetics for a lasting result.\n\nBecause every mouth is different, your rehabilitation is entirely personalized, sequenced for comfort and delivered by a team focused on restoring both your smile and your quality of life.',
@@ -1565,14 +1571,14 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 25000,
     durationMin: 120,
     isFeatured: false,
-    displayOrder: 19,
   },
   {
+    id: 20,
     slug: 'emergency-dental-care',
     name: 'Emergency Dental Care',
     category: 'Emergency',
     icon: 'emergency',
-    imageUrl: 'https://picsum.photos/seed/emergency-dental-care/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&q=75&auto=format&fit=crop',
     shortDesc: 'Fast, compassionate care for dental emergencies when you need relief right away.',
     overview:
       'Dental emergencies can strike without warning, from sudden severe pain to a knocked-out tooth or a broken restoration. When they do, prompt care can save a tooth and bring much-needed relief.\n\nWe prioritize emergency patients, working quickly to diagnose the problem, ease your pain, and stabilize the situation. Our calm, reassuring approach helps you feel supported during a stressful moment, and we explain your options clearly so you can decide what comes next.',
@@ -1647,6 +1653,25 @@ export const treatments: TreatmentSeed[] = [
     priceMax: 600,
     durationMin: 45,
     isFeatured: false,
-    displayOrder: 20,
   },
 ];
+
+const toRelated = (t: BaseTreatment) => ({
+  id: t.id,
+  slug: t.slug,
+  name: t.name,
+  shortDesc: t.shortDesc,
+  imageUrl: t.imageUrl,
+  icon: t.icon,
+});
+
+export const TREATMENTS: Treatment[] = BASE.map((t) => {
+  const picks = BASE.filter((o) => o.id !== t.id && o.category === t.category).slice(0, 3);
+  if (picks.length < 3) {
+    for (const o of BASE) {
+      if (picks.length >= 3) break;
+      if (o.id !== t.id && o.isFeatured && !picks.some((p) => p.id === o.id)) picks.push(o);
+    }
+  }
+  return { ...t, related: picks.map(toRelated) };
+});

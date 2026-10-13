@@ -26,6 +26,7 @@ import { useGallery } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { brand, gradients } from '@/theme/theme';
 import type { GalleryItem } from '@/lib/types';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 const FILTERS: { value: string; label: string; match: (t: string) => boolean }[] = [
   { value: 'ALL', label: 'All', match: () => true },
@@ -36,6 +37,7 @@ const FILTERS: { value: string; label: string; match: (t: string) => boolean }[]
 ];
 
 export default function Gallery() {
+  usePageMeta('Gallery — Bright Smile Dental Clinic', 'A look inside Bright Smile Dental Clinic — rooms, equipment, and results.');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data, isLoading, isError, error, refetch } = useGallery();

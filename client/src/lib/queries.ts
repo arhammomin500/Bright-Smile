@@ -1,63 +1,56 @@
-import { useQuery } from '@tanstack/react-query';
-import { apiGet } from './api';
-import type {
-  Doctor,
-  Treatment,
-  Testimonial,
-  Faq,
-  ClinicStat,
-  GalleryItem,
-  BlogPost,
-  Award,
-  InsurancePartner,
-  TeamMember,
-  DayAvailability,
-} from './types';
+// Static data-access layer for the frontend-only site.
+// Same hook names/signatures as the old react-query version, but purely
+// synchronous — no network, no caching, no loading states.
+import type { Doctor, Treatment, Testimonial, Faq, ClinicStat, GalleryItem, BlogPost, Award, InsurancePartner, TeamMember } from './types';
+import { DOCTOR, DOCTORS } from '@/data/doctor';
+import { TREATMENTS } from '@/data/treatments';
+import { TESTIMONIALS, FAQS, STATS, GALLERY, AWARDS, INSURANCE, TEAM } from '@/data/content';
+import { BLOG_POSTS } from '@/data/blog';
 
-// ── Public content queries (shared across marketing pages) ────────────
-export const useDoctors = () => useQuery({ queryKey: ['doctors'], queryFn: () => apiGet<Doctor[]>('/doctors') });
+const ok = <T,>(data: T) => ({
+  data,
+  isLoading: false as const,
+  isFetching: false as const,
+  isError: false as const,
+  error: null as unknown,
+  refetch: () => {},
+});
+
+// ── Doctors ────────────────────────────────────────────────────────────
+export const useDoctors = () => ok<Doctor[]>(DOCTORS);
 
 export const useDoctor = (slug?: string) =>
-  useQuery({ queryKey: ['doctor', slug], queryFn: () => apiGet<Doctor>(`/doctors/${slug}`), enabled: !!slug });
+  ok<Doctor | undefined>(slug ? DOCTORS.find((d) => d.slug === slug) : DOCTOR);
 
+// ── Treatments ─────────────────────────────────────────────────────────
 export const useTreatments = (params?: { category?: string; featured?: boolean }) =>
-  useQuery({
-    queryKey: ['treatments', params],
-    queryFn: () => {
-      const q = new URLSearchParams();
-      if (params?.category) q.set('category', params.category);
-      if (params?.featured) q.set('featured', 'true');
-      const qs = q.toString();
-      return apiGet<Treatment[]>(`/treatments${qs ? `?${qs}` : ''}`);
-    },
-  });
+  ok<Treatment[]>(
+    TREATMENTS.filter(
+      (t) => (!params?.category || t.category === params.category) && (!params?.featured || t.isFeatured),
+    ),
+  );
 
 export const useTreatment = (slug?: string) =>
-  useQuery({ queryKey: ['treatment', slug], queryFn: () => apiGet<Treatment>(`/treatments/${slug}`), enabled: !!slug });
+  ok<Treatment | undefined>(slug ? TREATMENTS.find((t) => t.slug === slug) : undefined);
 
+// ── Marketing content ──────────────────────────────────────────────────
 export const useTestimonials = (featured?: boolean) =>
-  useQuery({
-    queryKey: ['testimonials', featured],
-    queryFn: () => apiGet<Testimonial[]>(`/content/testimonials${featured ? '?featured=true' : ''}`),
-  });
+  ok<Testimonial[]>(featured ? TESTIMONIALS.slice(0, 6) : TESTIMONIALS);
 
-export const useFaqs = () => useQuery({ queryKey: ['faqs'], queryFn: () => apiGet<Faq[]>('/content/faqs') });
+export const useFaqs = () => ok<Faq[]>(FAQS);
 
-export const useStats = () => useQuery({ queryKey: ['stats'], queryFn: () => apiGet<ClinicStat[]>('/content/stats') });
+export const useStats = () => ok<ClinicStat[]>(STATS);
 
 export const useGallery = (type?: string) =>
-  useQuery({
-    queryKey: ['gallery', type],
-    queryFn: () => apiGet<GalleryItem[]>(`/content/gallery${type ? `?type=${type}` : ''}`),
-  });
+  ok<GalleryItem[]>(type ? GALLERY.filter((g) => g.type === type) : GALLERY);
 
-export const useInsurance = () =>
-  useQuery({ queryKey: ['insurance'], queryFn: () => apiGet<InsurancePartner[]>('/content/insurance') });
+export const useInsurance = () => ok<InsurancePartner[]>(INSURANCE);
 
-export const useAwards = () => useQuery({ queryKey: ['awards'], queryFn: () => apiGet<Award[]>('/content/awards') });
+export const useAwards = () => ok<Award[]>(AWARDS);
 
-export const useTeam = () => useQuery({ queryKey: ['team'], queryFn: () => apiGet<TeamMember[]>('/content/team') });
+export const useTeam = () => ok<TeamMember[]>(TEAM);
 
+// ── Blog ───────────────────────────────────────────────────────────────
 export interface BlogListResponse {
   items: BlogPost[];
   meta: { page: number; pageSize: number; total: number; totalPages: number };
@@ -65,27 +58,42 @@ export interface BlogListResponse {
   popular: { id: number; slug: string; title: string; coverImage?: string | null; publishedAt?: string | null }[];
 }
 
-export const useBlogList = (params: { category?: string; search?: string; page?: number }) =>
-  useQuery({
-    queryKey: ['blog', params],
-    queryFn: () => {
-      const q = new URLSearchParams();
-      if (params.category) q.set('category', params.category);
-      if (params.search) q.set('search', params.search);
-      if (params.page) q.set('page', String(params.page));
-      const qs = q.toString();
-      return apiGet<BlogListResponse>(`/content/blog${qs ? `?${qs}` : ''}`);
-    },
+const BLOG_PAGE_SIZE = 6;
+
+export const useBlogList = (params: { category?: string; search?: string; page?: number }) => {
+  let filtered = BLOG_POSTS;
+  if (params.category) filtered = filtered.filter((p) => p.category === params.category);
+  if (params.search) {
+    const q = params.search.toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q)),
+    );
+  }
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / BLOG_PAGE_SIZE));
+  const page = Math.min(Math.max(params.page ?? 1, 1), totalPages);
+  const items = filtered.slice((page - 1) * BLOG_PAGE_SIZE, page * BLOG_PAGE_SIZE);
+
+  const counts = new Map<string, number>();
+  for (const p of BLOG_POSTS) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+  const categories = [...counts.entries()].map(([name, count]) => ({ name, count }));
+
+  const popular = [...BLOG_POSTS]
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 4)
+    .map((p) => ({ id: p.id, slug: p.slug, title: p.title, coverImage: p.coverImage, publishedAt: p.publishedAt }));
+
+  return ok<BlogListResponse>({
+    items,
+    meta: { page, pageSize: BLOG_PAGE_SIZE, total, totalPages },
+    categories,
+    popular,
   });
+};
 
 export const useBlogPost = (slug?: string) =>
-  useQuery({ queryKey: ['blogPost', slug], queryFn: () => apiGet<BlogPost>(`/content/blog/${slug}`), enabled: !!slug });
-
-// ── Booking availability ──────────────────────────────────────────────
-// Single-doctor clinic: the server resolves the doctor automatically.
-export const useAvailability = (date?: string) =>
-  useQuery({
-    queryKey: ['availability', date],
-    queryFn: () => apiGet<DayAvailability>(`/appointments/availability?date=${date}`),
-    enabled: !!date,
-  });
+  ok<BlogPost | undefined>(slug ? BLOG_POSTS.find((p) => p.slug === slug) : undefined);

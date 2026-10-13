@@ -28,3 +28,9 @@ export const CLINIC = {
 export function whatsappLink(message = "Hi Bright Smile, I'd like to book an appointment."): string {
   return `https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(message)}`;
 }
+
+// Frontend-only site: forms hand the message to the visitor's own email or
+// WhatsApp app — nothing is stored or sent by the website itself.
+export function mailtoLink(subject: string, body: string): string {
+  return `mailto:${CLINIC.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}

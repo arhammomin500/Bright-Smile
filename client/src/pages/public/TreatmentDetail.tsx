@@ -33,7 +33,8 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Loader, ErrorState, EmptyState } from '@/components/ui/States';
 import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
 import { useTreatment } from '@/lib/queries';
-import { apiPost, errorMessage } from '@/lib/api';
+import { errorMessage } from '@/lib/api';
+import { whatsappLink } from '@/lib/clinic';
 import { formatPriceRange } from '@/lib/format';
 import { useToast } from '@/components/feedback/ToastProvider';
 import { brand, gradients } from '@/theme/theme';
@@ -455,27 +456,22 @@ function CostInquiryForm({ treatment }: { treatment: Treatment }) {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<InquiryForm>({
     resolver: zodResolver(inquirySchema),
     defaultValues: { name: '', phone: '', email: '', message: '' },
   });
 
-  const onSubmit = async (values: InquiryForm) => {
-    try {
-      await apiPost('/content/cost-inquiry', {
-        treatmentId: treatment.id,
-        name: values.name,
-        phone: values.phone,
-        email: values.email || undefined,
-        message: values.message || undefined,
-      });
-      toast.success('Thank you! Our team will contact you with a personalised cost estimate.');
-      reset();
-    } catch (e) {
-      toast.error(errorMessage(e));
-    }
+  // Frontend-only site: the enquiry opens in the visitor's WhatsApp with the
+  // message prepared — nothing is stored or sent by the website itself.
+  const onSubmit = (values: InquiryForm) => {
+    const msg =
+      `Hi Bright Smile 👋 I'd like a cost estimate for *${treatment.name}*.\n\n` +
+      `Name: ${values.name}\nPhone: ${values.phone}` +
+      (values.email ? `\nEmail: ${values.email}` : '') +
+      (values.message ? `\n\n${values.message}` : '');
+    window.open(whatsappLink(msg), '_blank', 'noopener');
+    toast.info('WhatsApp has opened with your enquiry ready — just press send.');
   };
 
   return (
@@ -525,16 +521,12 @@ function CostInquiryForm({ treatment }: { treatment: Treatment }) {
             error={!!errors.message}
             helperText={errors.message?.message}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            fullWidth
-            disabled={isSubmitting}
-            startIcon={<SendIcon />}
-          >
-            {isSubmitting ? 'Sending…' : 'Send Inquiry'}
+          <Button type="submit" variant="contained" size="large" fullWidth startIcon={<SendIcon />}>
+            Send Enquiry on WhatsApp
           </Button>
+          <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+            Opens WhatsApp with your enquiry prepared — you review and send it directly to the clinic.
+          </Typography>
         </Stack>
       </Box>
     </Card>

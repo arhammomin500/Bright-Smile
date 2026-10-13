@@ -30,8 +30,10 @@ import { useTestimonials } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { brand, gradients } from '@/theme/theme';
 import type { Testimonial } from '@/lib/types';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 export default function Testimonials() {
+  usePageMeta('Patient Stories — Bright Smile Dental Clinic', 'What patients say about their experience at Bright Smile Dental Clinic.');
   const { data, isLoading, isError, error, refetch } = useTestimonials();
   const [video, setVideo] = useState<{ url: string; name: string } | null>(null);
 

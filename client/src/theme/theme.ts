@@ -48,7 +48,7 @@ const baseOptions: ThemeOptions = {
     background: { default: '#ffffff', paper: '#ffffff' },
     divider: brand.line,
   },
-  shape: { borderRadius: 16 },
+  shape: { borderRadius: 12 },
   typography: {
     fontFamily: '"Plus Jakarta Sans", "Manrope", system-ui, -apple-system, sans-serif',
     h1: { fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.06 },
@@ -80,8 +80,8 @@ const baseOptions: ThemeOptions = {
       defaultProps: { disableElevation: true },
       styleOverrides: {
         root: {
-          borderRadius: 999,
-          paddingInline: 24,
+          borderRadius: 12,
+          paddingInline: 22,
           paddingBlock: 10,
           fontWeight: 700,
           transition: 'transform .18s ease, box-shadow .18s ease, background-color .18s ease',
@@ -106,7 +106,7 @@ const baseOptions: ThemeOptions = {
       defaultProps: { elevation: 0 },
       styleOverrides: {
         root: {
-          borderRadius: 20,
+          borderRadius: 16,
           border: `1px solid ${brand.line}`,
           boxShadow: softShadow,
           backgroundImage: 'none',
@@ -114,7 +114,7 @@ const baseOptions: ThemeOptions = {
       },
     },
     MuiPaper: {
-      styleOverrides: { rounded: { borderRadius: 18 } },
+      styleOverrides: { rounded: { borderRadius: 14 } },
     },
     MuiChip: {
       styleOverrides: {
@@ -125,7 +125,7 @@ const baseOptions: ThemeOptions = {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 14,
+          borderRadius: 10,
           backgroundColor: '#fff',
           '& fieldset': { borderColor: brand.line },
           '&:hover fieldset': { borderColor: alpha(brand.primary, 0.4) },
