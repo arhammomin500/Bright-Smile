@@ -37,18 +37,13 @@ import { CLINIC } from '@/lib/clinic';
 import { formatPriceRange, formatDate } from '@/lib/format';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { CountUp } from '@/components/ui/CountUp';
 import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
 import { Loader } from '@/components/ui/States';
 import {
-  useStats,
   useDoctors,
   useTreatments,
   useTestimonials,
   useFaqs,
-  useAwards,
-  useInsurance,
-  useGallery,
   useBlogList,
 } from '@/lib/queries';
 
@@ -73,31 +68,6 @@ function IconChip({ children, size = 52 }: { children: React.ReactNode; size?: n
       }}
     >
       {children}
-    </Box>
-  );
-}
-
-// ── Statistics band ───────────────────────────────────────────────────
-export function StatsSection() {
-  const { data: stats } = useStats();
-  return (
-    <Box sx={{ bgcolor: brand.mist, borderBlock: `1px solid ${brand.line}` }}>
-      <Container sx={{ py: { xs: 5, md: 7 } }}>
-        <Grid container spacing={{ xs: 3, md: 2 }}>
-          {(stats ?? []).map((s, i) => (
-            <Grid size={{ xs: 6, md: 3 }} key={s.id}>
-              <Reveal delayIndex={i} sx={{ textAlign: 'center' }}>
-                <Typography variant="h2" sx={{ fontSize: { xs: '2rem', md: '2.8rem' }, color: brand.primary }}>
-                  <CountUp value={s.value} suffix={s.suffix ?? ''} />
-                </Typography>
-                <Typography color="text.secondary" sx={{ fontWeight: 600, mt: 0.5 }}>
-                  {s.label}
-                </Typography>
-              </Reveal>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
     </Box>
   );
 }
@@ -339,52 +309,6 @@ export function DoctorsSection() {
   );
 }
 
-// ── Before & after ────────────────────────────────────────────────────
-export function BeforeAfterSection() {
-  const { data } = useGallery('BEFORE_AFTER');
-  const items = (data ?? []).slice(0, 3);
-  if (!items.length) return null;
-  return (
-    <Container sx={{ py: { xs: 8, md: 12 } }}>
-      <SectionHeading
-        eyebrow="Real Results"
-        title="Smiles we've transformed"
-        subtitle="Genuine before-and-after results from our patients — your transformation could be next."
-      />
-      <Grid container spacing={2.5}>
-        {items.map((g, i) => (
-          <Grid size={{ xs: 12, md: 4 }} key={g.id}>
-            <Reveal delayIndex={i}>
-              <Card sx={{ overflow: 'hidden', ...cardHover }}>
-                <Grid container>
-                  <Grid size={6} sx={{ position: 'relative' }}>
-                    <Box component="img" src={g.beforeUrl ?? ''} alt="Before" sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} />
-                    <Chip label="Before" size="small" sx={{ position: 'absolute', bottom: 8, left: 8, bgcolor: 'rgba(255,255,255,0.92)', fontWeight: 700 }} />
-                  </Grid>
-                  <Grid size={6} sx={{ position: 'relative' }}>
-                    <Box component="img" src={g.afterUrl ?? ''} alt="After" sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover' }} />
-                    <Chip label="After" size="small" color="primary" sx={{ position: 'absolute', bottom: 8, right: 8, fontWeight: 700 }} />
-                  </Grid>
-                </Grid>
-                <CardContent sx={{ py: 2 }}>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                    {g.title}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </Grid>
-        ))}
-      </Grid>
-      <Box sx={{ textAlign: 'center', mt: 5 }}>
-        <Button component={Link} to="/gallery" variant="outlined" size="large">
-          View Full Gallery
-        </Button>
-      </Box>
-    </Container>
-  );
-}
-
 // ── Testimonials ──────────────────────────────────────────────────────
 export function TestimonialsSection() {
   const { data } = useTestimonials(true);
@@ -428,65 +352,6 @@ export function TestimonialsSection() {
             Read More Stories
           </Button>
         </Box>
-      </Container>
-    </Box>
-  );
-}
-
-// ── Insurance partners ────────────────────────────────────────────────
-export function InsuranceSection() {
-  const { data } = useInsurance();
-  if (!data?.length) return null;
-  return (
-    <Container sx={{ py: { xs: 6, md: 8 } }}>
-      <Typography align="center" color="text.secondary" sx={{ fontWeight: 700, mb: 4, textTransform: 'uppercase', letterSpacing: 1.5, fontSize: 12.5 }}>
-        Trusted & accepted by leading insurance partners
-      </Typography>
-      <Grid container spacing={3} alignItems="center" justifyContent="center">
-        {data.map((p) => (
-          <Grid size={{ xs: 6, sm: 4, md: 2 }} key={p.id}>
-            <Box
-              component="img"
-              src={p.logoUrl ?? ''}
-              alt={p.name}
-              sx={{ width: '100%', maxWidth: 130, mx: 'auto', filter: 'grayscale(1)', opacity: 0.55, transition: '.3s', '&:hover': { filter: 'none', opacity: 1 } }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
-}
-
-// ── Awards ────────────────────────────────────────────────────────────
-export function AwardsSection() {
-  const { data } = useAwards();
-  if (!data?.length) return null;
-  return (
-    <Box sx={{ bgcolor: brand.mist, borderBlock: `1px solid ${brand.line}` }}>
-      <Container sx={{ py: { xs: 8, md: 11 } }}>
-        <SectionHeading eyebrow="Recognition" title="Awarded & certified excellence" />
-        <Grid container spacing={2.5}>
-          {data.map((a, i) => (
-            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={a.id}>
-              <Reveal delayIndex={i}>
-                <Card sx={{ textAlign: 'center', p: 1.5, height: '100%', ...cardHover }}>
-                  <CardContent>
-                    <Box sx={{ width: 54, height: 54, borderRadius: '50%', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', mx: 'auto', mb: 2 }}>
-                      <EmojiEventsOutlinedIcon />
-                    </Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
-                      {a.title}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.75 }}>
-                      {a.issuer} {a.year ? `· ${a.year}` : ''}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            </Grid>
-          ))}
-        </Grid>
       </Container>
     </Box>
   );

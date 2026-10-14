@@ -1,10 +1,10 @@
 // Static data-access layer for the frontend-only site.
 // Same hook names/signatures as the old react-query version, but purely
 // synchronous — no network, no caching, no loading states.
-import type { Doctor, Treatment, Testimonial, Faq, ClinicStat, GalleryItem, BlogPost, Award, InsurancePartner, TeamMember } from './types';
+import type { Doctor, Treatment, Testimonial, Faq, GalleryItem, BlogPost, TeamMember } from './types';
 import { DOCTOR, DOCTORS } from '@/data/doctor';
 import { TREATMENTS } from '@/data/treatments';
-import { TESTIMONIALS, FAQS, STATS, GALLERY, AWARDS, INSURANCE, TEAM } from '@/data/content';
+import { TESTIMONIALS, FAQS, GALLERY, TEAM } from '@/data/content';
 import { BLOG_POSTS } from '@/data/blog';
 
 const ok = <T,>(data: T) => ({
@@ -39,14 +39,8 @@ export const useTestimonials = (featured?: boolean) =>
 
 export const useFaqs = () => ok<Faq[]>(FAQS);
 
-export const useStats = () => ok<ClinicStat[]>(STATS);
-
 export const useGallery = (type?: string) =>
   ok<GalleryItem[]>(type ? GALLERY.filter((g) => g.type === type) : GALLERY);
-
-export const useInsurance = () => ok<InsurancePartner[]>(INSURANCE);
-
-export const useAwards = () => ok<Award[]>(AWARDS);
 
 export const useTeam = () => ok<TeamMember[]>(TEAM);
 

@@ -1,5 +1,5 @@
 // Static marketing content (adapted from server/prisma/seed-data/content.ts).
-import type { Testimonial, Faq, ClinicStat, GalleryItem, Award, InsurancePartner, TeamMember } from '@/lib/types';
+import type {Testimonial, Faq, GalleryItem, TeamMember } from '@/lib/types';
 
 // PLACEHOLDER reviews — replace with real patient reviews before public launch.
 export const TESTIMONIALS: Testimonial[] = [
@@ -162,12 +162,6 @@ export const FAQS: Faq[] = [
   },
 ];
 
-export const STATS: ClinicStat[] = [
-  { id: 1, label: 'Happy Patients', value: 18500, suffix: '+', icon: 'happy' },
-  { id: 2, label: 'Years of Excellence', value: 20, suffix: '+', icon: 'award' },
-  { id: 3, label: 'Expert Dentists', value: 12, suffix: '', icon: 'doctor' },
-  { id: 4, label: 'Smiles Transformed', value: 9800, suffix: '+', icon: 'smile' },
-];
 
 export const GALLERY: GalleryItem[] = [
   { id: 1, type: 'ROOM', title: 'Modern Reception Lounge', category: 'Clinic', imageUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=75&auto=format&fit=crop' },
@@ -212,49 +206,7 @@ export const GALLERY: GalleryItem[] = [
   },
 ];
 
-export const AWARDS: Award[] = [
-  {
-    id: 1,
-    title: 'Best Dental Clinic of the Year',
-    issuer: 'International Healthcare Excellence Awards',
-    year: 2025,
-    imageUrl: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=75&auto=format&fit=crop',
-    description: 'Recognised for outstanding patient care and clinical excellence.',
-  },
-  {
-    id: 2,
-    title: 'Innovation in Digital Dentistry',
-    issuer: 'Global Dental Congress',
-    year: 2024,
-    imageUrl: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&q=75&auto=format&fit=crop',
-    description: 'Awarded for pioneering the use of 3D smile design and digital workflows.',
-  },
-  {
-    id: 3,
-    title: 'Top Rated Patient Experience',
-    issuer: 'HealthTrust Reviews',
-    year: 2025,
-    imageUrl: 'https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=900&q=75&auto=format&fit=crop',
-    description: 'Ranked #1 for patient satisfaction across the region.',
-  },
-  {
-    id: 4,
-    title: 'Excellence in Implantology',
-    issuer: 'Academy of Osseointegration',
-    year: 2023,
-    imageUrl: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=900&q=75&auto=format&fit=crop',
-    description: 'Honoured for exceptional outcomes in dental implant treatment.',
-  },
-];
 
-export const INSURANCE: InsurancePartner[] = [
-  { id: 1, name: 'Delta Dental', logoUrl: 'https://images.unsplash.com/photo-1643297654416-05795d62e39c?w=900&q=75&auto=format&fit=crop' },
-  { id: 2, name: 'Cigna Health', logoUrl: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=75&auto=format&fit=crop' },
-  { id: 3, name: 'Aetna', logoUrl: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=900&q=75&auto=format&fit=crop' },
-  { id: 4, name: 'MetLife', logoUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=75&auto=format&fit=crop' },
-  { id: 5, name: 'Guardian', logoUrl: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=900&q=75&auto=format&fit=crop' },
-  { id: 6, name: 'BlueCross', logoUrl: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&q=75&auto=format&fit=crop' },
-];
 
 export const TEAM: TeamMember[] = [
   {

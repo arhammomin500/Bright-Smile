@@ -1,18 +1,6 @@
-// Shared client-side types mirroring the API responses.
+// Shared types for the static site content.
 
-export type Role = 'PATIENT' | 'RECEPTION' | 'DOCTOR' | 'ADMIN';
 
-export interface User {
-  id: number;
-  email: string;
-  role: Role;
-  firstName: string;
-  lastName: string;
-  phone?: string | null;
-  avatarUrl?: string | null;
-  patientId?: number | null;
-  doctorId?: number | null;
-}
 
 export interface Doctor {
   id: number;
@@ -64,61 +52,9 @@ export interface Treatment {
   related?: { id: number; slug: string; name: string; shortDesc: string; imageUrl?: string | null; icon?: string | null }[];
 }
 
-export type AppointmentStatus =
-  | 'PENDING'
-  | 'CONFIRMED'
-  | 'RESCHEDULED'
-  | 'COMPLETED'
-  | 'CANCELLED'
-  | 'NO_SHOW';
 
-export interface Appointment {
-  id: number;
-  appointmentCode: string;
-  patientId?: number | null;
-  doctorId: number;
-  treatmentId?: number | null;
-  contactName: string;
-  contactEmail?: string | null;
-  contactPhone: string;
-  scheduledDate: string;
-  startTime: string;
-  endTime: string;
-  status: AppointmentStatus;
-  source: string;
-  isEmergency: boolean;
-  reason?: string | null;
-  medicalNotes?: string | null;
-  internalNotes?: string | null;
-  createdAt: string;
-  doctor?: { id: number; fullName: string; specialization: string; photoUrl?: string | null } | null;
-  treatment?: { id: number; name: string } | null;
-  patient?: { id: number; patientCode: string; fullName: string; mobile: string } | null;
-  statusHistory?: {
-    id: number;
-    fromStatus?: string | null;
-    toStatus: string;
-    note?: string | null;
-    createdAt: string;
-  }[];
-}
 
-export interface SlotOption {
-  startTime: string;
-  endTime: string;
-  available: boolean;
-  remaining: number;
-  reason?: string;
-}
 
-export interface DayAvailability {
-  doctorId: number;
-  date: string;
-  isWorkingDay: boolean;
-  closedReason?: string;
-  slotDurationMin: number;
-  slots: SlotOption[];
-}
 
 export interface Testimonial {
   id: number;
@@ -140,13 +76,6 @@ export interface Faq {
   category: string;
 }
 
-export interface ClinicStat {
-  id: number;
-  label: string;
-  value: number;
-  suffix?: string | null;
-  icon?: string | null;
-}
 
 export interface GalleryItem {
   id: number;
@@ -175,20 +104,7 @@ export interface BlogPost {
   related?: { id: number; slug: string; title: string; excerpt?: string; coverImage?: string | null; publishedAt?: string | null }[];
 }
 
-export interface Award {
-  id: number;
-  title: string;
-  issuer?: string | null;
-  year?: number | null;
-  imageUrl?: string | null;
-  description?: string | null;
-}
 
-export interface InsurancePartner {
-  id: number;
-  name: string;
-  logoUrl?: string | null;
-}
 
 export interface TeamMember {
   id: number;
@@ -198,18 +114,4 @@ export interface TeamMember {
   bio?: string | null;
 }
 
-export interface AppNotification {
-  id: number;
-  type: string;
-  title: string;
-  message: string;
-  isRead: boolean;
-  createdAt: string;
-  relatedType?: string | null;
-  relatedId?: number | null;
-}
 
-export interface Paginated<T> {
-  data: T[];
-  meta: { page: number; pageSize: number; total: number; totalPages: number };
-}

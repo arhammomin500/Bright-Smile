@@ -8,6 +8,19 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-14
 
+### Code cleanup + owner's guide
+- Removed the last backend-era leftovers: appointment/user/availability types,
+  status constants, `STATUS_META`, the `CountUp` counter, and the dead
+  StatsSection/BeforeAfterSection/AwardsSection/InsuranceSection components;
+  dropped the stats/awards/insurance placeholder data and hooks entirely.
+- About page: removed the invented awards and stats-counter strips (and their
+  dark-gradient band) to match the site-wide no-invented-claims rule; fixed
+  the "Two Decades" heading that contradicted the 15+ years profile.
+- Added `WEBSITE-GUIDE.md` — plain-language owner's guide: architecture, where
+  content lives, the placeholder-content inventory, the checklist of details
+  to collect from the client for the next improvement round, and security
+  to-dos.
+
 ### HTTPS live via Cloudflare 🔒
 - GitHub Pages' certificate pipeline stayed wedged >24h (request never left
   the "new" queue despite clean DNS, no CAA/DNSSEC blockers, and multiple

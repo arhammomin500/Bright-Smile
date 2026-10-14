@@ -1,4 +1,3 @@
-import type { AppointmentStatus } from './types';
 
 export function formatMoney(n: number): string {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
@@ -26,14 +25,6 @@ export function formatDateLong(iso: string): string {
 }
 
 // MUI color + label per appointment status.
-export const STATUS_META: Record<AppointmentStatus, { label: string; color: 'default' | 'warning' | 'success' | 'info' | 'error'; hex: string }> = {
-  PENDING: { label: 'Pending', color: 'warning', hex: '#d97706' },
-  CONFIRMED: { label: 'Confirmed', color: 'success', hex: '#16a34a' },
-  RESCHEDULED: { label: 'Rescheduled', color: 'info', hex: '#2563eb' },
-  COMPLETED: { label: 'Completed', color: 'success', hex: '#059669' },
-  CANCELLED: { label: 'Cancelled', color: 'error', hex: '#dc2626' },
-  NO_SHOW: { label: 'No Show', color: 'default', hex: '#64748b' },
-};
 
 export const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const WEEKDAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

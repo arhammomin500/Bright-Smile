@@ -17,9 +17,8 @@ import type { SvgIconProps } from '@mui/material';
 import { PageHero } from '@/components/ui/PageHero';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
-import { CountUp } from '@/components/ui/CountUp';
 import { Loader, EmptyState, ErrorState } from '@/components/ui/States';
-import { useAwards, useTeam, useStats } from '@/lib/queries';
+import { useTeam } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { CLINIC } from '@/lib/clinic';
 import { brand, gradients } from '@/theme/theme';
@@ -50,9 +49,7 @@ const MILESTONES: { year: string; title: string; text: string }[] = [
 
 export default function About() {
   usePageMeta('About Us — Bright Smile Dental Clinic', 'Learn about Bright Smile Dental Clinic — our story, values, and the team behind gentle, modern dental care.');
-  const awards = useAwards();
   const team = useTeam();
-  const stats = useStats();
 
   return (
     <Box>
@@ -263,7 +260,7 @@ export default function About() {
 
       {/* ── Journey Timeline ─────────────────────────────────────── */}
       <Container sx={{ py: { xs: 6, md: 10 } }}>
-        <SectionHeading eyebrow="Our Journey" title="Two Decades of Bright Smiles" subtitle="From a two-chair practice to a regional centre of excellence." />
+        <SectionHeading eyebrow="Our Journey" title="Our Journey So Far" subtitle="From a two-chair practice to a regional centre of excellence." />
         <Box sx={{ maxWidth: 820, mx: 'auto', position: 'relative' }}>
           {/* vertical line */}
           <Box
@@ -316,65 +313,6 @@ export default function About() {
         </Box>
       </Container>
 
-      {/* ── Achievements ─────────────────────────────────────────── */}
-      <Box sx={{ background: gradients.soft, py: { xs: 6, md: 10 } }}>
-        <Container>
-          <SectionHeading eyebrow="Recognition" title="Awards & Achievements" subtitle="Honours that reflect our relentless pursuit of clinical excellence." />
-          {awards.isLoading ? (
-            <Loader label="Loading achievements…" />
-          ) : awards.isError ? (
-            <ErrorState message={errorMessage(awards.error)} onRetry={() => awards.refetch()} />
-          ) : !awards.data || awards.data.length === 0 ? (
-            <EmptyState title="No achievements yet" description="Check back soon for our latest recognitions." icon={<WorkspacePremiumOutlinedIcon sx={{ fontSize: 56 }} />} />
-          ) : (
-            <Grid container spacing={{ xs: 3, md: 3.5 }}>
-              {awards.data.map((a, i) => (
-                <Grid key={a.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                  <Reveal delayIndex={i % 3}>
-                    <Card sx={{ height: '100%', ...cardHover }}>
-                      <CardContent sx={{ p: { xs: 3, md: 3.5 } }}>
-                        <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2 }}>
-                          <Box
-                            sx={{
-                              width: 52,
-                              height: 52,
-                              borderRadius: 2.5,
-                              display: 'grid',
-                              placeItems: 'center',
-                              background: gradients.accent,
-                              color: '#fff',
-                              flexShrink: 0,
-                            }}
-                          >
-                            <WorkspacePremiumOutlinedIcon />
-                          </Box>
-                          {a.year && (
-                            <Chip label={a.year} size="small" sx={{ bgcolor: alpha(brand.primary, 0.1), color: brand.primary, fontWeight: 700 }} />
-                          )}
-                        </Stack>
-                        <Typography variant="h6" sx={{ mb: 0.5 }}>
-                          {a.title}
-                        </Typography>
-                        {a.issuer && (
-                          <Typography variant="body2" sx={{ color: brand.primary, fontWeight: 600, mb: 1 }}>
-                            {a.issuer}
-                          </Typography>
-                        )}
-                        {a.description && (
-                          <Typography color="text.secondary" variant="body2">
-                            {a.description}
-                          </Typography>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </Reveal>
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Container>
-      </Box>
-
       {/* ── Team ─────────────────────────────────────────────────── */}
       <Container sx={{ py: { xs: 6, md: 10 } }}>
         <SectionHeading eyebrow="Behind The Smiles" title="Meet Our Team" subtitle="The warm, dedicated people who make every visit feel effortless." />
@@ -426,33 +364,6 @@ export default function About() {
         )}
       </Container>
 
-      {/* ── Stats strip ──────────────────────────────────────────── */}
-      <Box sx={{ background: gradients.hero, color: '#fff', py: { xs: 6, md: 8 } }}>
-        <Container>
-          {stats.isLoading ? (
-            <Loader label="" />
-          ) : stats.isError ? (
-            <Typography sx={{ textAlign: 'center', color: 'rgba(255,255,255,0.85)' }}>
-              {errorMessage(stats.error)}
-            </Typography>
-          ) : stats.data && stats.data.length > 0 ? (
-            <Grid container spacing={{ xs: 3, md: 4 }}>
-              {stats.data.map((s, i) => (
-                <Grid key={s.id} size={{ xs: 6, md: 12 / Math.min(stats.data!.length, 4) }}>
-                  <Reveal delayIndex={i % 4} sx={{ textAlign: 'center' }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: { xs: '2.2rem', md: '3rem' }, lineHeight: 1 }}>
-                      <CountUp value={s.value} suffix={s.suffix ?? ''} />
-                    </Typography>
-                    <Typography sx={{ mt: 1, color: 'rgba(255,255,255,0.85)', fontWeight: 600 }}>
-                      {s.label}
-                    </Typography>
-                  </Reveal>
-                </Grid>
-              ))}
-            </Grid>
-          ) : null}
-        </Container>
-      </Box>
     </Box>
   );
 }
