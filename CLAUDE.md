@@ -38,5 +38,6 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   BrightSmile tooth-badge logo.
 
 ## Build & deploy
-- `npm run build` → `client/dist`. Deploy: push to `main` → **GitHub Pages** via `.github/workflows/deploy.yml` (repo is public; 404.html = SPA fallback). Domain: brightsmiledent.in (GoDaddy DNS).
+- `npm run build` → `client/dist`. Deploy: push to `main` → **GitHub Pages** via `.github/workflows/deploy.yml` (repo is public; 404.html = SPA fallback).
+- **Domain/TLS: Cloudflare in front of GitHub Pages** (since 2026-10-14) — brightsmiledent.in registered at GoDaddy, nameservers on Cloudflare (free), proxied A/CNAME records, Cloudflare edge certificate. Do NOT enable GitHub's "enforce HTTPS" (origin has no cert for the domain; GitHub's cert issuance for it is permanently wedged — that's why Cloudflare fronts it).
 - Client: MUI v6 `Grid2` (`size={{xs,md}}`), `@/` path alias.

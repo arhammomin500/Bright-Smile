@@ -6,6 +6,20 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-10-14
+
+### HTTPS live via Cloudflare 🔒
+- GitHub Pages' certificate pipeline stayed wedged >24h (request never left
+  the "new" queue despite clean DNS, no CAA/DNSSEC blockers, and multiple
+  resets incl. full Pages recreation), so the domain's DNS was moved to
+  **Cloudflare** (free plan, nameservers sonia/vern.ns.cloudflare.com at
+  GoDaddy). Cloudflare now proxies brightsmiledent.in and www in front of
+  GitHub Pages: instant edge certificate, CDN caching; GitHub keeps hosting
+  and auto-deploying the files. Both https://brightsmiledent.in and
+  https://www.brightsmiledent.in verified serving the site over TLS.
+- GitHub-side "enforce HTTPS" intentionally left OFF (origin stays
+  cert-less for the custom domain; Cloudflare terminates TLS).
+
 ## 2026-10-13
 
 ### 🌐 brightsmiledent.in IS LIVE
