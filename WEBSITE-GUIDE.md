@@ -1,6 +1,12 @@
 # Bright Smile Dental Clinic — Website Guide
 
-*Plain-language guide to everything about the website. Last updated: 14 Oct 2026.*
+*Plain-language guide to everything about the website. Last updated: 15 Oct 2026.*
+
+> **v3 (15 Oct 2026):** the whole site was rebuilt to match the client's 7-page
+> reference design — pages: Home, About, Treatments, Our Dentist, Reviews,
+> Book Appointment, Contact (+ Privacy/Terms). Booking is a 3-step form that
+> hands the request to WhatsApp. Content from the mockup (15+ years, 10K+
+> patients, memberships, Andheri West Mumbai) is treated as client-approved.
 
 ---
 
