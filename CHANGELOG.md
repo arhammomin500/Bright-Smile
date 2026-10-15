@@ -8,10 +8,12 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
-### Hero desktop polish
+### Hero desktop polish + compact CTAs
 - Wide screens: the doctor now aligns with the content container's right edge
   instead of the far viewport corner (1920px verified).
-- Book Appointment and Call Now are now the same width.
+- Book Appointment and Call Now are the same width, and on phones they're
+  compact single-line buttons (200px, smaller icons, no wrap) — the owner's
+  device was wrapping "Book Appointment" onto two lines.
 
 ### Hero: figure raised to headline level (owner's final reference)
 - Photo top pinned at headline level (76px phones / 100px tablets) and shifted

@@ -231,20 +231,18 @@ export default function Home() {
                   component={Link}
                   to="/book-appointment"
                   variant="contained"
-                  size="large"
-                  startIcon={<CalendarMonthOutlinedIcon />}
-                  endIcon={<ArrowForwardIcon />}
-                  sx={{ py: 1.2, fontSize: { xs: 14, md: 15 }, width: { xs: 238, md: 264 } }}
+                  startIcon={<CalendarMonthOutlinedIcon sx={{ fontSize: '18px !important' }} />}
+                  endIcon={<ArrowForwardIcon sx={{ fontSize: '18px !important', display: { xs: 'none', md: 'block' } }} />}
+                  sx={{ py: { xs: 0.9, md: 1.2 }, fontSize: { xs: 13, md: 15 }, width: { xs: 200, md: 264 }, whiteSpace: 'nowrap' }}
                 >
                   Book Appointment
                 </Button>
                 <Button
                   variant="outlined"
-                  size="large"
-                  startIcon={<CallIcon />}
+                  startIcon={<CallIcon sx={{ fontSize: '18px !important' }} />}
                   component="a"
                   href={CLINIC.phoneHref}
-                  sx={{ py: 1.1, fontSize: { xs: 14, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)', width: { xs: 238, md: 264 } }}
+                  sx={{ py: { xs: 0.8, md: 1.1 }, fontSize: { xs: 13, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)', width: { xs: 200, md: 264 }, whiteSpace: 'nowrap' }}
                 >
                   Call Now
                 </Button>
