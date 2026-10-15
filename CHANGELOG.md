@@ -9,6 +9,9 @@ Every code/content/config change must add an entry under the current date
 ## 2026-10-15
 
 ### v3 — rebuilt to the client's reference design 🎨
+- Deploy workflow now emits a real `index.html` copy for every route, so deep
+  links (e.g. /dentist, /treatments/…) return HTTP 200 and are indexable —
+  previously GitHub Pages served them via the 404-status SPA fallback.
 - The owner supplied a full 7-page design mockup; the site was rebuilt to
   match it closely: new header (Home/About/Treatments/Our Dentist/Reviews/
   Contact + phone + CTA), dark-navy footer, and a blue "Book Your Appointment
