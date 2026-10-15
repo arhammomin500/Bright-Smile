@@ -11,7 +11,7 @@ export const DOCTOR: Doctor = {
   lastName: 'Khan',
   fullName: 'Dr. Afaque Khan',
   title: 'Dr.',
-  photoUrl: '/images/dr-afaque-khan.jpg', // from the client's approved mockup
+  photoUrl: '/images/dr-afaque-khan-2026.jpg', // the clinic's original photo (renamed to bust stale caches)
   qualification: 'BDS, MDS — Conservative Dentistry & Endodontics',
   specialization: 'General, Cosmetic & Implant Dentistry',
   experienceYears: 15,

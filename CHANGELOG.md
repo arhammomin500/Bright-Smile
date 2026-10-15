@@ -8,6 +8,12 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Cache-bust the doctor photo
+- Owner's phone kept showing the old image (phone/edge caches hold files by
+  URL, and the filename hadn't changed). Renamed the asset to
+  `dr-afaque-khan-2026.jpg` and updated both references (`images.ts`,
+  `doctor.ts`) so every device fetches the new photo immediately.
+
 ### Real doctor photo 🎉
 - Replaced the mockup-extracted portrait with the clinic's **original photo of
   Dr. Afaque Khan** (supplied by the owner, optimized 1087×1447 → 900×1198

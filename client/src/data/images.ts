@@ -3,7 +3,7 @@
 // real photos — same filename, zero code changes.
 export const IMG = {
   // Dr. Afaque Khan — extracted from the client's approved design mockup.
-  doctorPortrait: '/images/dr-afaque-khan.jpg',
+  doctorPortrait: '/images/dr-afaque-khan-2026.jpg',
   heroClinic: '/images/hero-clinic-room.jpg',
   clinicReception: '/images/clinic-reception.jpg',
   clinicInterior: '/images/clinic-interior.jpg',
