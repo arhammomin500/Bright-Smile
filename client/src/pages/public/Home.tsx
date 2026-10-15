@@ -142,12 +142,12 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              right: { xs: -40, sm: -16, md: 0 },
+              right: { xs: -56, sm: -24, md: 0 },
               bottom: 0,
-              // Pin the photo's top edge BELOW the headline on phones/tablets, so
-              // the full figure scales to the remaining space and can never
-              // overlap the heading; desktop keeps the fixed-size full figure.
-              top: { xs: 148, sm: 170, md: 'auto' },
+              // Pin the photo's top edge at headline level (reference design) —
+              // the figure scales to the remaining space; the headline stays
+              // clear because the photo is shifted right past the text.
+              top: { xs: 76, sm: 100, md: 'auto' },
               zIndex: 1,
               lineHeight: 0,
               pointerEvents: 'none',

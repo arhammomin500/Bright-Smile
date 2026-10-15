@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Hero: figure raised to headline level (owner's final reference)
+- Photo top pinned at headline level (76px phones / 100px tablets) and shifted
+  further right so the headline clears his hair; the Book Appointment button
+  intentionally overlaps his coat, matching the owner's reference image.
+
 ### Hero final layout (owner iterations): doctor right, FULL figure, zero overlap
 - Owner iterated through mirrored (doctor-left) and half-body variants, then
   settled on the original look: full-figure cutout on the RIGHT with the
