@@ -8,13 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
-### Hero mirrored to the owner's final reference (doctor LEFT, text RIGHT)
-- Hero flipped per the latest mockup: doctor cutout anchored bottom-left
-  (edge crops off-screen on phones), text column (eyebrow, Title-Case
-  headline, paragraph, Book Appointment + Call Now) on the right.
-- Trust strip icons now circular; third item reads "Personalized / care for
-  every smile" per the mockup.
-- Verified 412×915, 768×1024 iPad and 1366 desktop — no text/photo overlap.
+### Hero final layout (owner iterations): doctor right, half-body, zero overlap
+- After trying the mirrored (doctor-left) layout, the owner reverted to doctor
+  on the RIGHT but with the overlap fixed for good: on phones/tablets the
+  cutout is a straight half-body crop (head to waist, cropped by the trust
+  strip) that starts BELOW the buttons, so it can never touch the text; the
+  full figure shows on desktop beside the text column.
+- Trust strip icons circular; third item "Personalized / care for every smile".
+- Verified 412×915 and 1366 desktop — content fully clear of the photo.
 
 ### Hero cutout sizing/position (owner feedback rounds)
 - Doctor cutout tuned over several owner feedback rounds — final: shifted
