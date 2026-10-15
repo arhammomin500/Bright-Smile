@@ -8,6 +8,22 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Local image assets + completed homepage
+- **All 24 photos are now local project assets** in `client/public/images/`
+  (optimized progressive JPEGs, ~1 MB total, descriptive filenames) — no more
+  Unsplash/pravatar hotlinks that could fail to load and leave sections
+  looking empty. Swapping in real clinic photos = replace a file, no code.
+- **Doctor photo integrity:** Dr. Khan's portrait is now extracted from the
+  client's own approved design mockup (not a random stock person), upscaled
+  and sharpened; used on the home doctor section and the Our Dentist page
+  (landscape crop). Ask the client for the original photo file for best
+  quality.
+- **Homepage completed** per the follow-up brief: added Technology, Doctor
+  profile (photo + 15+ yrs badge + Book/Full Profile), Testimonials preview,
+  FAQ accordion, and a contact/hours strip — all in the mockup's design
+  language. Verified: every image loads, zero external image requests, no
+  horizontal overflow at 375px, build clean.
+
 ### v3 — rebuilt to the client's reference design 🎨
 - Deploy workflow now emits a real `index.html` copy for every route, so deep
   links (e.g. /dentist, /treatments/…) return HTTP 200 and are indexable —

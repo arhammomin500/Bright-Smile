@@ -69,7 +69,7 @@ export default function Dentist() {
                   component="img"
                   src={IMG.doctorPortrait}
                   alt={doctor?.fullName ?? 'Dr. Afaque Khan'}
-                  sx={{ width: '100%', aspectRatio: '4/4.4', objectFit: 'cover', objectPosition: 'top', borderRadius: '18px 18px 0 0', display: 'block' }}
+                  sx={{ width: '100%', aspectRatio: { xs: '16/10', md: '4/3' }, objectFit: 'cover', objectPosition: 'top', borderRadius: '18px 18px 0 0', display: 'block', bgcolor: '#fff' }}
                 />
                 <Card sx={{ position: 'absolute', bottom: 16, right: { xs: 8, md: -14 }, px: 2, py: 1.1, borderRadius: '12px', boxShadow: hoverShadow, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <WorkspacePremiumOutlinedIcon sx={{ color: brand.primary, fontSize: 22 }} />

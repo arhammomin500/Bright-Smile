@@ -11,7 +11,7 @@ export const DOCTOR: Doctor = {
   lastName: 'Khan',
   fullName: 'Dr. Afaque Khan',
   title: 'Dr.',
-  photoUrl: 'https://i.pravatar.cc/400?img=59',
+  photoUrl: '/images/dr-afaque-khan.jpg', // from the client's approved mockup
   qualification: 'BDS, MDS — Conservative Dentistry & Endodontics',
   specialization: 'General, Cosmetic & Implant Dentistry',
   experienceYears: 15,

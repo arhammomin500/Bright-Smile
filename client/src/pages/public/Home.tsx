@@ -30,6 +30,7 @@ import { useTreatments } from '@/lib/queries';
 import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
 import { Reveal } from '@/components/ui/Reveal';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { TechnologySection, DoctorSection, TestimonialsSection, FaqSection, ContactStrip } from './home-sections';
 
 const MotionBox = motion.create(Box);
 
@@ -339,6 +340,12 @@ export default function Home() {
           </Grid>
         </Container>
       </Box>
+
+      <TechnologySection />
+      <DoctorSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <ContactStrip />
 
       {/* Clinic tour video dialog */}
       <Dialog open={tourOpen} onClose={() => setTourOpen(false)} maxWidth="md" fullWidth PaperProps={{ sx: { bgcolor: '#000', borderRadius: '14px', position: 'relative' } }}>
