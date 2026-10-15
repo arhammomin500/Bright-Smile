@@ -8,6 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Real doctor photo 🎉
+- Replaced the mockup-extracted portrait with the clinic's **original photo of
+  Dr. Afaque Khan** (supplied by the owner, optimized 1087×1447 → 900×1198
+  progressive JPEG, 75 KB). Used everywhere via the same
+  `/images/dr-afaque-khan.jpg` file: home hero, home doctor section, and the
+  Our Dentist page. Verified on mobile + desktop — natural scale, full face,
+  no awkward cropping.
+
 ### Mobile hero compacted (owner's phone feedback)
 - The first phone screen now shows the badge, full headline ("Gentle care
   for / brighter smiles" — line break fixed), description, both buttons and
