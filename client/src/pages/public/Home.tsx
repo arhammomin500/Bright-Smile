@@ -138,14 +138,14 @@ export default function Home() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            sx={{ position: 'absolute', right: { xs: -26, sm: -10, md: 0 }, bottom: 0, zIndex: 1, lineHeight: 0, pointerEvents: 'none' }}
+            sx={{ position: 'absolute', right: { xs: -46, sm: -28, md: 0 }, bottom: 0, zIndex: 1, lineHeight: 0, pointerEvents: 'none' }}
           >
             <Box
               component="img"
               src={IMG.doctorCutout}
               alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
               sx={{
-                height: { xs: 'clamp(360px, 64svh, 600px)', md: 'clamp(520px, 78vh, 760px)' },
+                height: { xs: 'clamp(340px, 56svh, 500px)', sm: 'clamp(400px, 60svh, 580px)', md: 'clamp(500px, 74vh, 700px)' },
                 width: 'auto',
                 maxWidth: { xs: '92vw', md: '46vw' },
                 objectFit: 'contain',
