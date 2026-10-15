@@ -21,8 +21,8 @@ export function MobileBookingBar() {
         backdropFilter: 'blur(10px)',
         borderTop: '1px solid #DFE8F7',
         px: 2,
-        pt: 1,
-        pb: 'calc(8px + env(safe-area-inset-bottom))',
+        pt: 0.75,
+        pb: 'calc(6px + env(safe-area-inset-bottom))',
         boxShadow: '0 -6px 20px rgba(16,33,61,0.1)',
       }}
     >
@@ -32,7 +32,7 @@ export function MobileBookingBar() {
         variant="contained"
         fullWidth
         startIcon={<CalendarMonthIcon />}
-        sx={{ py: 1.3, fontSize: '1rem' }}
+        sx={{ py: 1, fontSize: '0.95rem' }}
       >
         Book Appointment
       </Button>

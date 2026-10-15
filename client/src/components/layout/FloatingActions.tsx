@@ -22,8 +22,8 @@ export function FloatingActions() {
       sx={{
         position: 'fixed',
         right: { xs: 14, md: 24 },
-        // Clear the mobile booking bar (~64px + safe area) on phones.
-        bottom: { xs: 'calc(76px + env(safe-area-inset-bottom))', md: 28 },
+        // Clear the mobile booking bar (~56px + safe area) on phones.
+        bottom: { xs: 'calc(66px + env(safe-area-inset-bottom))', md: 28 },
         zIndex: 1250,
         display: 'flex',
         flexDirection: 'column',
@@ -52,6 +52,8 @@ export function FloatingActions() {
           sx={{
             bgcolor: '#25D366',
             color: '#fff',
+            width: { xs: 48, md: 56 },
+            height: { xs: 48, md: 56 },
             boxShadow: '0 10px 24px rgba(37,211,102,0.5)',
             '&:hover': { bgcolor: '#1ebe5b' },
           }}

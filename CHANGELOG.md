@@ -8,6 +8,21 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Mobile hero compacted (owner's phone feedback)
+- The first phone screen now shows the badge, full headline ("Gentle care
+  for / brighter smiles" — line break fixed), description, both buttons and
+  the start of the doctor photo: reduced heading/paragraph sizes and margins,
+  slimmer buttons, tighter hero padding on xs.
+- Doctor photo is a square (1/1) crop on phones so the full face + name card
+  appear right after the buttons instead of far below the fold (md keeps 7/8).
+- Fixed bottom booking bar slimmed (~56px) and the WhatsApp bubble shrunk to
+  48px on phones and repositioned so the two never fight for space.
+- Owner sent the clinic's original doctor photo, but it reached the chat as a
+  100×124 thumbnail — too small for the site. Still using the mockup-extracted
+  portrait until the full-resolution file is provided.
+- Verified at 360/375/390/430 px: no horizontal overflow, buttons work,
+  desktop/tablet unchanged, build clean.
+
 ### Doctor-led homepage hero (new client mockup)
 - **Hero redesigned to the client's latest mobile mockup:** Dr. Khan's portrait
   now *is* the hero image, with a floating "15+ Years of trusted care" badge

@@ -83,9 +83,9 @@ export default function Home() {
   return (
     <Box>
       {/* ── Hero ── */}
-      <Box sx={{ bgcolor: brand.mist, pt: { xs: '86px', md: '120px' }, pb: { xs: 5, md: 8 }, overflow: 'hidden' }}>
+      <Box sx={{ bgcolor: brand.mist, pt: { xs: '76px', md: '120px' }, pb: { xs: 4, md: 8 }, overflow: 'hidden' }}>
         <Container>
-          <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+          <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
             <Grid size={{ xs: 12, md: 6 }}>
               <MotionBox {...fadeUp(0.05)}>
                 <Stack
@@ -99,7 +99,7 @@ export default function Home() {
                     borderRadius: 999,
                     px: 1.75,
                     py: 0.6,
-                    mb: 2.5,
+                    mb: { xs: 1.75, md: 2.5 },
                   }}
                 >
                   <VerifiedOutlinedIcon sx={{ fontSize: 16, color: brand.primary }} />
@@ -116,12 +116,13 @@ export default function Home() {
                     fontWeight: 800,
                     letterSpacing: '-0.03em',
                     lineHeight: 1.12,
-                    fontSize: { xs: '2.3rem', sm: '2.9rem', md: '3.3rem' },
+                    fontSize: { xs: '2.05rem', sm: '2.9rem', md: '3.3rem' },
                     color: 'text.primary',
-                    mb: 2,
+                    mb: { xs: 1.25, md: 2 },
                   }}
                 >
-                  Gentle care for{' '}
+                  Gentle care for
+                  <br />
                   <Box component="span" sx={{ color: brand.primary }}>
                     brighter smiles
                   </Box>
@@ -129,18 +130,32 @@ export default function Home() {
               </MotionBox>
 
               <MotionBox {...fadeUp(0.2)}>
-                <Typography sx={{ color: 'text.secondary', maxWidth: 480, mb: 3.5, fontSize: { xs: '1rem', md: '1.05rem' } }}>
+                <Typography sx={{ color: 'text.secondary', maxWidth: 480, mb: { xs: 2.5, md: 3.5 }, fontSize: { xs: '0.95rem', md: '1.05rem' }, lineHeight: 1.6 }}>
                   Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
                   complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
                 </Typography>
               </MotionBox>
 
               <MotionBox {...fadeUp(0.28)}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
-                  <Button component={Link} to="/book-appointment" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1.25, sm: 1.75 }}>
+                  <Button
+                    component={Link}
+                    to="/book-appointment"
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowForwardIcon />}
+                    sx={{ py: { xs: 1.1, md: 1.25 } }}
+                  >
                     Book Appointment
                   </Button>
-                  <Button variant="outlined" size="large" startIcon={<CallIcon />} component="a" href={CLINIC.phoneHref}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    startIcon={<CallIcon />}
+                    component="a"
+                    href={CLINIC.phoneHref}
+                    sx={{ py: { xs: 1, md: 1.25 } }}
+                  >
                     Call Now
                   </Button>
                 </Stack>
@@ -161,7 +176,7 @@ export default function Home() {
                   alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
                   sx={{
                     width: '100%',
-                    aspectRatio: '7/8',
+                    aspectRatio: { xs: '1/1', md: '7/8' },
                     objectFit: 'cover',
                     objectPosition: 'top',
                     borderRadius: '18px',
