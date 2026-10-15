@@ -8,13 +8,13 @@ export const CLINIC = {
   emergencyHref: 'tel:+919373223464',
   whatsapp: '919373223464',
   email: 'hello@brightsmile.example',
-  address: '1200 Riverfront Avenue, Suite 400, Metropolis, NY 10012',
-  addressShort: 'Metropolis, NY',
-  mapQuery: '1200 Riverfront Avenue, Metropolis, NY 10012',
+  address: 'Andheri West, Mumbai, Maharashtra',
+  addressShort: 'Andheri West, Mumbai',
+  mapQuery: 'Andheri West, Mumbai',
   hours: [
     { day: 'Monday – Friday', time: '8:30 AM – 7:00 PM' },
-    { day: 'Saturday', time: '9:00 AM – 3:00 PM' },
-    { day: 'Sunday', time: 'Emergencies only' },
+    { day: 'Saturday', time: '9:00 AM – 6:00 PM' },
+    { day: 'Sunday', time: 'Closed' },
   ],
   socials: {
     facebook: 'https://facebook.com',

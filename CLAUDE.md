@@ -32,10 +32,12 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
 ## Owner preferences
 - Single-doctor clinic: **Dr. Afaque Khan** (BDS, MDS, 15+ yrs, Mon–Sat).
 - Keep public flows minimal — the owner consistently rejects extra steps.
-- Design: light premium blue/white; white surfaces, `brand.mist` tinted bands,
-  solid-blue buttons (12px radius), navy headings with "+ EYEBROW" blue
-  labels, no dark backgrounds/heavy gradients/pill shapes. Keep the original
-  BrightSmile tooth-badge logo.
+- Design: since 2026-10-15 the **client's 7-page reference mockup is the
+  source of truth** (palette #216CF3/#10213D/#F3F7FF, navy footer + navy
+  dentist hero, blue CTA band on every page, "+ EYEBROW" labels, 3-step
+  booking stepper, fixed mobile booking bar). Keep the BrightSmile
+  tooth-badge logo. Content in the mockup (stats, memberships, Mumbai
+  address) is client-approved.
 
 ## Build & deploy
 - `npm run build` → `client/dist`. Deploy: push to `main` → **GitHub Pages** via `.github/workflows/deploy.yml` (repo is public; 404.html = SPA fallback).

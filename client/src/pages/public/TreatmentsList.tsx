@@ -1,198 +1,119 @@
-import { useMemo, useState } from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Chip,
-  Container,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Container, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ScheduleIcon from '@mui/icons-material/Schedule';
-import { PageHero } from '@/components/ui/PageHero';
-import { Reveal } from '@/components/ui/Reveal';
-import { Loader, ErrorState, EmptyState } from '@/components/ui/States';
-import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
+import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
+import { brand, softShadow, hoverShadow } from '@/theme/theme';
+import { IMG } from '@/data/images';
 import { useTreatments } from '@/lib/queries';
-import { errorMessage } from '@/lib/api';
-import { formatPriceRange } from '@/lib/format';
-import { brand, gradients } from '@/theme/theme';
-import type { Treatment } from '@/lib/types';
+import { Reveal } from '@/components/ui/Reveal';
 import { usePageMeta } from '@/lib/usePageMeta';
 
-const ALL = 'All';
+// Photos for the featured six (reference design); others fall back in rotation.
+const CARD_PHOTOS: Record<string, string> = {
+  'general-dentistry': IMG.dentistExam,
+  'root-canal-treatment': IMG.procedure,
+  'dental-implants': IMG.surgery,
+  'teeth-whitening': IMG.smile,
+  'invisible-aligners': IMG.aligner,
+  'smile-makeover': IMG.smilingDentist,
+};
+const FALLBACKS = [IMG.dentistPatient, IMG.heroClinic, IMG.xray, IMG.clinicInterior, IMG.clinicReception];
 
 export default function TreatmentsList() {
-  usePageMeta('Dental Treatments — Bright Smile Dental Clinic', 'Explore our dental treatments: implants, aligners, whitening, root canal, cosmetic dentistry and more.');
-  const { data: treatments, isLoading, isError, error, refetch } = useTreatments();
-  const [category, setCategory] = useState<string>(ALL);
-
-  const categories = useMemo(() => {
-    if (!treatments) return [ALL];
-    return [ALL, ...Array.from(new Set(treatments.map((t) => t.category)))];
-  }, [treatments]);
-
-  const filtered = useMemo(() => {
-    if (!treatments) return [];
-    return category === ALL ? treatments : treatments.filter((t) => t.category === category);
-  }, [treatments, category]);
+  usePageMeta(
+    'Treatments — BrightSmile Dental Clinic',
+    'Comprehensive dental care for every smile: general dentistry, root canal, implants, whitening, aligners, smile makeovers and more.',
+  );
+  const { data: treatments } = useTreatments();
+  const featuredOrder = Object.keys(CARD_PHOTOS);
+  const sorted = [...(treatments ?? [])].sort((a, b) => {
+    const ai = featuredOrder.indexOf(a.slug);
+    const bi = featuredOrder.indexOf(b.slug);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
 
   return (
     <Box>
-      <PageHero
-        title="Our Dental Treatments"
-        subtitle="From routine care to full smile makeovers — explore our comprehensive range of advanced, comfortable treatments."
-        crumbs={[{ label: 'Treatments' }]}
-      />
+      {/* ── Page hero ── */}
+      <Box sx={{ bgcolor: brand.mist, pt: { xs: '86px', md: '116px' }, pb: { xs: 4, md: 6 }, borderBottom: `1px solid ${brand.line}` }}>
+        <Container>
+          <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
+            <Grid size={{ xs: 12, md: 7 }}>
+              <Typography sx={{ color: brand.primary, fontWeight: 700, letterSpacing: '0.2em', fontSize: 12.5, mb: 1 }}>
+                + OUR TREATMENTS
+              </Typography>
+              <Typography component="h1" sx={{ fontWeight: 800, letterSpacing: '-0.025em', fontSize: { xs: '1.9rem', md: '2.6rem' }, lineHeight: 1.18, color: 'text.primary', mb: 1.5 }}>
+                Comprehensive Dental Care for Every Smile
+              </Typography>
+              <Typography sx={{ color: 'text.secondary', maxWidth: 520 }}>
+                We offer a wide range of dental treatments to keep your teeth healthy, your smile
+                bright, and your confidence high.
+              </Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
+              <Box
+                component="img"
+                src={IMG.dentistExam}
+                alt="Dental examination"
+                sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: '16px', boxShadow: softShadow, display: 'block' }}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
-      <Container sx={{ py: { xs: 6, md: 10 } }}>
-        {isLoading && <Loader label="Loading treatments…" />}
+      {/* ── Treatment cards ── */}
+      <Container sx={{ py: { xs: 5, md: 8 } }}>
+        <Grid container spacing={2.5}>
+          {sorted.map((t, i) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={t.id}>
+              <Reveal delayIndex={i % 3}>
+                <Card sx={{ height: '100%', overflow: 'hidden', transition: '.25s', '&:hover': { transform: 'translateY(-5px)', boxShadow: hoverShadow } }}>
+                  <Box
+                    component="img"
+                    src={CARD_PHOTOS[t.slug] ?? FALLBACKS[i % FALLBACKS.length]}
+                    alt={t.name}
+                    loading="lazy"
+                    sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
+                  />
+                  <CardContent sx={{ p: 2.5 }}>
+                    <Typography sx={{ fontWeight: 800, fontSize: '1.08rem', mb: 0.75 }}>{t.name}</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5, minHeight: 42 }}>
+                      {t.shortDesc}
+                    </Typography>
+                    <Button component={Link} to={`/treatments/${t.slug}`} endIcon={<ArrowForwardIcon sx={{ fontSize: 16 }} />} sx={{ px: 0, fontWeight: 700 }}>
+                      Learn More
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Reveal>
+            </Grid>
+          ))}
+        </Grid>
 
-        {isError && <ErrorState message={errorMessage(error)} onRetry={() => refetch()} />}
-
-        {!isLoading && !isError && treatments && treatments.length > 0 && (
-          <>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: { xs: 4, md: 6 } }}>
-              <ToggleButtonGroup
-                value={category}
-                exclusive
-                onChange={(_, val) => val && setCategory(val)}
-                aria-label="Filter treatments by category"
-                sx={{
-                  flexWrap: 'wrap',
-                  gap: 1,
-                  justifyContent: 'center',
-                  '& .MuiToggleButton-root': {
-                    border: `1px solid ${brand.primary}26`,
-                    borderRadius: 999,
-                    px: 2.5,
-                    py: 0.75,
-                    textTransform: 'none',
-                    fontWeight: 700,
-                    color: brand.slate,
-                  },
-                  '& .MuiToggleButton-root.Mui-selected': {
-                    color: '#fff',
-                    background: gradients.primary,
-                    borderColor: 'transparent',
-                    '&:hover': { background: gradients.primary },
-                  },
-                }}
-              >
-                {categories.map((cat) => (
-                  <ToggleButton key={cat} value={cat} disableRipple>
-                    {cat}
-                  </ToggleButton>
-                ))}
-              </ToggleButtonGroup>
-            </Box>
-
-            {filtered.length === 0 ? (
-              <EmptyState title="No treatments in this category" description="Try selecting a different category." />
-            ) : (
-              <Grid container spacing={{ xs: 3, md: 4 }}>
-                {filtered.map((t, i) => (
-                  <Grid key={t.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                    <Reveal delayIndex={i % 3} sx={{ height: '100%' }}>
-                      <TreatmentCard treatment={t} />
-                    </Reveal>
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-          </>
-        )}
-
-        {!isLoading && !isError && (!treatments || treatments.length === 0) && (
-          <EmptyState title="No treatments available yet" description="Please check back soon." />
-        )}
+        {/* ── Consultation band ── */}
+        <Reveal sx={{ mt: { xs: 4, md: 6 } }}>
+          <Card sx={{ p: { xs: 2.5, md: 3 }, bgcolor: brand.cloud, border: `1px solid ${brand.line}`, boxShadow: 'none' }}>
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ md: 'center' }}>
+              <Stack direction="row" spacing={1.75} alignItems="center" sx={{ flex: 1 }}>
+                <Box sx={{ width: 44, height: 44, borderRadius: '11px', bgcolor: '#fff', color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                  <TipsAndUpdatesOutlinedIcon />
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 800 }}>Not sure which treatment is right for you?</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Book a consultation with our expert dentist.
+                  </Typography>
+                </Box>
+              </Stack>
+              <Button component={Link} to="/book-appointment" variant="contained" endIcon={<ArrowForwardIcon />} sx={{ flexShrink: 0 }}>
+                Book Appointment
+              </Button>
+            </Stack>
+          </Card>
+        </Reveal>
       </Container>
     </Box>
-  );
-}
-
-function TreatmentCard({ treatment }: { treatment: Treatment }) {
-  return (
-    <Card
-      sx={{
-        height: '100%',
-        transition: 'transform .28s ease, box-shadow .28s ease',
-        '&:hover': {
-          transform: 'translateY(-6px)',
-          boxShadow: `0 22px 48px ${brand.primary}22`,
-        },
-      }}
-    >
-      <CardActionArea
-        component={Link}
-        to={`/treatments/${treatment.slug}`}
-        sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
-      >
-        <CardContent sx={{ p: 3, display: 'flex', flexDirection: 'column', flexGrow: 1, width: '100%' }}>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Box
-              sx={{
-                width: 64,
-                height: 64,
-                borderRadius: '50%',
-                background: gradients.accent,
-                color: '#fff',
-                display: 'grid',
-                placeItems: 'center',
-                flexShrink: 0,
-                boxShadow: `0 10px 24px ${brand.primary}33`,
-              }}
-            >
-              <TreatmentIcon name={treatment.icon ?? undefined} sx={{ fontSize: 30 }} />
-            </Box>
-            <Chip
-              label={treatment.category}
-              size="small"
-              sx={{ bgcolor: `${brand.primary}12`, color: brand.primary, fontWeight: 700 }}
-            />
-          </Stack>
-
-          <Typography variant="h6" sx={{ fontWeight: 800, mt: 2.5 }}>
-            {treatment.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            {treatment.shortDesc}
-          </Typography>
-
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ mt: 2.5, pt: 2, borderTop: `1px solid ${brand.primary}14` }}
-          >
-            <Typography sx={{ fontWeight: 800, color: brand.primary }}>
-              {formatPriceRange(treatment.priceMin, treatment.priceMax)}
-            </Typography>
-            <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: brand.slate }}>
-              <ScheduleIcon fontSize="small" />
-              <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                ~{treatment.durationMin} min
-              </Typography>
-            </Stack>
-          </Stack>
-
-          <Button
-            component="span"
-            endIcon={<ArrowForwardIcon />}
-            sx={{ mt: 2, alignSelf: 'flex-start', px: 0, color: brand.primary, '&:hover': { background: 'transparent' } }}
-          >
-            Learn more
-          </Button>
-        </CardContent>
-      </CardActionArea>
-    </Card>
   );
 }

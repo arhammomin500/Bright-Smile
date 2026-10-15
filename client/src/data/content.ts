@@ -3,105 +3,16 @@ import type {Testimonial, Faq, GalleryItem, TeamMember } from '@/lib/types';
 
 // PLACEHOLDER reviews — replace with real patient reviews before public launch.
 export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: 1,
-    patientName: 'Emily Richardson',
-    avatarUrl: 'https://i.pravatar.cc/150?img=25',
-    location: 'New York, USA',
-    rating: 5,
-    title: 'A truly painless implant experience',
-    content:
-      'I was terrified of getting an implant, but Dr. Khan and the team made it completely painless. The clinic feels like a luxury spa and everyone is so kind. My new tooth looks and feels totally natural!',
-    treatment: 'Dental Implants',
-    source: 'GOOGLE',
-  },
-  {
-    id: 2,
-    patientName: 'Marcus Lee',
-    avatarUrl: 'https://i.pravatar.cc/150?img=13',
-    location: 'Toronto, Canada',
-    rating: 5,
-    title: 'My aligners changed everything',
-    content:
-      'Six months with invisible aligners and my smile is completely transformed. Dr. Khan showed me a 3D preview on day one and the result matched it perfectly. Worth every penny.',
-    treatment: 'Invisible Aligners',
-    source: 'VIDEO',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-  },
-  {
-    id: 3,
-    patientName: 'Priya Sharma',
-    avatarUrl: 'https://i.pravatar.cc/150?img=44',
-    location: 'London, UK',
-    rating: 5,
-    title: 'Best dental cleaning I have ever had',
-    content:
-      'Professional, gentle, and thorough. I actually look forward to my six-month cleanings now. The hygienist explained everything and my teeth have never felt cleaner.',
-    treatment: 'Dental Cleaning',
-    source: 'GOOGLE',
-  },
-  {
-    id: 4,
-    patientName: 'David Thompson',
-    avatarUrl: 'https://i.pravatar.cc/150?img=52',
-    location: 'Sydney, Australia',
-    rating: 5,
-    title: 'Emergency care when I needed it most',
-    content:
-      'Cracked a tooth on a Saturday night and they saw me within the hour. Calm, quick, and completely professional. This is how healthcare should feel.',
-    treatment: 'Emergency Dental Care',
-    source: 'STORY',
-  },
-  {
-    id: 5,
-    patientName: 'Sofia Martinez',
-    avatarUrl: 'https://i.pravatar.cc/150?img=20',
-    location: 'Madrid, Spain',
-    rating: 5,
-    title: 'My kids actually love the dentist',
-    content:
-      'Dr. Khan is magical with children. My two little ones now ask when their next visit is! The play area and gentle approach make all the difference.',
-    treatment: 'Pediatric Dentistry',
-    source: 'GOOGLE',
-  },
-  {
-    id: 6,
-    patientName: 'Robert Kim',
-    avatarUrl: 'https://i.pravatar.cc/150?img=33',
-    location: 'Los Angeles, USA',
-    rating: 5,
-    title: 'Hollywood-worthy smile makeover',
-    content:
-      'The full smile makeover exceeded my expectations. From consultation to the final reveal, every step was meticulously planned. I can’t stop smiling in photos now.',
-    treatment: 'Smile Makeover',
-    source: 'VIDEO',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-  },
-  {
-    id: 7,
-    patientName: 'Aisha Abdullah',
-    avatarUrl: 'https://i.pravatar.cc/150?img=49',
-    location: 'Dubai, UAE',
-    rating: 5,
-    title: 'Whitening that actually works',
-    content:
-      'Eight shades brighter in a single visit and zero sensitivity. The results are stunning and completely natural-looking. Highly recommend.',
-    treatment: 'Teeth Whitening',
-    source: 'GOOGLE',
-  },
-  {
-    id: 8,
-    patientName: 'Thomas Müller',
-    avatarUrl: 'https://i.pravatar.cc/150?img=68',
-    location: 'Berlin, Germany',
-    rating: 5,
-    title: 'Saved my tooth with a root canal',
-    content:
-      'I expected pain and got none. Dr. Khan’s single-visit root canal was smooth and quick. My tooth feels perfect and I kept my natural smile.',
-    treatment: 'Root Canal Treatment',
-    source: 'STORY',
-  },
+  // PLACEHOLDER reviews (names/text from the client's approved mockup) —
+  // replace with real, consented patient reviews before promotion.
+  { id: 1, patientName: 'Emily Richardson', avatarUrl: 'https://i.pravatar.cc/80?img=5', location: 'New York, USA', rating: 5, content: 'I was terrified of getting an implant, but Dr. Khan and the team made it completely painless. The clinic feels like a retreat and everyone is so kind. My new tooth looks and feels totally natural!', treatment: 'Dental Implants' },
+  { id: 2, patientName: 'Marcus Lee', avatarUrl: 'https://i.pravatar.cc/80?img=12', location: 'Toronto, Canada', rating: 5, content: 'Six months with invisible aligners and my smile is completely transformed. Dr. Khan showed me a 3D preview on day one and the result matched it perfectly. Worth every penny.', treatment: 'Clear Aligners' },
+  { id: 3, patientName: 'Priya Sharma', avatarUrl: 'https://i.pravatar.cc/80?img=47', location: 'London, UK', rating: 5, content: 'Professional, gentle, and thorough. I actually look forward to my cleanings now. Everything was explained clearly and my teeth have never felt cleaner.', treatment: 'Dental Cleaning' },
+  { id: 4, patientName: 'David Thompson', avatarUrl: 'https://i.pravatar.cc/80?img=15', location: 'Sydney, Australia', rating: 5, content: 'Cracked a tooth on a Saturday night and they saw me within the hour. Calm, quick, and completely professional. This is how healthcare should feel.', treatment: 'Emergency Care' },
+  { id: 5, patientName: 'Sofia Martinez', avatarUrl: 'https://i.pravatar.cc/80?img=32', location: 'Madrid, Spain', rating: 5, content: 'Dr. Khan is magical with children. My two little ones now ask when their next visit is! The gentle approach makes all the difference.', treatment: 'Pediatric Dentistry' },
+  { id: 6, patientName: 'Robert Kim', avatarUrl: 'https://i.pravatar.cc/80?img=59', location: 'Los Angeles, USA', rating: 5, content: 'The full smile makeover was a life-changing experience. From consultation to the final reveal, every step was meticulously planned. I cannot stop smiling in photos now.', treatment: 'Smile Makeover' },
 ];
+
 
 export const FAQS: Faq[] = [
   {

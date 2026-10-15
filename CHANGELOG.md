@@ -6,6 +6,37 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-10-15
+
+### v3 — rebuilt to the client's reference design 🎨
+- The owner supplied a full 7-page design mockup; the site was rebuilt to
+  match it closely: new header (Home/About/Treatments/Our Dentist/Reviews/
+  Contact + phone + CTA), dark-navy footer, and a blue "Book Your Appointment
+  Today" band on every page.
+- Pages per the mockup: Home (photo hero + floating 15,000+ patients badge,
+  6-treatment strip, "Your Smile. Our Priority." with clinic-tour video
+  dialog), About (banner + stats row + why-choose + mission card), Treatments
+  (photo cards + consultation band), Our Dentist (navy hero with portrait,
+  credentials, memberships), Reviews (6 cards from the mockup), Contact
+  (channels + hours + map + message form), Privacy & Terms.
+- Booking is now the mockup's 3-step stepper (Details → Date & Time →
+  Confirm) with validation, no past dates, times from the clinic's weekly
+  hours, and the honest WhatsApp/email/call handoff ("not confirmed until
+  the clinic replies").
+- Mobile-first: fixed bottom Book Appointment bar (safe-area aware, hidden
+  on the booking page), WhatsApp FAB lifted above it; verified zero
+  horizontal overflow at 320/375px on all pages; burger menu checked.
+- Content per the client's mockup: stats (15+ yrs, 10K+ patients), 15,000+
+  badge, professional memberships (IDA, Endodontic Society of India, ACFFI),
+  Andheri West Mumbai address, Sat hours 9–6; testimonials replaced with the
+  mockup's six (still placeholder-flagged); verified doctor-portrait and
+  treatment photos added; palette aligned to the mockup (#216CF3/#10213D).
+- Routes: /dentist, /reviews, /book-appointment, /privacy, /terms (+
+  redirects from /doctors, /testimonials, /book); blog & gallery remain
+  routable but out of navigation; sitemap updated (29 URLs).
+- Tested: build clean, all routes + redirects, stepper E2E with composed
+  WhatsApp message, zero console errors.
+
 ## 2026-10-14
 
 ### Code cleanup + owner's guide

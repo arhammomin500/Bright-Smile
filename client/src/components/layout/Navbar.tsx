@@ -13,27 +13,24 @@ import {
   Toolbar,
   useScrollTrigger,
   Divider,
-  Chip,
   Typography,
   Link as MuiLink,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import CallIcon from '@mui/icons-material/Call';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Logo } from './Logo';
 import { CLINIC } from '@/lib/clinic';
 import { brand } from '@/theme/theme';
 
+// Reference header: single white bar — logo | nav links | phone + CTA.
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Treatments', to: '/treatments' },
+  { label: 'Our Dentist', to: '/dentist' },
+  { label: 'Reviews', to: '/reviews' },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -48,69 +45,14 @@ export function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: 'rgba(255,255,255,0.92)',
-          backdropFilter: 'saturate(180%) blur(14px)',
+          bgcolor: 'rgba(255,255,255,0.96)',
+          backdropFilter: 'saturate(180%) blur(12px)',
           borderBottom: `1px solid ${scrolled ? brand.line : 'transparent'}`,
           transition: 'border-color .3s ease',
         }}
       >
-        {/* Slim contact strip */}
-        <Box
-          sx={{
-            bgcolor: brand.mist,
-            borderBottom: `1px solid ${brand.line}`,
-            display: { xs: 'none', md: 'block' },
-          }}
-        >
-          <Container>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ height: 36 }}>
-              <Stack direction="row" spacing={3} alignItems="center">
-                <MuiLink href={`mailto:${CLINIC.email}`} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75 }}>
-                  <EmailOutlinedIcon sx={{ fontSize: 15, color: brand.primary }} />
-                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-                    {CLINIC.email}
-                  </Typography>
-                </MuiLink>
-                <MuiLink href={CLINIC.phoneHref} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75 }}>
-                  <CallIcon sx={{ fontSize: 15, color: brand.primary }} />
-                  <Typography variant="caption" sx={{ color: 'text.primary', fontWeight: 700 }}>
-                    {CLINIC.phone}
-                  </Typography>
-                </MuiLink>
-                <Stack direction="row" spacing={0.75} alignItems="center" sx={{ display: { xs: 'none', lg: 'inline-flex' } }}>
-                  <AccessTimeIcon sx={{ fontSize: 15, color: brand.primary }} />
-                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-                    Mon–Fri 8:30–19:00 · Sat 9:00–15:00
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Stack direction="row" spacing={0.5} alignItems="center">
-                {[
-                  { icon: <FacebookIcon sx={{ fontSize: 16 }} />, href: CLINIC.socials.facebook, label: 'Facebook' },
-                  { icon: <InstagramIcon sx={{ fontSize: 16 }} />, href: CLINIC.socials.instagram, label: 'Instagram' },
-                  { icon: <YouTubeIcon sx={{ fontSize: 17 }} />, href: CLINIC.socials.youtube, label: 'YouTube' },
-                ].map((s) => (
-                  <IconButton
-                    key={s.label}
-                    component="a"
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    size="small"
-                    sx={{ color: brand.primary, '&:hover': { bgcolor: brand.cloud } }}
-                  >
-                    {s.icon}
-                  </IconButton>
-                ))}
-              </Stack>
-            </Stack>
-          </Container>
-        </Box>
-
-        {/* Main navigation */}
         <Container>
-          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 72 }, gap: 2 }}>
+          <Toolbar disableGutters sx={{ minHeight: { xs: 62, md: 72 }, gap: 1.5 }}>
             <Logo />
             <Box sx={{ flexGrow: 1 }} />
 
@@ -124,7 +66,7 @@ export function Navbar() {
                   sx={{
                     color: 'text.secondary',
                     fontWeight: 600,
-                    px: 1.6,
+                    px: 1.5,
                     borderRadius: 2,
                     fontSize: 15,
                     '&.active': { color: 'primary.main' },
@@ -136,15 +78,19 @@ export function Navbar() {
               ))}
             </Stack>
 
-            <Stack direction="row" spacing={1.5} alignItems="center" sx={{ display: { xs: 'none', md: 'flex' }, ml: 2 }}>
-              <Button variant="contained" onClick={() => navigate('/book')}>
+            <Stack direction="row" spacing={1.75} alignItems="center" sx={{ display: { xs: 'none', md: 'flex' }, ml: 1.5 }}>
+              <MuiLink href={CLINIC.phoneHref} underline="none" sx={{ display: { xs: 'none', xl: 'inline-flex' }, alignItems: 'center', gap: 0.75 }}>
+                <CallIcon sx={{ fontSize: 17, color: brand.primary }} />
+                <Typography sx={{ fontWeight: 700, fontSize: 14.5, color: 'text.primary' }}>{CLINIC.phone}</Typography>
+              </MuiLink>
+              <Button variant="contained" onClick={() => navigate('/book-appointment')}>
                 Book Appointment
               </Button>
             </Stack>
 
             <IconButton
               onClick={() => setOpen(true)}
-              sx={{ display: { xs: 'inline-flex', lg: 'none' }, ml: 1, color: 'text.primary' }}
+              sx={{ display: { xs: 'inline-flex', lg: 'none' }, ml: 0.5, color: 'text.primary' }}
               aria-label="Open menu"
             >
               <MenuIcon />
@@ -158,7 +104,7 @@ export function Navbar() {
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}
-        PaperProps={{ sx: { width: { xs: '82%', sm: 360 }, p: 2.5, borderRadius: '20px 0 0 20px' } }}
+        PaperProps={{ sx: { width: { xs: '82%', sm: 360 }, p: 2.5 } }}
       >
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
           <Logo />
@@ -175,7 +121,7 @@ export function Navbar() {
               to={link.to}
               end={link.to === '/'}
               onClick={() => setOpen(false)}
-              sx={{ borderRadius: 2, mb: 0.5, '&.active': { bgcolor: brand.cloud, color: 'primary.main' } }}
+              sx={{ borderRadius: 2, mb: 0.5, minHeight: 48, '&.active': { bgcolor: brand.cloud, color: 'primary.main' } }}
             >
               <ListItemText primaryTypographyProps={{ fontWeight: 600 }}>{link.label}</ListItemText>
             </ListItemButton>
@@ -183,18 +129,12 @@ export function Navbar() {
         </List>
         <Divider sx={{ my: 1.5 }} />
         <Stack spacing={1.5} sx={{ mt: 1 }}>
-          <Button variant="contained" size="large" onClick={() => { setOpen(false); navigate('/book'); }}>
+          <Button variant="contained" size="large" onClick={() => { setOpen(false); navigate('/book-appointment'); }}>
             Book Appointment
           </Button>
-          <Chip
-            component="a"
-            clickable
-            variant="outlined"
-            icon={<CallIcon />}
-            label={`Call: ${CLINIC.phone}`}
-            href={CLINIC.phoneHref}
-            sx={{ py: 2.4, fontWeight: 700, color: 'primary.main', borderColor: 'primary.main' }}
-          />
+          <Button variant="outlined" size="large" startIcon={<CallIcon />} component="a" href={CLINIC.phoneHref}>
+            {CLINIC.phone}
+          </Button>
         </Stack>
       </Drawer>
     </>

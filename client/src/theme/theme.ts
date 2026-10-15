@@ -3,15 +3,15 @@ import { createTheme, alpha, type ThemeOptions } from '@mui/material/styles';
 // ── Bright Smile brand palette ────────────────────────────────────────
 // Light, clean, premium: white surfaces, calm blues, generous whitespace.
 export const brand = {
-  primary: '#1f6feb',
-  primaryDark: '#1558c9',
+  primary: '#216CF3',
+  primaryDark: '#1557CE',
   primaryLight: '#5c9bff',
   accent: '#22c1c3',
-  ink: '#0b1c36',
-  slate: '#5b6b84',
-  mist: '#f5f9ff', // section tint
-  cloud: '#eef4ff', // chip / icon tint
-  line: '#e6edf9', // hairline borders
+  ink: '#10213D',
+  slate: '#647895',
+  mist: '#F3F7FF', // section tint
+  cloud: '#E9F1FF', // chip / icon tint
+  line: '#DFE8F7', // hairline borders
   success: '#16a34a',
   warning: '#d97706',
   danger: '#dc2626',
