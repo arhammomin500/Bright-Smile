@@ -9,9 +9,9 @@ Every code/content/config change must add an entry under the current date
 ## 2026-10-15
 
 ### Hero cutout enlarged (owner feedback: too much empty space)
-- Doctor cutout raised/enlarged — phones 50svh → 56svh (head now sits just
-  below the headline, beside the paragraph), desktop 70vh → 74vh. Verified no
-  text collision at 390 px.
+- Doctor cutout raised/enlarged twice on owner feedback — final size: phones
+  64svh (head top aligned with the "Care for" headline line), desktop 78vh.
+  Verified no text collision at 390 px.
 
 ### Hero matched to the owner's exact mockup — doctor cutout, integrated trust strip
 - Dr. Khan now appears as a **background-removed cutout** (rembg/BriaAI model
