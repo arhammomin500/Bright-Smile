@@ -8,6 +8,17 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Mobile hero: photo beside the text (website-style, owner feedback)
+- The owner didn't want "text first, image below" stacking on phones — the
+  doctor photo now sits to the RIGHT of the headline from the very top of the
+  hero on all screen sizes, like the reference design: headline/description/
+  buttons left, photo right (stretching the row), 15+ Years badge on the
+  photo, and the name card spanning the hero bottom over the photo.
+- Hero + trust strip + services heading now all fit in the first phone screen.
+- Name card shows all three lines (name / BDS, MDS / specialization) on
+  phones; verified at 320/390 px (no overflow) and on tablet + desktop
+  (unchanged two-column layout, card inside the photo).
+
 ### Cache-bust the doctor photo
 - Owner's phone kept showing the old image (phone/edge caches hold files by
   URL, and the filename hadn't changed). Renamed the asset to

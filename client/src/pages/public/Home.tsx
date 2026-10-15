@@ -85,163 +85,211 @@ export default function Home() {
       {/* ── Hero ── */}
       <Box sx={{ bgcolor: brand.mist, pt: { xs: '76px', md: '120px' }, pb: { xs: 4, md: 8 }, overflow: 'hidden' }}>
         <Container>
-          <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
-            <Grid size={{ xs: 12, md: 6 }}>
-              <MotionBox {...fadeUp(0.05)}>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  alignItems="center"
-                  sx={{
-                    display: 'inline-flex',
-                    bgcolor: '#fff',
-                    border: `1px solid ${brand.line}`,
-                    borderRadius: 999,
-                    px: 1.75,
-                    py: 0.6,
-                    mb: { xs: 1.75, md: 2.5 },
-                  }}
-                >
-                  <VerifiedOutlinedIcon sx={{ fontSize: 16, color: brand.primary }} />
-                  <Typography variant="caption" sx={{ fontWeight: 700, color: 'text.secondary' }}>
-                    Trusted Dental Care for a Healthier Smile
+          {/* Trust badge — full-width row so the photo can sit beside the headline on phones */}
+          <MotionBox {...fadeUp(0.05)}>
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              sx={{
+                display: 'inline-flex',
+                bgcolor: '#fff',
+                border: `1px solid ${brand.line}`,
+                borderRadius: 999,
+                px: 1.75,
+                py: 0.6,
+                mb: { xs: 1.75, md: 2.5 },
+              }}
+            >
+              <VerifiedOutlinedIcon sx={{ fontSize: 16, color: brand.primary }} />
+              <Typography variant="caption" sx={{ fontWeight: 700, color: 'text.secondary' }}>
+                Trusted Dental Care for a Healthier Smile
+              </Typography>
+            </Stack>
+          </MotionBox>
+
+          {/* Website-style hero: text LEFT and doctor photo RIGHT on every screen size
+              (per the client's reference) — on phones the photo stretches beside the
+              text and the name card overlaps the bottom of the whole hero row. */}
+          <Box sx={{ position: 'relative' }}>
+            <Grid container spacing={{ xs: 1.75, md: 6 }} alignItems={{ xs: 'stretch', md: 'center' }}>
+              <Grid size={{ xs: 7, sm: 7, md: 6 }}>
+                <MotionBox {...fadeUp(0.12)}>
+                  <Typography
+                    component="h1"
+                    sx={{
+                      fontWeight: 800,
+                      letterSpacing: '-0.03em',
+                      lineHeight: 1.14,
+                      fontSize: { xs: '1.5rem', sm: '2.4rem', md: '3.3rem' },
+                      color: 'text.primary',
+                      mb: { xs: 1, md: 2 },
+                    }}
+                  >
+                    Gentle care for
+                    <br />
+                    <Box component="span" sx={{ color: brand.primary }}>
+                      brighter smiles
+                    </Box>
                   </Typography>
-                </Stack>
-              </MotionBox>
+                </MotionBox>
 
-              <MotionBox {...fadeUp(0.12)}>
-                <Typography
-                  component="h1"
-                  sx={{
-                    fontWeight: 800,
-                    letterSpacing: '-0.03em',
-                    lineHeight: 1.12,
-                    fontSize: { xs: '2.05rem', sm: '2.9rem', md: '3.3rem' },
-                    color: 'text.primary',
-                    mb: { xs: 1.25, md: 2 },
-                  }}
+                <MotionBox {...fadeUp(0.2)}>
+                  <Typography
+                    sx={{
+                      color: 'text.secondary',
+                      maxWidth: 480,
+                      mb: { xs: 1.75, md: 3.5 },
+                      fontSize: { xs: '0.82rem', sm: '0.95rem', md: '1.05rem' },
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
+                    complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
+                  </Typography>
+                </MotionBox>
+
+                <MotionBox {...fadeUp(0.28)} sx={{ pb: { xs: 9.5, sm: 8, md: 0 } }}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 1.75 }}>
+                    <Button
+                      component={Link}
+                      to="/book-appointment"
+                      variant="contained"
+                      size="large"
+                      endIcon={<ArrowForwardIcon sx={{ display: { xs: 'none', sm: 'block' } }} />}
+                      sx={{ py: { xs: 1, md: 1.25 }, px: { xs: 1, md: 2.75 }, fontSize: { xs: 13.5, md: 15 } }}
+                    >
+                      Book Appointment
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      startIcon={<CallIcon />}
+                      component="a"
+                      href={CLINIC.phoneHref}
+                      sx={{ py: { xs: 0.9, md: 1.25 }, px: { xs: 1, md: 2.75 }, fontSize: { xs: 13.5, md: 15 } }}
+                    >
+                      Call Now
+                    </Button>
+                  </Stack>
+                </MotionBox>
+              </Grid>
+
+              {/* Doctor photo — beside the text from the very top, like the reference */}
+              <Grid size={{ xs: 5, sm: 5, md: 6 }}>
+                <MotionBox
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.7, delay: 0.15 }}
+                  sx={{ position: 'relative', height: { xs: '100%', md: 'auto' }, minHeight: { xs: 240, md: 0 } }}
                 >
-                  Gentle care for
-                  <br />
-                  <Box component="span" sx={{ color: brand.primary }}>
-                    brighter smiles
-                  </Box>
-                </Typography>
-              </MotionBox>
-
-              <MotionBox {...fadeUp(0.2)}>
-                <Typography sx={{ color: 'text.secondary', maxWidth: 480, mb: { xs: 2.5, md: 3.5 }, fontSize: { xs: '0.95rem', md: '1.05rem' }, lineHeight: 1.6 }}>
-                  Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
-                  complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
-                </Typography>
-              </MotionBox>
-
-              <MotionBox {...fadeUp(0.28)}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1.25, sm: 1.75 }}>
-                  <Button
-                    component={Link}
-                    to="/book-appointment"
-                    variant="contained"
-                    size="large"
-                    endIcon={<ArrowForwardIcon />}
-                    sx={{ py: { xs: 1.1, md: 1.25 } }}
+                  <Box
+                    component="img"
+                    src={IMG.doctorPortrait}
+                    alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
+                    sx={{
+                      position: { xs: 'absolute', md: 'static' },
+                      inset: 0,
+                      width: '100%',
+                      height: { xs: '100%', md: 'auto' },
+                      aspectRatio: { md: '7/8' },
+                      objectFit: 'cover',
+                      objectPosition: 'center top',
+                      borderRadius: { xs: '14px', md: '18px' },
+                      border: `1px solid ${brand.line}`,
+                      boxShadow: hoverShadow,
+                      display: 'block',
+                    }}
+                  />
+                  {/* Experience badge */}
+                  <Card
+                    sx={{
+                      position: 'absolute',
+                      right: { xs: 4, md: -16 },
+                      bottom: { xs: 64, md: 118 },
+                      px: { xs: 1, md: 1.75 },
+                      py: { xs: 0.6, md: 1 },
+                      borderRadius: '12px',
+                      boxShadow: hoverShadow,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: { xs: 0.75, md: 1 },
+                    }}
                   >
-                    Book Appointment
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    startIcon={<CallIcon />}
-                    component="a"
-                    href={CLINIC.phoneHref}
-                    sx={{ py: { xs: 1, md: 1.25 } }}
+                    <Box sx={{ width: { xs: 26, md: 34 }, height: { xs: 26, md: 34 }, borderRadius: '50%', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center' }}>
+                      <PeopleAltOutlinedIcon sx={{ fontSize: { xs: 15, md: 18 } }} />
+                    </Box>
+                    <Box sx={{ lineHeight: 1.2 }}>
+                      <Typography sx={{ fontWeight: 800, fontSize: { xs: 12, md: 14.5 } }}>15+ Years</Typography>
+                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: 10, md: 12 } }}>
+                        of trusted care
+                      </Typography>
+                    </Box>
+                  </Card>
+                  {/* Doctor name card — desktop (inside the photo) */}
+                  <Card
+                    sx={{
+                      position: 'absolute',
+                      left: 14,
+                      right: 14,
+                      bottom: 14,
+                      px: 2,
+                      py: 1.25,
+                      borderRadius: '14px',
+                      boxShadow: hoverShadow,
+                      display: { xs: 'none', md: 'flex' },
+                      alignItems: 'center',
+                      gap: 1.5,
+                    }}
                   >
-                    Call Now
-                  </Button>
-                </Stack>
-              </MotionBox>
+                    <Box sx={{ width: 44, height: 44, borderRadius: '12px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                      <ToothMark />
+                    </Box>
+                    <Box sx={{ minWidth: 0, lineHeight: 1.3 }}>
+                      <Typography sx={{ fontWeight: 800, fontSize: 17, lineHeight: 1.3 }}>Dr. Afaque Khan</Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ fontSize: 13, lineHeight: 1.4 }}>
+                        BDS, MDS
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ fontSize: 13, lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        Conservative Dentistry &amp; Endodontics
+                      </Typography>
+                    </Box>
+                  </Card>
+                </MotionBox>
+              </Grid>
             </Grid>
 
-            {/* Doctor-led hero photo (reference design): portrait + experience badge + name card */}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <MotionBox
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                sx={{ position: 'relative', maxWidth: { xs: 480, md: 'none' }, mx: 'auto', pb: { xs: 0, md: 0 } }}
-              >
-                <Box
-                  component="img"
-                  src={IMG.doctorPortrait}
-                  alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
-                  sx={{
-                    width: '100%',
-                    aspectRatio: { xs: '1/1', md: '7/8' },
-                    objectFit: 'cover',
-                    objectPosition: 'top',
-                    borderRadius: '18px',
-                    border: `1px solid ${brand.line}`,
-                    boxShadow: hoverShadow,
-                    display: 'block',
-                  }}
-                />
-                {/* Experience badge */}
-                <Card
-                  sx={{
-                    position: 'absolute',
-                    right: { xs: 10, md: -16 },
-                    bottom: { xs: 112, sm: 118 },
-                    px: 1.75,
-                    py: 1,
-                    borderRadius: '12px',
-                    boxShadow: hoverShadow,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1,
-                  }}
-                >
-                  <Box sx={{ width: 34, height: 34, borderRadius: '50%', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center' }}>
-                    <PeopleAltOutlinedIcon sx={{ fontSize: 18 }} />
-                  </Box>
-                  <Box sx={{ lineHeight: 1.2 }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: 14.5 }}>15+ Years</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      of trusted care
-                    </Typography>
-                  </Box>
-                </Card>
-                {/* Doctor name card */}
-                <Card
-                  sx={{
-                    position: 'absolute',
-                    left: { xs: 10, md: 14 },
-                    right: { xs: 10, md: 14 },
-                    bottom: { xs: 10, md: 14 },
-                    px: { xs: 1.75, md: 2 },
-                    py: 1.25,
-                    borderRadius: '14px',
-                    boxShadow: hoverShadow,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1.5,
-                  }}
-                >
-                  <Box sx={{ width: 44, height: 44, borderRadius: '12px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
-                    <ToothMark />
-                  </Box>
-                  <Box sx={{ minWidth: 0, lineHeight: 1.3 }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: { xs: 15.5, md: 17 }, lineHeight: 1.3 }}>Dr. Afaque Khan</Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 12, md: 13 }, lineHeight: 1.4 }}>
-                      BDS, MDS
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 12, md: 13 }, lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      Conservative Dentistry &amp; Endodontics
-                    </Typography>
-                  </Box>
-                </Card>
-              </MotionBox>
-            </Grid>
-          </Grid>
+            {/* Doctor name card — phones (spans the hero bottom, overlapping the photo) */}
+            <Card
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 2,
+                px: 1.75,
+                py: 1.1,
+                borderRadius: '14px',
+                boxShadow: hoverShadow,
+                alignItems: 'center',
+                gap: 1.25,
+              }}
+            >
+              <Box sx={{ width: 40, height: 40, borderRadius: '11px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                <ToothMark />
+              </Box>
+              <Box sx={{ minWidth: 0, lineHeight: 1.3 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: 15, lineHeight: 1.3 }}>Dr. Afaque Khan</Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: 12, lineHeight: 1.35 }}>
+                  BDS, MDS
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: 12, lineHeight: 1.35, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  Conservative Dentistry &amp; Endodontics
+                </Typography>
+              </Box>
+            </Card>
+          </Box>
         </Container>
       </Box>
 
