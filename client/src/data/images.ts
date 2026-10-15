@@ -11,6 +11,7 @@ export const IMG = {
   dentistExam: '/images/dental-examination.jpg',
   aligner: '/images/clear-aligner.jpg',
   smile: '/images/bright-smile.jpg',
+  happyPatient: '/images/happy-patient.jpg',
   smilingDentist: '/images/smiling-dentist.jpg',
   xray: '/images/dental-xray-review.jpg',
   surgery: '/images/dental-surgery.jpg',

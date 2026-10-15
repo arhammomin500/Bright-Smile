@@ -147,14 +147,9 @@ export function DoctorSection() {
                   <Chip key={s} label={s} sx={{ bgcolor: brand.cloud, color: brand.primary, fontWeight: 700, borderRadius: '8px' }} />
                 ))}
               </Stack>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
-                <Button component={Link} to="/book-appointment" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
-                  Book Appointment
-                </Button>
-                <Button component={Link} to="/dentist" variant="outlined" size="large">
-                  View Full Profile
-                </Button>
-              </Stack>
+              <Button component={Link} to="/dentist" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
+                View Full Profile
+              </Button>
             </Reveal>
           </Grid>
         </Grid>
@@ -163,48 +158,74 @@ export function DoctorSection() {
   );
 }
 
-// ── Testimonials preview ────────────────────────────────────────────────
+// ── Patient reviews — featured review + photo (reference design) ────────
 export function TestimonialsSection() {
   const { data: testimonials } = useTestimonials();
-  const items = (testimonials ?? []).slice(0, 3);
+  const featured = (testimonials ?? [])[0];
+  if (!featured) return null;
   return (
     <Container sx={{ py: { xs: 6, md: 9 } }}>
-      <Box sx={{ textAlign: 'center', maxWidth: 640, mx: 'auto', mb: { xs: 3.5, md: 5 } }}>
-        <Eyebrow>PATIENT REVIEWS</Eyebrow>
-        <Heading>Real Stories. Real Smiles.</Heading>
-      </Box>
-      <Grid container spacing={2.5}>
-        {items.map((t, i) => (
-          <Grid size={{ xs: 12, md: 4 }} key={t.id}>
-            <Reveal delayIndex={i}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ p: 2.75, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                  <Rating value={t.rating} readOnly size="small" sx={{ mb: 1.5 }} />
-                  <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2.5, flex: 1 }}>
-                    "{t.content}"
-                  </Typography>
-                  <Stack direction="row" spacing={1.5} alignItems="center">
-                    <Avatar src={t.avatarUrl ?? undefined} alt={t.patientName} sx={{ width: 40, height: 40 }} />
-                    <Box sx={{ minWidth: 0 }}>
-                      <Typography sx={{ fontWeight: 700, fontSize: 14 }} noWrap>
-                        {t.patientName}
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary" noWrap sx={{ display: 'block' }}>
-                        {t.location} · {t.treatment}
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </Grid>
-        ))}
+      <Grid container spacing={{ xs: 4, md: 7 }} alignItems="center">
+        <Grid size={{ xs: 12, md: 6.5 }}>
+          <Reveal>
+            <Eyebrow>PATIENT REVIEWS</Eyebrow>
+            <Heading>Real Stories. Real Smiles.</Heading>
+            <Rating value={featured.rating} readOnly size="small" sx={{ mb: 1.5 }} />
+            <Typography sx={{ color: 'text.secondary', fontStyle: 'italic', mb: 2.5, maxWidth: 520 }}>
+              "{featured.content}"
+            </Typography>
+            <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
+              <Avatar src={featured.avatarUrl ?? undefined} alt={featured.patientName} sx={{ width: 44, height: 44 }} />
+              <Box sx={{ minWidth: 0 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: 14.5 }} noWrap>
+                  {featured.patientName}
+                </Typography>
+                <Typography variant="caption" color="text.secondary" noWrap sx={{ display: 'block' }}>
+                  {featured.location} · {featured.treatment}
+                </Typography>
+              </Box>
+            </Stack>
+            <Button component={Link} to="/reviews" variant="outlined" endIcon={<ArrowForwardIcon />}>
+              Read More Reviews
+            </Button>
+          </Reveal>
+        </Grid>
+        <Grid size={{ xs: 12, md: 5.5 }}>
+          <Reveal delayIndex={1}>
+            <Box sx={{ position: 'relative', maxWidth: 440, mx: 'auto' }}>
+              <Box
+                component="img"
+                src={IMG.happyPatient}
+                alt="Happy patient with a bright smile"
+                sx={{
+                  width: '100%',
+                  aspectRatio: '1/1',
+                  objectFit: 'cover',
+                  borderRadius: '48% 52% 46% 54% / 58% 54% 46% 42%',
+                  border: `1px solid ${brand.line}`,
+                  display: 'block',
+                }}
+              />
+              <Typography
+                sx={{
+                  position: 'absolute',
+                  top: { xs: -6, md: 2 },
+                  right: { xs: 0, md: -10 },
+                  fontFamily: 'cursive',
+                  color: brand.primary,
+                  fontSize: { xs: 15, md: 17 },
+                  lineHeight: 1.3,
+                  transform: 'rotate(6deg)',
+                  textAlign: 'center',
+                  maxWidth: 140,
+                }}
+              >
+                Because you deserve a great smile
+              </Typography>
+            </Box>
+          </Reveal>
+        </Grid>
       </Grid>
-      <Stack alignItems="center" sx={{ mt: 4 }}>
-        <Button component={Link} to="/reviews" variant="outlined" size="large" endIcon={<ArrowForwardIcon />}>
-          Read More Reviews
-        </Button>
-      </Stack>
     </Container>
   );
 }

@@ -8,6 +8,29 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Homepage restyled to the owner's refined mockup — fewer Book buttons
+- **Hero** is now a rounded tinted card: "HEALTHY SMILES. BRIGHTER TOMORROWS."
+  eyebrow, Title-Case headline, one Book Appointment (calendar + arrow) and
+  Call Now, with the doctor photo flush to the card's right edge — no floating
+  badges or name cards (cleaner, per the new mockup).
+- **Fewer Book Appointment buttons** (owner: "so much book appointment button
+  not looking professional"): removed from the services section, the old
+  "Your Smile" section and the doctor section — in-page it now appears only in
+  the hero; the navbar, blue CTA band and mobile booking bar still carry it.
+- **Trust strip** now: 15+ Years of trusted care / Thousands of happy patients
+  / Personalized care for you.
+- **New About Us section** ("Your Smile. Our Priority.") with clinic photo,
+  "Watch Clinic Tour" video chip, and a 2×2 feature grid (Advanced Technology,
+  Personalized Care, Safe & Hygienic, Trusted by Many).
+- **Services**: heading + "View All Services" on the left, 2-column service
+  grid on the right (chevrons dropped), per the mockup.
+- **Reviews section** redesigned: one featured review (stars, italic quote,
+  reviewer) + organic-shaped smiling-patient photo with the mockup's
+  handwritten "Because you deserve a great smile" note; new local asset
+  `happy-patient.jpg` (the old slot pointed at a masked-surgeon stock photo).
+- Doctor section: single "View Full Profile" button.
+- Verified responsive at 320/390/1366: no overflow, no console errors.
+
 ### Mobile hero: photo beside the text (website-style, owner feedback)
 - The owner didn't want "text first, image below" stacking on phones — the
   doctor photo now sits to the RIGHT of the headline from the very top of the
