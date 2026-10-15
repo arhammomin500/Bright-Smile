@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CallIcon from '@mui/icons-material/Call';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -90,10 +89,11 @@ export default function Home() {
 
   return (
     <Box>
-      {/* ── Hero: full-screen, one continuous background (reference design) ──
-          The clinic photo is the hero background under a light-blue wash; the
-          doctor is anchored to the hero's bottom with his name integrated on a
-          soft gradient — no cards, borders, or floating boxes. */}
+      {/* ── Hero: full-screen, one continuous background (owner's reference) ──
+          Blurred clinic photo under a light wash; eyebrow + Title-Case headline
+          left, compact left-aligned CTAs, the doctor as a background-removed
+          CUTOUT anchored to the bottom-right, and the trust strip integrated
+          at the hero's bottom. No cards, borders, or boxes. */}
       <Box
         component="section"
         sx={{
@@ -103,67 +103,73 @@ export default function Home() {
           flexDirection: 'column',
           pt: { xs: '62px', md: '88px' },
           // Fill the first phone screen minus the fixed booking bar; cap it on desktop.
-          minHeight: { xs: 'calc(100svh - 56px)', md: 'min(100svh, 860px)' },
+          minHeight: { xs: 'calc(100svh - 56px)', md: 'min(100svh, 880px)' },
         }}
       >
-        {/* Background: clinic photo under a light brand wash */}
+        {/* Background: blurred clinic photo under a light brand wash */}
         <Box aria-hidden sx={{ position: 'absolute', inset: 0 }}>
           <Box
             component="img"
             src={IMG.heroClinic}
             alt=""
-            sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+            sx={{
+              width: '104%',
+              height: '104%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              display: 'block',
+              filter: 'blur(6px)',
+              transform: 'translate(-2%, -2%)',
+            }}
           />
           <Box
             sx={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(180deg, rgba(243,247,255,0.96) 0%, rgba(236,244,255,0.9) 45%, rgba(226,238,255,0.84) 100%)',
+              background: 'linear-gradient(180deg, rgba(243,247,255,0.92) 0%, rgba(236,244,255,0.78) 45%, rgba(226,238,255,0.62) 100%)',
             }}
           />
         </Box>
 
-        <Container
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            flex: 1,
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: { xs: 'stretch', md: 'flex-end' },
-            gap: { md: 4 },
-          }}
-        >
-          {/* Text + actions */}
-          <Box
-            sx={{
-              flex: { md: '1 1 55%' },
-              alignSelf: { md: 'center' },
-              textAlign: { xs: 'center', md: 'left' },
-              pt: { xs: 3.5, sm: 5, md: 0 },
-              pb: { md: 10 },
-            }}
+        {/* Content area (text + doctor cutout) */}
+        <Box sx={{ position: 'relative', flex: 1 }}>
+          {/* Doctor cutout — blended straight into the background, bottom-right */}
+          <MotionBox
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            sx={{ position: 'absolute', right: { xs: -26, sm: -10, md: 0 }, bottom: 0, zIndex: 1, lineHeight: 0, pointerEvents: 'none' }}
           >
+            <Box
+              component="img"
+              src={IMG.doctorCutout}
+              alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
+              sx={{
+                height: { xs: 'clamp(300px, 50svh, 460px)', md: 'clamp(480px, 70vh, 680px)' },
+                width: 'auto',
+                maxWidth: { xs: '92vw', md: '46vw' },
+                objectFit: 'contain',
+                objectPosition: 'bottom right',
+                display: 'block',
+                filter: 'drop-shadow(0 18px 40px rgba(16,33,61,0.18))',
+              }}
+            />
+          </MotionBox>
+
+          <Container sx={{ position: 'relative', zIndex: 2, pt: { xs: 3.5, sm: 5, md: 9 } }}>
             <MotionBox {...fadeUp(0.05)}>
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
+              <Typography
                 sx={{
-                  display: 'inline-flex',
-                  bgcolor: 'rgba(255,255,255,0.9)',
-                  border: `1px solid ${brand.line}`,
-                  borderRadius: 999,
-                  px: 2,
-                  py: 0.7,
-                  mb: { xs: 2, md: 2.5 },
+                  color: brand.ink,
+                  fontWeight: 800,
+                  letterSpacing: '0.16em',
+                  fontSize: { xs: 11, md: 13 },
+                  mb: { xs: 1.25, md: 1.75 },
+                  maxWidth: { xs: 300, md: 'none' },
                 }}
               >
-                <VerifiedOutlinedIcon sx={{ fontSize: 15, color: brand.primary }} />
-                <Typography sx={{ fontWeight: 700, color: brand.primary, fontSize: { xs: 10.5, md: 12 }, letterSpacing: '0.12em' }}>
-                  TRUSTED DENTAL CARE FOR A HEALTHIER SMILE
-                </Typography>
-              </Stack>
+                HEALTHY SMILES. BRIGHTER TOMORROWS.
+              </Typography>
             </MotionBox>
 
             <MotionBox {...fadeUp(0.14)}>
@@ -173,15 +179,15 @@ export default function Home() {
                   fontWeight: 800,
                   letterSpacing: '-0.03em',
                   lineHeight: 1.12,
-                  fontSize: { xs: '2.1rem', sm: '2.7rem', md: '3.4rem' },
+                  fontSize: { xs: '2.15rem', sm: '2.8rem', md: '3.4rem' },
                   color: 'text.primary',
                   mb: { xs: 1.5, md: 2 },
                 }}
               >
-                Gentle care for
+                Gentle Care for
                 <br />
                 <Box component="span" sx={{ color: brand.primary }}>
-                  brighter smiles
+                  Brighter Smiles
                 </Box>
               </Typography>
             </MotionBox>
@@ -189,10 +195,9 @@ export default function Home() {
             <MotionBox {...fadeUp(0.22)}>
               <Typography
                 sx={{
-                  color: 'text.secondary',
-                  maxWidth: { xs: 420, md: 470 },
-                  mx: { xs: 'auto', md: 0 },
-                  mb: { xs: 3, md: 3.5 },
+                  color: brand.slate,
+                  maxWidth: { xs: 205, sm: 380, md: 470 },
+                  mb: { xs: 2.5, md: 3.5 },
                   fontSize: { xs: '0.95rem', md: '1.05rem' },
                   lineHeight: 1.6,
                 }}
@@ -203,139 +208,85 @@ export default function Home() {
             </MotionBox>
 
             <MotionBox {...fadeUp(0.3)}>
-              <Stack
-                direction={{ xs: 'column', md: 'row' }}
-                spacing={{ xs: 1.25, md: 1.75 }}
-                alignItems={{ xs: 'center', md: 'flex-start' }}
-                sx={{ width: '100%', maxWidth: { xs: 360, md: 'none' }, mx: { xs: 'auto', md: 0 } }}
-              >
+              <Stack direction="column" spacing={{ xs: 1.25, md: 1.5 }} alignItems="flex-start">
                 <Button
                   component={Link}
                   to="/book-appointment"
                   variant="contained"
                   size="large"
-                  fullWidth
                   startIcon={<CalendarMonthOutlinedIcon />}
                   endIcon={<ArrowForwardIcon />}
-                  sx={{ py: 1.3, fontSize: 15, maxWidth: { md: 280 } }}
+                  sx={{ py: 1.2, px: 2.5, fontSize: { xs: 14, md: 15 } }}
                 >
                   Book Appointment
                 </Button>
                 <Button
                   variant="outlined"
                   size="large"
-                  fullWidth
                   startIcon={<CallIcon />}
                   component="a"
                   href={CLINIC.phoneHref}
-                  sx={{ py: 1.15, fontSize: 15, bgcolor: 'rgba(255,255,255,0.92)', maxWidth: { md: 200 } }}
+                  sx={{ py: 1, px: 2.5, fontSize: { xs: 14, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)' }}
                 >
                   Call Now
                 </Button>
               </Stack>
             </MotionBox>
-          </Box>
+          </Container>
+        </Box>
 
-          {/* Doctor — anchored to the hero's bottom, blended into the background */}
-          <Box
-            sx={{
-              flex: { md: '1 1 45%' },
-              mt: { xs: 'auto' },
-              pt: { xs: 3, md: 0 },
-              display: 'flex',
-              justifyContent: { xs: 'center', md: 'flex-end' },
-              alignItems: 'flex-end',
-            }}
-          >
-            <MotionBox
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              sx={{ position: 'relative', lineHeight: 0 }}
-            >
-              <Box
-                component="img"
-                src={IMG.doctorPortrait}
-                alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
-                sx={{
-                  height: { xs: 'clamp(230px, 34svh, 340px)', md: 'clamp(420px, 58vh, 560px)' },
-                  aspectRatio: '4/5',
-                  maxWidth: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  borderRadius: '26px 26px 0 0',
-                  display: 'block',
-                }}
-              />
-              {/* Name + verified degree, integrated on a soft gradient */}
-              <Box
-                sx={{
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  pt: 6,
-                  pb: 1.5,
-                  px: 2,
-                  textAlign: 'center',
-                  background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(240,246,255,0.96) 62%)',
-                }}
-              >
-                <Typography sx={{ fontWeight: 800, fontSize: { xs: 15.5, md: 18 }, lineHeight: 1.3, color: 'text.primary' }}>
-                  Dr. Afaque Khan
-                </Typography>
-                <Typography sx={{ color: 'text.secondary', fontSize: { xs: 12, md: 13.5 }, lineHeight: 1.4 }}>
-                  BDS, MDS — Conservative Dentistry &amp; Endodontics
-                </Typography>
-              </Box>
-            </MotionBox>
-          </Box>
-        </Container>
-      </Box>
-
-      {/* ── Trust strip (reference design) ── */}
-      <Box sx={{ bgcolor: '#fff', borderBottom: `1px solid ${brand.line}` }}>
-        <Container sx={{ py: { xs: 2.5, md: 3.5 } }}>
-          <Grid container>
-            {TRUST.map((t, i) => (
-              <Grid
-                size={{ xs: 4 }}
-                key={t.title}
-                sx={{ borderLeft: i > 0 ? `1px solid ${brand.line}` : 'none', px: { xs: 1, sm: 2 } }}
-              >
-                <Stack
-                  direction={{ xs: 'column', sm: 'row' }}
-                  alignItems="center"
-                  justifyContent={{ sm: 'center' }}
-                  spacing={{ xs: 0.75, sm: 1.5 }}
-                  sx={{ textAlign: { xs: 'center', sm: 'left' } }}
+        {/* Trust strip — integrated at the hero's bottom (reference design) */}
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 2,
+            borderTop: '1px solid rgba(255,255,255,0.65)',
+            bgcolor: 'rgba(255,255,255,0.55)',
+            backdropFilter: 'blur(10px)',
+          }}
+        >
+          <Container sx={{ py: { xs: 2, md: 2.75 } }}>
+            <Grid container>
+              {TRUST.map((t, i) => (
+                <Grid
+                  size={{ xs: 4 }}
+                  key={t.title}
+                  sx={{ borderLeft: i > 0 ? `1px solid ${brand.line}` : 'none', px: { xs: 1, sm: 2 } }}
                 >
-                  <Box
-                    sx={{
-                      width: { xs: 40, md: 50 },
-                      height: { xs: 40, md: 50 },
-                      borderRadius: '50%',
-                      bgcolor: brand.cloud,
-                      color: brand.primary,
-                      display: 'grid',
-                      placeItems: 'center',
-                      flexShrink: 0,
-                      '& svg': { fontSize: { xs: 20, md: 24 } },
-                    }}
+                  <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    alignItems="center"
+                    justifyContent={{ md: 'center' }}
+                    spacing={{ xs: 0.75, md: 1.5 }}
+                    sx={{ textAlign: { xs: 'center', md: 'left' } }}
                   >
-                    {t.icon}
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight: 800, fontSize: { xs: 13, md: 16 }, lineHeight: 1.25 }}>{t.title}</Typography>
-                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: 11, md: 12.5 }, lineHeight: 1.3, display: 'block' }}>
-                      {t.sub}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+                    <Box
+                      sx={{
+                        width: { xs: 40, md: 48 },
+                        height: { xs: 40, md: 48 },
+                        borderRadius: '13px',
+                        bgcolor: brand.cloud,
+                        color: brand.primary,
+                        display: 'grid',
+                        placeItems: 'center',
+                        flexShrink: 0,
+                        '& svg': { fontSize: { xs: 20, md: 23 } },
+                      }}
+                    >
+                      {t.icon}
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontWeight: 800, fontSize: { xs: 13, md: 15.5 }, lineHeight: 1.25 }}>{t.title}</Typography>
+                      <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 11, md: 12.5 }, lineHeight: 1.3, display: 'block' }}>
+                        {t.sub}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Box>
       </Box>
 
       {/* ── About us (reference design) ── */}

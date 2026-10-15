@@ -2,8 +2,10 @@
 // (optimized JPEGs, no external hotlinks). Swap any file for the clinic's
 // real photos — same filename, zero code changes.
 export const IMG = {
-  // Dr. Afaque Khan — extracted from the client's approved design mockup.
+  // Dr. Afaque Khan — the clinic's original photo.
   doctorPortrait: '/images/dr-afaque-khan-2026.jpg',
+  // Background-removed cutout of the same photo (hero).
+  doctorCutout: '/images/dr-afaque-khan-cutout.webp',
   heroClinic: '/images/hero-clinic-room.jpg',
   clinicReception: '/images/clinic-reception.jpg',
   clinicInterior: '/images/clinic-interior.jpg',

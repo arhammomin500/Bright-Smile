@@ -8,6 +8,19 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Hero matched to the owner's exact mockup — doctor cutout, integrated trust strip
+- Dr. Khan now appears as a **background-removed cutout** (rembg/BriaAI model
+  run locally on the clinic's photo → `dr-afaque-khan-cutout.webp`, 53 KB with
+  alpha) anchored to the hero's bottom-right with a soft drop shadow — he
+  blends straight into the background with no rectangle edges.
+- Eyebrow text "HEALTHY SMILES. BRIGHTER TOMORROWS." replaces the badge pill;
+  Title-Case headline; narrower left text column so nothing collides with the
+  photo; compact left-aligned Book Appointment + Call Now buttons.
+- Hero background is now gently blurred for depth; the trust strip
+  (15+ Years / Thousands / Personalized) is integrated INTO the hero bottom on
+  a translucent blurred band, per the mockup.
+- Verified at 390×844 and desktop: no text/photo collisions, no overflow.
+
 ### Full-screen premium hero (owner's reference: continuous background, no cards)
 - Hero redesigned as one continuous full-screen composition (`100svh` minus
   the mobile booking bar): the clinic-room photo is the hero background under
