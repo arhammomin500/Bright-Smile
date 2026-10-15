@@ -8,6 +8,19 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Full-screen premium hero (owner's reference: continuous background, no cards)
+- Hero redesigned as one continuous full-screen composition (`100svh` minus
+  the mobile booking bar): the clinic-room photo is the hero background under
+  a light blue wash; centered badge pill, headline, description and large
+  Book Appointment / Call Now buttons; Dr. Khan anchored to the hero's bottom
+  with his name + degree integrated on a soft gradient — no cards, borders
+  or floating boxes anywhere in the hero.
+- About and all later sections start below the fold; desktop uses the same
+  full-width background with text left / doctor bottom-right (capped height).
+- Fixed a mislabeled asset: `clinic-interior.jpg` is actually a portrait
+  photo, so the hero background uses `hero-clinic-room.jpg`.
+- Verified at 390×844, short 390×700 (buttons never hidden), and 1366 desktop.
+
 ### Homepage restyled to the owner's refined mockup — fewer Book buttons
 - **Hero** is now a rounded tinted card: "HEALTHY SMILES. BRIGHTER TOMORROWS."
   eyebrow, Title-Case headline, one Book Appointment (calendar + arrow) and

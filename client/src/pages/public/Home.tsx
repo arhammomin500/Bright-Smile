@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CallIcon from '@mui/icons-material/Call';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -89,132 +90,206 @@ export default function Home() {
 
   return (
     <Box>
-      {/* ── Hero: rounded tinted card, text left / doctor photo flush right (reference design) ── */}
-      <Box sx={{ pt: { xs: '74px', md: '104px' }, pb: { xs: 2.5, md: 4 } }}>
-        <Container>
-          <MotionBox
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      {/* ── Hero: full-screen, one continuous background (reference design) ──
+          The clinic photo is the hero background under a light-blue wash; the
+          doctor is anchored to the hero's bottom with his name integrated on a
+          soft gradient — no cards, borders, or floating boxes. */}
+      <Box
+        component="section"
+        sx={{
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          pt: { xs: '62px', md: '88px' },
+          // Fill the first phone screen minus the fixed booking bar; cap it on desktop.
+          minHeight: { xs: 'calc(100svh - 56px)', md: 'min(100svh, 860px)' },
+        }}
+      >
+        {/* Background: clinic photo under a light brand wash */}
+        <Box aria-hidden sx={{ position: 'absolute', inset: 0 }}>
+          <Box
+            component="img"
+            src={IMG.heroClinic}
+            alt=""
+            sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+          />
+          <Box
             sx={{
-              position: 'relative',
-              background: `linear-gradient(135deg, ${brand.mist} 0%, ${brand.cloud} 100%)`,
-              border: `1px solid ${brand.line}`,
-              borderRadius: { xs: '18px', md: '28px' },
-              overflow: 'hidden',
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(243,247,255,0.96) 0%, rgba(236,244,255,0.9) 45%, rgba(226,238,255,0.84) 100%)',
+            }}
+          />
+        </Box>
+
+        <Container
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            flex: 1,
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: { xs: 'stretch', md: 'flex-end' },
+            gap: { md: 4 },
+          }}
+        >
+          {/* Text + actions */}
+          <Box
+            sx={{
+              flex: { md: '1 1 55%' },
+              alignSelf: { md: 'center' },
+              textAlign: { xs: 'center', md: 'left' },
+              pt: { xs: 3.5, sm: 5, md: 0 },
+              pb: { md: 10 },
             }}
           >
-            <Grid container alignItems="stretch">
-              <Grid size={{ xs: 7, sm: 7, md: 6.5 }}>
-                <Box sx={{ p: { xs: 2, sm: 3.5, md: 6 }, pr: { xs: 1, sm: 2, md: 4 } }}>
-                  <MotionBox {...fadeUp(0.08)}>
-                    <Typography
-                      sx={{
-                        color: brand.ink,
-                        fontWeight: 800,
-                        letterSpacing: '0.14em',
-                        fontSize: { xs: 10, sm: 11.5, md: 12.5 },
-                        mb: { xs: 1, md: 1.75 },
-                      }}
-                    >
-                      HEALTHY SMILES. BRIGHTER TOMORROWS.
-                    </Typography>
-                  </MotionBox>
+            <MotionBox {...fadeUp(0.05)}>
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{
+                  display: 'inline-flex',
+                  bgcolor: 'rgba(255,255,255,0.9)',
+                  border: `1px solid ${brand.line}`,
+                  borderRadius: 999,
+                  px: 2,
+                  py: 0.7,
+                  mb: { xs: 2, md: 2.5 },
+                }}
+              >
+                <VerifiedOutlinedIcon sx={{ fontSize: 15, color: brand.primary }} />
+                <Typography sx={{ fontWeight: 700, color: brand.primary, fontSize: { xs: 10.5, md: 12 }, letterSpacing: '0.12em' }}>
+                  TRUSTED DENTAL CARE FOR A HEALTHIER SMILE
+                </Typography>
+              </Stack>
+            </MotionBox>
 
-                  <MotionBox {...fadeUp(0.16)}>
-                    <Typography
-                      component="h1"
-                      sx={{
-                        fontWeight: 800,
-                        letterSpacing: '-0.03em',
-                        lineHeight: 1.14,
-                        fontSize: { xs: '1.5rem', sm: '2.4rem', md: '3.1rem' },
-                        color: 'text.primary',
-                        mb: { xs: 1, md: 1.75 },
-                      }}
-                    >
-                      Gentle Care for
-                      <br />
-                      <Box component="span" sx={{ color: brand.primary }}>
-                        Brighter Smiles
-                      </Box>
-                    </Typography>
-                  </MotionBox>
-
-                  <MotionBox {...fadeUp(0.24)}>
-                    <Typography
-                      sx={{
-                        color: 'text.secondary',
-                        maxWidth: 440,
-                        mb: { xs: 1.75, md: 3 },
-                        fontSize: { xs: '0.82rem', sm: '0.95rem', md: '1.02rem' },
-                        lineHeight: 1.55,
-                      }}
-                    >
-                      Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
-                      complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
-                    </Typography>
-                  </MotionBox>
-
-                  <MotionBox {...fadeUp(0.32)}>
-                    <Stack direction="column" spacing={{ xs: 1, md: 1.5 }} alignItems="flex-start">
-                      <Button
-                        component={Link}
-                        to="/book-appointment"
-                        variant="contained"
-                        size="large"
-                        startIcon={<CalendarMonthOutlinedIcon />}
-                        endIcon={<ArrowForwardIcon sx={{ display: { xs: 'none', sm: 'block' } }} />}
-                        sx={{ py: { xs: 1, md: 1.2 }, px: { xs: 1.75, md: 2.75 }, fontSize: { xs: 13.5, md: 15 } }}
-                      >
-                        Book Appointment
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="large"
-                        startIcon={<CallIcon />}
-                        component="a"
-                        href={CLINIC.phoneHref}
-                        sx={{
-                          py: { xs: 0.8, md: 1 },
-                          px: { xs: 1.75, md: 2.5 },
-                          fontSize: { xs: 13.5, md: 14.5 },
-                          bgcolor: '#fff',
-                        }}
-                      >
-                        Call Now
-                      </Button>
-                    </Stack>
-                  </MotionBox>
+            <MotionBox {...fadeUp(0.14)}>
+              <Typography
+                component="h1"
+                sx={{
+                  fontWeight: 800,
+                  letterSpacing: '-0.03em',
+                  lineHeight: 1.12,
+                  fontSize: { xs: '2.1rem', sm: '2.7rem', md: '3.4rem' },
+                  color: 'text.primary',
+                  mb: { xs: 1.5, md: 2 },
+                }}
+              >
+                Gentle care for
+                <br />
+                <Box component="span" sx={{ color: brand.primary }}>
+                  brighter smiles
                 </Box>
-              </Grid>
+              </Typography>
+            </MotionBox>
 
-              {/* Doctor photo — fills the hero's right side, flush to the card edges */}
-              <Grid size={{ xs: 5, sm: 5, md: 5.5 }}>
-                <MotionBox
-                  initial={{ opacity: 0, scale: 1.02 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.15 }}
-                  sx={{ position: 'relative', height: '100%', minHeight: { xs: 230, sm: 320, md: 440 } }}
+            <MotionBox {...fadeUp(0.22)}>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                  maxWidth: { xs: 420, md: 470 },
+                  mx: { xs: 'auto', md: 0 },
+                  mb: { xs: 3, md: 3.5 },
+                  fontSize: { xs: '0.95rem', md: '1.05rem' },
+                  lineHeight: 1.6,
+                }}
+              >
+                Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
+                complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
+              </Typography>
+            </MotionBox>
+
+            <MotionBox {...fadeUp(0.3)}>
+              <Stack
+                direction={{ xs: 'column', md: 'row' }}
+                spacing={{ xs: 1.25, md: 1.75 }}
+                alignItems={{ xs: 'center', md: 'flex-start' }}
+                sx={{ width: '100%', maxWidth: { xs: 360, md: 'none' }, mx: { xs: 'auto', md: 0 } }}
+              >
+                <Button
+                  component={Link}
+                  to="/book-appointment"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  startIcon={<CalendarMonthOutlinedIcon />}
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{ py: 1.3, fontSize: 15, maxWidth: { md: 280 } }}
                 >
-                  <Box
-                    component="img"
-                    src={IMG.doctorPortrait}
-                    alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
-                    sx={{
-                      position: 'absolute',
-                      inset: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: 'center top',
-                      display: 'block',
-                    }}
-                  />
-                </MotionBox>
-              </Grid>
-            </Grid>
-          </MotionBox>
+                  Book Appointment
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  fullWidth
+                  startIcon={<CallIcon />}
+                  component="a"
+                  href={CLINIC.phoneHref}
+                  sx={{ py: 1.15, fontSize: 15, bgcolor: 'rgba(255,255,255,0.92)', maxWidth: { md: 200 } }}
+                >
+                  Call Now
+                </Button>
+              </Stack>
+            </MotionBox>
+          </Box>
+
+          {/* Doctor — anchored to the hero's bottom, blended into the background */}
+          <Box
+            sx={{
+              flex: { md: '1 1 45%' },
+              mt: { xs: 'auto' },
+              pt: { xs: 3, md: 0 },
+              display: 'flex',
+              justifyContent: { xs: 'center', md: 'flex-end' },
+              alignItems: 'flex-end',
+            }}
+          >
+            <MotionBox
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              sx={{ position: 'relative', lineHeight: 0 }}
+            >
+              <Box
+                component="img"
+                src={IMG.doctorPortrait}
+                alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
+                sx={{
+                  height: { xs: 'clamp(230px, 34svh, 340px)', md: 'clamp(420px, 58vh, 560px)' },
+                  aspectRatio: '4/5',
+                  maxWidth: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  borderRadius: '26px 26px 0 0',
+                  display: 'block',
+                }}
+              />
+              {/* Name + verified degree, integrated on a soft gradient */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  pt: 6,
+                  pb: 1.5,
+                  px: 2,
+                  textAlign: 'center',
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(240,246,255,0.96) 62%)',
+                }}
+              >
+                <Typography sx={{ fontWeight: 800, fontSize: { xs: 15.5, md: 18 }, lineHeight: 1.3, color: 'text.primary' }}>
+                  Dr. Afaque Khan
+                </Typography>
+                <Typography sx={{ color: 'text.secondary', fontSize: { xs: 12, md: 13.5 }, lineHeight: 1.4 }}>
+                  BDS, MDS — Conservative Dentistry &amp; Endodontics
+                </Typography>
+              </Box>
+            </MotionBox>
+          </Box>
         </Container>
       </Box>
 
