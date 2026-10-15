@@ -142,7 +142,9 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              right: { xs: -56, sm: -24, md: 0 },
+              // On desktop, align him with the Container's right edge instead of
+              // the viewport corner (Container maxWidth = 1200px).
+              right: { xs: -56, sm: -24, md: 'max(24px, calc((100% - 1200px) / 2))' },
               bottom: 0,
               // Pin the photo's top edge at headline level (reference design) —
               // the figure scales to the remaining space; the headline stays
@@ -232,7 +234,7 @@ export default function Home() {
                   size="large"
                   startIcon={<CalendarMonthOutlinedIcon />}
                   endIcon={<ArrowForwardIcon />}
-                  sx={{ py: 1.2, px: 2.5, fontSize: { xs: 14, md: 15 } }}
+                  sx={{ py: 1.2, fontSize: { xs: 14, md: 15 }, width: { xs: 238, md: 264 } }}
                 >
                   Book Appointment
                 </Button>
@@ -242,7 +244,7 @@ export default function Home() {
                   startIcon={<CallIcon />}
                   component="a"
                   href={CLINIC.phoneHref}
-                  sx={{ py: 1, px: 2.5, fontSize: { xs: 14, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)' }}
+                  sx={{ py: 1.1, fontSize: { xs: 14, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)', width: { xs: 238, md: 264 } }}
                 >
                   Call Now
                 </Button>
