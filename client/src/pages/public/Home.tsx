@@ -142,13 +142,18 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              right: { xs: -24, sm: -12, md: 0 },
+              right: { xs: -40, sm: -16, md: 0 },
               bottom: 0,
+              // Pin the photo's top edge BELOW the headline on phones/tablets, so
+              // the full figure scales to the remaining space and can never
+              // overlap the heading; desktop keeps the fixed-size full figure.
+              top: { xs: 148, sm: 170, md: 'auto' },
               zIndex: 1,
               lineHeight: 0,
               pointerEvents: 'none',
-              height: { xs: '40svh', sm: '46svh', md: 'auto' },
-              overflow: { xs: 'hidden', md: 'visible' },
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'flex-end',
             }}
           >
             <Box
@@ -156,11 +161,11 @@ export default function Home() {
               src={IMG.doctorCutout}
               alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
               sx={{
-                height: { xs: '60svh', sm: '68svh', md: 'clamp(540px, 76vh, 740px)' },
+                height: { xs: '100%', md: 'clamp(540px, 76vh, 740px)' },
                 width: 'auto',
                 maxWidth: { xs: '92vw', md: '46vw' },
                 objectFit: 'contain',
-                objectPosition: 'top right',
+                objectPosition: 'bottom right',
                 display: 'block',
                 filter: 'drop-shadow(0 18px 40px rgba(16,33,61,0.18))',
               }}
@@ -207,7 +212,7 @@ export default function Home() {
               <Typography
                 sx={{
                   color: brand.slate,
-                  maxWidth: { xs: 360, sm: 420, md: 440 },
+                  maxWidth: { xs: 210, sm: 420, md: 440 },
                   mb: { xs: 2.5, md: 3.5 },
                   fontSize: { xs: '0.95rem', md: '1.05rem' },
                   lineHeight: 1.6,

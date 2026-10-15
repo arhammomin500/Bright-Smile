@@ -8,12 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
-### Hero final layout (owner iterations): doctor right, half-body, zero overlap
-- After trying the mirrored (doctor-left) layout, the owner reverted to doctor
-  on the RIGHT but with the overlap fixed for good: on phones/tablets the
-  cutout is a straight half-body crop (head to waist, cropped by the trust
-  strip) that starts BELOW the buttons, so it can never touch the text; the
-  full figure shows on desktop beside the text column.
+### Hero final layout (owner iterations): doctor right, FULL figure, zero overlap
+- Owner iterated through mirrored (doctor-left) and half-body variants, then
+  settled on the original look: full-figure cutout on the RIGHT with the
+  overlap solved structurally — on phones/tablets the photo's TOP edge is
+  pinned just below the headline (`top: 148/170px`, bottom at the trust
+  strip) so the figure auto-scales to the remaining space and can never touch
+  the heading; the paragraph is narrowed (210px on phones) to flow beside his
+  head. Desktop keeps the fixed-size full figure beside the text.
 - Trust strip icons circular; third item "Personalized / care for every smile".
 - Verified 412×915 and 1366 desktop — content fully clear of the photo.
 
