@@ -8,6 +8,25 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Doctor-led homepage hero (new client mockup)
+- **Hero redesigned to the client's latest mobile mockup:** Dr. Khan's portrait
+  now *is* the hero image, with a floating "15+ Years of trusted care" badge
+  and a name card (tooth mark, Dr. Afaque Khan, BDS MDS, Conservative
+  Dentistry & Endodontics) overlaying the photo — replacing the clinic-room
+  photo and "15,000+ patients" card.
+- **New, much higher-quality doctor portrait** extracted from the latest
+  mockup (720×816 portrait, sharpened) replaces the old small crop everywhere:
+  hero, home doctor section, and the Our Dentist page (aspect ratios updated
+  to portrait).
+- **Trust strip moved below the hero** as its own 3-column band with the
+  mockup's items: Painless Treatments / Modern Equipment / Same-day Emergency.
+- **Services section restyled to the mockup:** "+ OUR SERVICES / Complete
+  Dental Care Under One Roof" heading, 6 icon-list cards with short taglines
+  and chevrons (2-col mobile, 3-col desktop), full-width Book Appointment
+  button + "View all treatments" link.
+- Verified: build clean, zero console errors, no horizontal overflow at
+  320/375px, desktop layout balanced, booking CTAs unchanged.
+
 ### Local image assets + completed homepage
 - **All 24 photos are now local project assets** in `client/public/images/`
   (optimized progressive JPEGs, ~1 MB total, descriptive filenames) — no more

@@ -15,9 +15,11 @@ import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CallIcon from '@mui/icons-material/Call';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
-import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined';
+import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
@@ -40,26 +42,42 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
+// Trust strip directly below the hero (reference design)
 const TRUST = [
-  { icon: <MedicalServicesOutlinedIcon />, title: 'Expert Dentist', sub: '15+ Years Experience' },
-  { icon: <BiotechOutlinedIcon />, title: 'Modern Equipment', sub: 'Advanced Technology' },
-  { icon: <SentimentSatisfiedAltIcon />, title: 'Comfortable Care', sub: 'Safe & Painless Treatment' },
+  { icon: <VerifiedUserOutlinedIcon />, title: 'Painless Treatments', sub: 'Comfortable & safe' },
+  { icon: <BiotechOutlinedIcon />, title: 'Modern Equipment', sub: 'Advanced technology' },
+  { icon: <AccessTimeOutlinedIcon />, title: 'Same-day Emergency', sub: 'Care when you need it' },
 ];
 
-// Featured treatments strip (slugs match data/treatments.ts)
-const FEATURED_SLUGS = [
-  'general-dentistry',
-  'root-canal-treatment',
-  'dental-implants',
-  'teeth-whitening',
-  'invisible-aligners',
-  'smile-makeover',
+// Featured services (slugs match data/treatments.ts) with the reference design's short taglines
+const FEATURED: { slug: string; tagline: string }[] = [
+  { slug: 'general-dentistry', tagline: 'Cleanings & check-ups' },
+  { slug: 'root-canal-treatment', tagline: 'Save your natural tooth' },
+  { slug: 'dental-implants', tagline: 'Lasting smile solution' },
+  { slug: 'teeth-whitening', tagline: 'Brighter, whiter smile' },
+  { slug: 'invisible-aligners', tagline: 'Discreet teeth straightening' },
+  { slug: 'smile-makeover', tagline: 'Your complete transformation' },
 ];
+
+// Small outline tooth mark used in the hero doctor card (matches the brand logo)
+function ToothMark() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M22 12.1c-2.2-1.3-4.3-1.3-6-.5-2.5 1.1-3.8 3.5-3.8 6.4 0 2.6.7 5 1.3 7.3.5 1.9 1 3.9 1.5 5.6.3 1.2.9 2.3 2 2.3 1 0 1.4-1 1.7-2.3.3-1.1.6-2.4 1.2-3.1.4-.5 1-.8 2.1-.8s1.7.3 2.1.8c.6.7.9 2 1.2 3.1.3 1.3.7 2.3 1.7 2.3 1.1 0 1.7-1.1 2-2.3.5-1.7 1-3.7 1.5-5.6.6-2.3 1.3-4.7 1.3-7.3 0-2.9-1.3-5.3-3.8-6.4-1.7-.8-3.8-.8-6 .5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
 
 export default function Home() {
   usePageMeta();
   const { data: treatments } = useTreatments();
-  const featured = FEATURED_SLUGS.map((slug) => treatments?.find((t) => t.slug === slug)).filter(Boolean);
+  const featured = FEATURED.map((f) => {
+    const t = treatments?.find((x) => x.slug === f.slug);
+    return t ? { ...t, tagline: f.tagline } : null;
+  }).filter(Boolean);
   const [tourOpen, setTourOpen] = useState(false);
 
   return (
@@ -118,7 +136,7 @@ export default function Home() {
               </MotionBox>
 
               <MotionBox {...fadeUp(0.28)}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75} sx={{ mb: 4 }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.75}>
                   <Button component={Link} to="/book-appointment" variant="contained" size="large" endIcon={<ArrowForwardIcon />}>
                     Book Appointment
                   </Button>
@@ -127,82 +145,82 @@ export default function Home() {
                   </Button>
                 </Stack>
               </MotionBox>
-
-              <MotionBox {...fadeUp(0.36)}>
-                <Grid container spacing={2}>
-                  {TRUST.map((t) => (
-                    <Grid size={{ xs: 12, sm: 4 }} key={t.title}>
-                      <Stack direction="row" spacing={1.25} alignItems="center">
-                        <Box
-                          sx={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '10px',
-                            bgcolor: brand.cloud,
-                            color: brand.primary,
-                            display: 'grid',
-                            placeItems: 'center',
-                            flexShrink: 0,
-                            '& svg': { fontSize: 20 },
-                          }}
-                        >
-                          {t.icon}
-                        </Box>
-                        <Box>
-                          <Typography sx={{ fontWeight: 700, fontSize: 14, lineHeight: 1.25 }}>{t.title}</Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {t.sub}
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </Grid>
-                  ))}
-                </Grid>
-              </MotionBox>
             </Grid>
 
+            {/* Doctor-led hero photo (reference design): portrait + experience badge + name card */}
             <Grid size={{ xs: 12, md: 6 }}>
               <MotionBox
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                sx={{ position: 'relative' }}
+                sx={{ position: 'relative', maxWidth: { xs: 480, md: 'none' }, mx: 'auto', pb: { xs: 0, md: 0 } }}
               >
                 <Box
                   component="img"
-                  src={IMG.heroClinic}
-                  alt="Modern dental treatment room at BrightSmile Dental Clinic"
+                  src={IMG.doctorPortrait}
+                  alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
                   sx={{
                     width: '100%',
-                    aspectRatio: { xs: '4/3', md: '7/6' },
+                    aspectRatio: '7/8',
                     objectFit: 'cover',
+                    objectPosition: 'top',
                     borderRadius: '18px',
                     border: `1px solid ${brand.line}`,
                     boxShadow: hoverShadow,
                     display: 'block',
                   }}
                 />
+                {/* Experience badge */}
                 <Card
                   sx={{
                     position: 'absolute',
-                    bottom: 18,
                     right: { xs: 10, md: -16 },
-                    px: 2,
-                    py: 1.25,
+                    bottom: { xs: 112, sm: 118 },
+                    px: 1.75,
+                    py: 1,
                     borderRadius: '12px',
                     boxShadow: hoverShadow,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1.25,
+                    gap: 1,
                   }}
                 >
-                  <Box sx={{ width: 38, height: 38, borderRadius: '10px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center' }}>
-                    <PeopleAltOutlinedIcon sx={{ fontSize: 20 }} />
+                  <Box sx={{ width: 34, height: 34, borderRadius: '50%', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center' }}>
+                    <PeopleAltOutlinedIcon sx={{ fontSize: 18 }} />
                   </Box>
                   <Box sx={{ lineHeight: 1.2 }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: 15 }}>15,000+</Typography>
+                    <Typography sx={{ fontWeight: 800, fontSize: 14.5 }}>15+ Years</Typography>
                     <Typography variant="caption" color="text.secondary">
-                      Happy Patients
+                      of trusted care
+                    </Typography>
+                  </Box>
+                </Card>
+                {/* Doctor name card */}
+                <Card
+                  sx={{
+                    position: 'absolute',
+                    left: { xs: 10, md: 14 },
+                    right: { xs: 10, md: 14 },
+                    bottom: { xs: 10, md: 14 },
+                    px: { xs: 1.75, md: 2 },
+                    py: 1.25,
+                    borderRadius: '14px',
+                    boxShadow: hoverShadow,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                  }}
+                >
+                  <Box sx={{ width: 44, height: 44, borderRadius: '12px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                    <ToothMark />
+                  </Box>
+                  <Box sx={{ minWidth: 0, lineHeight: 1.3 }}>
+                    <Typography sx={{ fontWeight: 800, fontSize: { xs: 15.5, md: 17 }, lineHeight: 1.3 }}>Dr. Afaque Khan</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 12, md: 13 }, lineHeight: 1.4 }}>
+                      BDS, MDS
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 12, md: 13 }, lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      Conservative Dentistry &amp; Endodontics
                     </Typography>
                   </Box>
                 </Card>
@@ -212,48 +230,125 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* ── Featured treatments strip ── */}
-      <Container sx={{ py: { xs: 5, md: 7 } }}>
-        <Grid container spacing={2}>
+      {/* ── Trust strip (below hero, per reference design) ── */}
+      <Box sx={{ bgcolor: '#fff', borderBottom: `1px solid ${brand.line}` }}>
+        <Container sx={{ py: { xs: 3, md: 4 } }}>
+          <Grid container>
+            {TRUST.map((t, i) => (
+              <Grid
+                size={{ xs: 4 }}
+                key={t.title}
+                sx={{ borderLeft: i > 0 ? `1px solid ${brand.line}` : 'none', px: { xs: 1, sm: 2 } }}
+              >
+                <Stack alignItems="center" spacing={1} sx={{ textAlign: 'center' }}>
+                  <Box
+                    sx={{
+                      width: { xs: 44, md: 52 },
+                      height: { xs: 44, md: 52 },
+                      borderRadius: '14px',
+                      bgcolor: brand.cloud,
+                      color: brand.primary,
+                      display: 'grid',
+                      placeItems: 'center',
+                      '& svg': { fontSize: { xs: 21, md: 25 } },
+                    }}
+                  >
+                    {t.icon}
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 15.5 }, lineHeight: 1.25 }}>{t.title}</Typography>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: { xs: 11, md: 12.5 }, lineHeight: 1.3, display: 'block' }}>
+                      {t.sub}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* ── Our Services (reference design: icon-list cards + booking CTA) ── */}
+      <Container sx={{ py: { xs: 5, md: 8 } }}>
+        <Reveal>
+          <Typography sx={{ color: brand.primary, fontWeight: 700, letterSpacing: '0.18em', fontSize: 12.5, mb: 1 }}>
+            + OUR SERVICES
+          </Typography>
+          <Typography
+            component="h2"
+            sx={{ fontWeight: 800, letterSpacing: '-0.02em', fontSize: { xs: '1.9rem', md: '2.4rem' }, lineHeight: 1.18, color: 'text.primary', mb: 1.25 }}
+          >
+            Complete Dental Care
+            <br />
+            Under One Roof
+          </Typography>
+          <Typography sx={{ color: 'text.secondary', maxWidth: 520, mb: 3.5 }}>
+            From preventive care to advanced treatments, we're here for your healthy, confident smile.
+          </Typography>
+        </Reveal>
+
+        <Grid container spacing={{ xs: 1.5, md: 2 }}>
           {featured.map((t, i) => (
-            <Grid size={{ xs: 6, sm: 4, md: 2 }} key={t!.id}>
-              <Reveal delayIndex={i % 6}>
-                <Card sx={{ height: '100%', transition: '.25s', '&:hover': { transform: 'translateY(-4px)', boxShadow: hoverShadow } }}>
-                  <CardActionArea component={Link} to={`/treatments/${t!.slug}`} sx={{ p: 2, height: '100%' }}>
+            <Grid size={{ xs: 6, md: 4 }} key={t!.id}>
+              <Reveal delayIndex={i % 6} sx={{ height: '100%' }}>
+                <Card sx={{ height: '100%', transition: '.25s', '&:hover': { transform: 'translateY(-3px)', boxShadow: hoverShadow } }}>
+                  <CardActionArea
+                    component={Link}
+                    to={`/treatments/${t!.slug}`}
+                    sx={{ p: { xs: 1.75, md: 2.25 }, height: '100%', display: 'flex', alignItems: 'center', gap: { xs: 1.25, md: 1.75 }, justifyContent: 'flex-start' }}
+                  >
                     <Box
                       sx={{
-                        width: 42,
-                        height: 42,
-                        borderRadius: '10px',
+                        width: { xs: 40, md: 48 },
+                        height: { xs: 40, md: 48 },
+                        borderRadius: '12px',
                         bgcolor: brand.cloud,
                         color: brand.primary,
                         display: 'grid',
                         placeItems: 'center',
-                        mb: 1.25,
+                        flexShrink: 0,
+                        '& svg': { fontSize: { xs: 20, md: 24 } },
                       }}
                     >
                       <TreatmentIcon name={t!.icon} />
                     </Box>
-                    <Typography sx={{ fontWeight: 700, fontSize: 14.5, lineHeight: 1.3, mb: 0.5 }}>{t!.name}</Typography>
-                    <Typography
-                      variant="caption"
-                      color="text.secondary"
-                      sx={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        lineHeight: 1.45,
-                      }}
-                    >
-                      {t!.shortDesc.split('.')[0]}.
-                    </Typography>
+                    <Box sx={{ minWidth: 0, flex: 1 }}>
+                      <Typography sx={{ fontWeight: 700, fontSize: { xs: 13.5, md: 15.5 }, lineHeight: 1.25, mb: 0.25 }}>{t!.name}</Typography>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{ display: 'block', lineHeight: 1.35, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: { md: 'nowrap' } }}
+                      >
+                        {t!.tagline}
+                      </Typography>
+                    </Box>
+                    <ChevronRightIcon sx={{ color: brand.slate, fontSize: 20, flexShrink: 0, display: { xs: 'none', sm: 'block' } }} />
                   </CardActionArea>
                 </Card>
               </Reveal>
             </Grid>
           ))}
         </Grid>
+
+        <Reveal sx={{ mt: { xs: 2.5, md: 3.5 } }}>
+          <Stack alignItems="center" spacing={1.25}>
+            <Button
+              component={Link}
+              to="/book-appointment"
+              variant="contained"
+              size="large"
+              fullWidth
+              startIcon={<CalendarMonthOutlinedIcon />}
+              endIcon={<ArrowForwardIcon />}
+              sx={{ maxWidth: { sm: 420 }, py: 1.4 }}
+            >
+              Book Appointment
+            </Button>
+            <Button component={Link} to="/treatments" variant="text" size="small" sx={{ fontWeight: 700 }}>
+              View all treatments
+            </Button>
+          </Stack>
+        </Reveal>
       </Container>
 
       {/* ── Your Smile. Our Priority. ── */}

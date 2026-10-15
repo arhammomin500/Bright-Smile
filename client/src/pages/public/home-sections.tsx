@@ -109,7 +109,7 @@ export function DoctorSection() {
                   alt={doctor?.fullName ?? 'Dr. Afaque Khan'}
                   sx={{
                     width: '100%',
-                    aspectRatio: '4/3',
+                    aspectRatio: '7/8',
                     objectFit: 'cover',
                     objectPosition: 'top',
                     borderRadius: '18px',
