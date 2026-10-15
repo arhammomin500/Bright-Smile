@@ -8,6 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-15
 
+### Hero mirrored to the owner's final reference (doctor LEFT, text RIGHT)
+- Hero flipped per the latest mockup: doctor cutout anchored bottom-left
+  (edge crops off-screen on phones), text column (eyebrow, Title-Case
+  headline, paragraph, Book Appointment + Call Now) on the right.
+- Trust strip icons now circular; third item reads "Personalized / care for
+  every smile" per the mockup.
+- Verified 412×915, 768×1024 iPad and 1366 desktop — no text/photo overlap.
+
 ### Hero cutout sizing/position (owner feedback rounds)
 - Doctor cutout tuned over several owner feedback rounds — final: shifted
   right so his edge crops off-screen on phones (no text overlap), head just

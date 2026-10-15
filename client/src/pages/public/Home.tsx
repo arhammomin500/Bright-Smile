@@ -45,7 +45,7 @@ const fadeUp = (delay: number) => ({
 const TRUST = [
   { icon: <VerifiedUserOutlinedIcon />, title: '15+ Years', sub: 'of trusted care' },
   { icon: <PeopleAltOutlinedIcon />, title: 'Thousands', sub: 'of happy patients' },
-  { icon: <FavoriteBorderOutlinedIcon />, title: 'Personalized', sub: 'care for you' },
+  { icon: <FavoriteBorderOutlinedIcon />, title: 'Personalized', sub: 'care for every smile' },
 ];
 
 // About-us feature grid (reference design)
@@ -133,23 +133,23 @@ export default function Home() {
 
         {/* Content area (text + doctor cutout) */}
         <Box sx={{ position: 'relative', flex: 1 }}>
-          {/* Doctor cutout — blended straight into the background, bottom-right */}
+          {/* Doctor cutout — blended straight into the background, bottom-LEFT (reference) */}
           <MotionBox
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            sx={{ position: 'absolute', right: { xs: -46, sm: -28, md: 0 }, bottom: 0, zIndex: 1, lineHeight: 0, pointerEvents: 'none' }}
+            sx={{ position: 'absolute', left: { xs: -64, sm: -32, md: '1%' }, bottom: 0, zIndex: 1, lineHeight: 0, pointerEvents: 'none' }}
           >
             <Box
               component="img"
               src={IMG.doctorCutout}
               alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
               sx={{
-                height: { xs: 'clamp(340px, 56svh, 500px)', sm: 'clamp(400px, 60svh, 580px)', md: 'clamp(500px, 74vh, 700px)' },
+                height: { xs: 'clamp(380px, 58svh, 560px)', sm: 'clamp(460px, 66svh, 660px)', md: 'clamp(540px, 78vh, 760px)' },
                 width: 'auto',
                 maxWidth: { xs: '92vw', md: '46vw' },
                 objectFit: 'contain',
-                objectPosition: 'bottom right',
+                objectPosition: 'bottom left',
                 display: 'block',
                 filter: 'drop-shadow(0 18px 40px rgba(16,33,61,0.18))',
               }}
@@ -157,15 +157,15 @@ export default function Home() {
           </MotionBox>
 
           <Container sx={{ position: 'relative', zIndex: 2, pt: { xs: 3.5, sm: 5, md: 9 } }}>
+            <Box sx={{ ml: 'auto', width: { xs: '62%', sm: '55%', md: '50%' } }}>
             <MotionBox {...fadeUp(0.05)}>
               <Typography
                 sx={{
                   color: brand.ink,
                   fontWeight: 800,
                   letterSpacing: '0.16em',
-                  fontSize: { xs: 11, md: 13 },
+                  fontSize: { xs: 10, sm: 11.5, md: 13 },
                   mb: { xs: 1.25, md: 1.75 },
-                  maxWidth: { xs: 300, md: 'none' },
                 }}
               >
                 HEALTHY SMILES. BRIGHTER TOMORROWS.
@@ -179,9 +179,9 @@ export default function Home() {
                   fontWeight: 800,
                   letterSpacing: '-0.03em',
                   lineHeight: 1.12,
-                  fontSize: { xs: '2.15rem', sm: '2.8rem', md: '3.4rem' },
+                  fontSize: { xs: '1.55rem', sm: '2.4rem', md: '3.2rem' },
                   color: 'text.primary',
-                  mb: { xs: 1.5, md: 2 },
+                  mb: { xs: 1.25, md: 2 },
                 }}
               >
                 Gentle Care for
@@ -196,9 +196,9 @@ export default function Home() {
               <Typography
                 sx={{
                   color: brand.slate,
-                  maxWidth: { xs: 205, sm: 380, md: 470 },
+                  maxWidth: { xs: 'none', md: 440 },
                   mb: { xs: 2.5, md: 3.5 },
-                  fontSize: { xs: '0.95rem', md: '1.05rem' },
+                  fontSize: { xs: '0.85rem', sm: '0.95rem', md: '1.05rem' },
                   lineHeight: 1.6,
                 }}
               >
@@ -232,6 +232,7 @@ export default function Home() {
                 </Button>
               </Stack>
             </MotionBox>
+            </Box>
           </Container>
         </Box>
 
@@ -264,7 +265,7 @@ export default function Home() {
                       sx={{
                         width: { xs: 40, md: 48 },
                         height: { xs: 40, md: 48 },
-                        borderRadius: '13px',
+                        borderRadius: '50%',
                         bgcolor: brand.cloud,
                         color: brand.primary,
                         display: 'grid',
