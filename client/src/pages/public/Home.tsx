@@ -145,7 +145,7 @@ export default function Home() {
               src={IMG.doctorCutout}
               alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
               sx={{
-                height: { xs: 'clamp(300px, 50svh, 460px)', md: 'clamp(480px, 70vh, 680px)' },
+                height: { xs: 'clamp(330px, 56svh, 530px)', md: 'clamp(500px, 74vh, 720px)' },
                 width: 'auto',
                 maxWidth: { xs: '92vw', md: '46vw' },
                 objectFit: 'contain',
