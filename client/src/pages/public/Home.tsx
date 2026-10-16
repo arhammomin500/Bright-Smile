@@ -128,7 +128,7 @@ export default function Home() {
             bgcolor: 'rgba(33,108,243,0.07)',
             width: { xs: 280, md: 540 },
             height: { xs: 280, md: 540 },
-            right: { xs: -80, md: '6%' },
+            right: { xs: -80, md: '13%' },
             top: { xs: 100, md: 120 },
           }}
         />
@@ -141,7 +141,7 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              right: { xs: 4, sm: 20, md: '6%' },
+              right: { xs: 4, sm: 20, md: '15%' },
               bottom: 0,
               top: { xs: 34, sm: 24, md: 16 },
               zIndex: 1,
@@ -169,7 +169,7 @@ export default function Home() {
           </MotionBox>
 
           {/* Handwritten note beside his head (reference design) */}
-          <MotionBox {...fadeUp(0.55)} sx={{ position: 'absolute', top: { xs: 4, md: 48 }, right: { xs: 4, md: '1%' }, zIndex: 2, pointerEvents: 'none' }}>
+          <MotionBox {...fadeUp(0.55)} sx={{ position: 'absolute', top: { xs: 4, md: 48 }, right: { xs: 4, md: '9%' }, zIndex: 2, pointerEvents: 'none' }}>
             <Typography
               sx={{
                 fontFamily: 'cursive',

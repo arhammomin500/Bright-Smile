@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### Desktop hero spacing
+- On desktop/laptop the doctor (with his circle and handwritten note) moved in
+  from the far right to sit close beside the text (right 6% → 15% of the
+  container). Mobile/tablet untouched per the owner.
+
 ### More realistic hero photo (owner supplied a new render)
 - Owner generated a photorealistic studio shot (natural skin/fabric texture,
   straight stance, gray studio background) from the spec we provided; cut out
