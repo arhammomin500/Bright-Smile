@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Box,
   Button,
@@ -13,21 +13,26 @@ import {
 import Grid from '@mui/material/Grid2';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import CallIcon from '@mui/icons-material/Call';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
+import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
+import dayjs from 'dayjs';
 
 import { brand, softShadow, hoverShadow } from '@/theme/theme';
-import { CLINIC } from '@/lib/clinic';
+import { whatsappLink } from '@/lib/clinic';
 import { IMG } from '@/data/images';
-import { useTreatments } from '@/lib/queries';
+import { useTreatments, useDoctors } from '@/lib/queries';
+import { getDaySlots } from '@/pages/booking/slots';
+import { formatTime12h } from '@/lib/format';
 import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
 import { Reveal } from '@/components/ui/Reveal';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -41,11 +46,11 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
-// Trust strip directly below the hero (reference design)
-const TRUST = [
-  { icon: <VerifiedUserOutlinedIcon />, title: '15+ Years', sub: 'of trusted care' },
-  { icon: <PeopleAltOutlinedIcon />, title: 'Thousands', sub: 'of happy patients' },
-  { icon: <FavoriteBorderOutlinedIcon />, title: 'Personalized', sub: 'care for every smile' },
+// Doctor-information tiles (reference design) — facts from data/doctor.ts
+const INFO_TILES = [
+  { icon: <BusinessCenterOutlinedIcon />, title: '15+ Years', caption: 'Experience' },
+  { icon: <TranslateOutlinedIcon />, title: 'English · Hindi', caption: 'Languages' },
+  { icon: <AccessTimeOutlinedIcon />, title: '8:30 AM – 7 PM', caption: 'Availability' },
 ];
 
 // About-us feature grid (reference design)
@@ -81,81 +86,70 @@ function ToothMark() {
 export default function Home() {
   usePageMeta();
   const { data: treatments } = useTreatments();
+  const { data: doctors } = useDoctors();
+  const doctor = doctors?.[0];
   const featured = FEATURED.map((f) => {
     const t = treatments?.find((x) => x.slug === f.slug);
     return t ? { ...t, tagline: f.tagline } : null;
   }).filter(Boolean);
   const [tourOpen, setTourOpen] = useState(false);
 
+  // Appointment quick-pick: the next day with published hours, and its times.
+  const quickDay = useMemo(() => {
+    for (let i = 0; i < 8; i++) {
+      const d = dayjs().add(i, 'day');
+      if (getDaySlots(doctor, d).length > 0) return d;
+    }
+    return null;
+  }, [doctor]);
+  const quickSlots = useMemo(() => (quickDay ? getDaySlots(doctor, quickDay).slice(0, 8) : []), [doctor, quickDay]);
+  const [quickTime, setQuickTime] = useState('');
+
   return (
     <Box>
-      {/* ── Hero: full-screen, one continuous background (owner's reference) ──
-          Blurred clinic photo under a light wash; eyebrow + Title-Case headline
-          left, compact left-aligned CTAs, the doctor as a background-removed
-          CUTOUT anchored to the bottom-right, and the trust strip integrated
-          at the hero's bottom. No cards, borders, or boxes. */}
+      {/* ── Hero (owner's reference design, blue theme): soft gradient, badge
+          chip, highlighted headline, doctor cutout right with handwritten note,
+          doctor name row, single Book Appointment CTA ── */}
       <Box
         component="section"
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
           pt: { xs: '62px', md: '88px' },
-          // Fill the first phone screen minus the fixed booking bar; cap it on desktop.
-          minHeight: { xs: 'calc(100svh - 56px)', md: 'min(100svh, 880px)' },
+          background: `linear-gradient(180deg, ${brand.mist} 0%, ${brand.cloud} 100%)`,
         }}
       >
-        {/* Background: blurred clinic photo under a light brand wash */}
-        <Box aria-hidden sx={{ position: 'absolute', inset: 0 }}>
-          <Box
-            component="img"
-            src={IMG.heroClinic}
-            alt=""
-            sx={{
-              width: '104%',
-              height: '104%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              display: 'block',
-              filter: 'blur(6px)',
-              transform: 'translate(-2%, -2%)',
-            }}
-          />
-          <Box
-            sx={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(243,247,255,0.92) 0%, rgba(236,244,255,0.78) 45%, rgba(226,238,255,0.62) 100%)',
-            }}
-          />
-        </Box>
+        {/* Decorative circle behind the doctor */}
+        <Box
+          aria-hidden
+          sx={{
+            position: 'absolute',
+            borderRadius: '50%',
+            bgcolor: 'rgba(33,108,243,0.07)',
+            width: { xs: 280, md: 540 },
+            height: { xs: 280, md: 540 },
+            right: { xs: -80, md: '6%' },
+            top: { xs: 100, md: 120 },
+          }}
+        />
 
-        {/* Content area (text + doctor cutout) */}
-        <Box sx={{ position: 'relative', flex: 1 }}>
-          {/* Doctor cutout — bottom-right. On phones/tablets a straight half-body
-              crop (head to waist) that starts BELOW the text, so it can never
-              overlap the headline, paragraph or buttons. Full figure on desktop. */}
+        <Container sx={{ position: 'relative' }}>
+          {/* Doctor cutout — right side, feet on the hero's bottom edge */}
           <MotionBox
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              // On desktop, align him with the Container's right edge instead of
-              // the viewport corner (Container maxWidth = 1200px).
-              right: { xs: -56, sm: -24, md: 'max(24px, calc((100% - 1200px) / 2))' },
+              right: { xs: -26, sm: 0, md: '3%' },
               bottom: 0,
-              // Pin the photo's top edge at headline level (reference design) —
-              // the figure scales to the remaining space; the headline stays
-              // clear because the photo is shifted right past the text.
-              top: { xs: 76, sm: 100, md: 'auto' },
+              top: { xs: 34, sm: 24, md: 16 },
               zIndex: 1,
-              lineHeight: 0,
-              pointerEvents: 'none',
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'flex-end',
+              lineHeight: 0,
+              pointerEvents: 'none',
             }}
           >
             <Box
@@ -163,31 +157,53 @@ export default function Home() {
               src={IMG.doctorCutout}
               alt="Dr. Afaque Khan at BrightSmile Dental Clinic"
               sx={{
-                height: { xs: '100%', md: 'clamp(540px, 76vh, 740px)' },
+                height: '100%',
                 width: 'auto',
-                maxWidth: { xs: '92vw', md: '46vw' },
+                maxWidth: { xs: '62vw', md: '42vw' },
                 objectFit: 'contain',
                 objectPosition: 'bottom right',
                 display: 'block',
-                filter: 'drop-shadow(0 18px 40px rgba(16,33,61,0.18))',
+                filter: 'drop-shadow(0 16px 36px rgba(16,33,61,0.16))',
               }}
             />
           </MotionBox>
 
-          <Container sx={{ position: 'relative', zIndex: 2, pt: { xs: 3.5, sm: 5, md: 9 } }}>
-            <Box>
+          {/* Handwritten note beside his head (reference design) */}
+          <MotionBox {...fadeUp(0.55)} sx={{ position: 'absolute', top: { xs: 4, md: 48 }, right: { xs: 4, md: '1%' }, zIndex: 2, pointerEvents: 'none' }}>
+            <Typography
+              sx={{
+                fontFamily: 'cursive',
+                color: brand.primary,
+                fontSize: { xs: 13, md: 17 },
+                lineHeight: 1.45,
+                textAlign: 'center',
+                transform: 'rotate(-6deg)',
+                maxWidth: { xs: 84, md: 112 },
+              }}
+            >
+              Healthy Smiles Happy Lives
+            </Typography>
+          </MotionBox>
+
+          {/* Text column */}
+          <Box sx={{ position: 'relative', zIndex: 2, py: { xs: 3.5, sm: 4.5, md: 8 }, width: { xs: '62%', sm: '56%', md: '52%' } }}>
             <MotionBox {...fadeUp(0.05)}>
-              <Typography
+              <Box
                 sx={{
-                  color: brand.ink,
-                  fontWeight: 800,
-                  letterSpacing: '0.16em',
-                  fontSize: { xs: 10, sm: 11.5, md: 13 },
-                  mb: { xs: 1.25, md: 1.75 },
+                  display: 'inline-flex',
+                  bgcolor: brand.cloud,
+                  border: `1px solid ${brand.line}`,
+                  color: brand.primary,
+                  fontWeight: 700,
+                  fontSize: { xs: 12, md: 13.5 },
+                  borderRadius: 999,
+                  px: 1.75,
+                  py: 0.6,
+                  mb: { xs: 1.75, md: 2.25 },
                 }}
               >
-                HEALTHY SMILES. BRIGHTER TOMORROWS.
-              </Typography>
+                Trusted Dental Care
+              </Box>
             </MotionBox>
 
             <MotionBox {...fadeUp(0.14)}>
@@ -196,16 +212,16 @@ export default function Home() {
                 sx={{
                   fontWeight: 800,
                   letterSpacing: '-0.03em',
-                  lineHeight: 1.12,
-                  fontSize: { xs: '2.1rem', sm: '2.7rem', md: '3.2rem' },
+                  lineHeight: 1.16,
+                  fontSize: { xs: '1.8rem', sm: '2.5rem', md: '3.2rem' },
                   color: 'text.primary',
-                  mb: { xs: 1.25, md: 2 },
+                  mb: { xs: 1.25, md: 1.75 },
                 }}
               >
-                Gentle Care for
+                Healthy Smiles
                 <br />
                 <Box component="span" sx={{ color: brand.primary }}>
-                  Brighter Smiles
+                  for a Brighter Tomorrow
                 </Box>
               </Typography>
             </MotionBox>
@@ -214,97 +230,136 @@ export default function Home() {
               <Typography
                 sx={{
                   color: brand.slate,
-                  maxWidth: { xs: 210, sm: 420, md: 440 },
-                  mb: { xs: 2.5, md: 3.5 },
-                  fontSize: { xs: '0.95rem', md: '1.05rem' },
+                  maxWidth: { xs: 205, sm: 330, md: 420 },
+                  mb: { xs: 2, md: 3 },
+                  fontSize: { xs: '0.92rem', md: '1.05rem' },
                   lineHeight: 1.6,
                 }}
               >
-                Modern, painless dentistry in a calm, welcoming space. From routine check-ups to
-                complete smile makeovers — personal care from Dr. Afaque Khan at every visit.
+                Modern dental care with personalized treatment. Your smile, our priority.
               </Typography>
             </MotionBox>
 
             <MotionBox {...fadeUp(0.3)}>
-              <Stack direction="column" spacing={{ xs: 1.25, md: 1.5 }} alignItems="flex-start">
-                <Button
-                  component={Link}
-                  to="/book-appointment"
-                  variant="contained"
-                  startIcon={<CalendarMonthOutlinedIcon sx={{ fontSize: '18px !important' }} />}
-                  endIcon={<ArrowForwardIcon sx={{ fontSize: '18px !important', display: { xs: 'none', md: 'block' } }} />}
-                  sx={{ py: { xs: 0.9, md: 1.2 }, fontSize: { xs: 13, md: 15 }, width: { xs: 200, md: 264 }, whiteSpace: 'nowrap' }}
-                >
-                  Book Appointment
-                </Button>
-                <Button
-                  variant="outlined"
-                  startIcon={<CallIcon sx={{ fontSize: '18px !important' }} />}
-                  component="a"
-                  href={CLINIC.phoneHref}
-                  sx={{ py: { xs: 0.8, md: 1.1 }, fontSize: { xs: 13, md: 15 }, bgcolor: 'rgba(255,255,255,0.85)', width: { xs: 200, md: 264 }, whiteSpace: 'nowrap' }}
-                >
-                  Call Now
-                </Button>
+              <Stack direction="row" spacing={1.25} alignItems="center" sx={{ mb: { xs: 2.25, md: 3 } }}>
+                <Box sx={{ width: 40, height: 40, borderRadius: '12px', bgcolor: '#fff', border: `1px solid ${brand.line}`, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                  <ToothMark />
+                </Box>
+                <Box sx={{ lineHeight: 1.25 }}>
+                  <Typography sx={{ fontWeight: 800, fontSize: { xs: 14.5, md: 16 } }}>Dr. Afaque Khan</Typography>
+                  <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 12, md: 13 } }}>
+                    BDS, MDS
+                  </Typography>
+                </Box>
               </Stack>
             </MotionBox>
-            </Box>
-          </Container>
-        </Box>
 
-        {/* Trust strip — integrated at the hero's bottom (reference design) */}
-        <Box
-          sx={{
-            position: 'relative',
-            zIndex: 2,
-            borderTop: '1px solid rgba(255,255,255,0.65)',
-            bgcolor: 'rgba(255,255,255,0.55)',
-            backdropFilter: 'blur(10px)',
-          }}
-        >
-          <Container sx={{ py: { xs: 2, md: 2.75 } }}>
-            <Grid container>
-              {TRUST.map((t, i) => (
-                <Grid
-                  size={{ xs: 4 }}
-                  key={t.title}
-                  sx={{ borderLeft: i > 0 ? `1px solid ${brand.line}` : 'none', px: { xs: 1, sm: 2 } }}
-                >
-                  <Stack
-                    direction={{ xs: 'column', md: 'row' }}
-                    alignItems="center"
-                    justifyContent={{ md: 'center' }}
-                    spacing={{ xs: 0.75, md: 1.5 }}
-                    sx={{ textAlign: { xs: 'center', md: 'left' } }}
-                  >
-                    <Box
-                      sx={{
-                        width: { xs: 40, md: 48 },
-                        height: { xs: 40, md: 48 },
-                        borderRadius: '50%',
-                        bgcolor: brand.cloud,
-                        color: brand.primary,
-                        display: 'grid',
-                        placeItems: 'center',
-                        flexShrink: 0,
-                        '& svg': { fontSize: { xs: 20, md: 23 } },
-                      }}
-                    >
-                      {t.icon}
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 800, fontSize: { xs: 13, md: 15.5 }, lineHeight: 1.25 }}>{t.title}</Typography>
-                      <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 11, md: 12.5 }, lineHeight: 1.3, display: 'block' }}>
-                        {t.sub}
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </Box>
+            <MotionBox {...fadeUp(0.38)}>
+              <Button
+                component={Link}
+                to="/book-appointment"
+                variant="contained"
+                startIcon={<CalendarMonthOutlinedIcon sx={{ fontSize: '18px !important' }} />}
+                endIcon={<ArrowForwardIcon sx={{ fontSize: '18px !important' }} />}
+                sx={{ py: { xs: 1, md: 1.2 }, px: 2, fontSize: { xs: 13.5, md: 15 }, whiteSpace: 'nowrap' }}
+              >
+                Book Appointment
+              </Button>
+            </MotionBox>
+          </Box>
+        </Container>
       </Box>
+
+      {/* ── Doctor information + appointment quick-pick (reference design) ── */}
+      <Container sx={{ py: { xs: 3, md: 6 } }}>
+        <Grid container spacing={{ xs: 2.5, md: 3 }} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Reveal sx={{ height: '100%' }}>
+              <Card sx={{ p: { xs: 2.5, md: 3 }, borderRadius: '22px', height: '100%' }}>
+                <Typography component="h2" sx={{ fontWeight: 800, fontSize: { xs: '1.25rem', md: '1.4rem' }, mb: 2 }}>
+                  Doctor Information
+                </Typography>
+                <Grid container spacing={1.5}>
+                  {INFO_TILES.map((t) => (
+                    <Grid size={{ xs: 4 }} key={t.caption}>
+                      <Box sx={{ bgcolor: brand.mist, border: `1px solid ${brand.line}`, borderRadius: '16px', p: { xs: 1.5, md: 2 }, textAlign: 'center', height: '100%' }}>
+                        <Box sx={{ width: 44, height: 44, borderRadius: '50%', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', mx: 'auto', mb: 1, '& svg': { fontSize: 21 } }}>
+                          {t.icon}
+                        </Box>
+                        <Typography sx={{ fontWeight: 800, fontSize: { xs: 12.5, md: 14 }, lineHeight: 1.3 }}>{t.title}</Typography>
+                        <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 11, md: 12 } }}>
+                          {t.caption}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Card>
+            </Reveal>
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Reveal delayIndex={1} sx={{ height: '100%' }}>
+              <Card sx={{ p: { xs: 2.5, md: 3 }, borderRadius: '22px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <Typography component="h2" sx={{ fontWeight: 800, fontSize: { xs: '1.25rem', md: '1.4rem' }, mb: 2 }}>
+                  Appointment
+                </Typography>
+                {quickDay && (
+                  <Box sx={{ bgcolor: brand.mist, border: `1px solid ${brand.line}`, borderRadius: '16px', p: { xs: 1.75, md: 2 }, mb: 1.5 }}>
+                    <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
+                      <Stack direction="row" spacing={1} alignItems="center">
+                        <CalendarMonthOutlinedIcon sx={{ color: brand.primary, fontSize: 20 }} />
+                        <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15 } }}>{quickDay.format('D MMMM, dddd')}</Typography>
+                      </Stack>
+                      <IconButton component={Link} to="/book-appointment" size="small" aria-label="Choose another date" sx={{ color: brand.primary }}>
+                        <EditCalendarOutlinedIcon sx={{ fontSize: 20 }} />
+                      </IconButton>
+                    </Stack>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {quickSlots.map((t) => (
+                        <Button
+                          key={t}
+                          size="small"
+                          variant={quickTime === t ? 'contained' : 'outlined'}
+                          onClick={() => setQuickTime(quickTime === t ? '' : t)}
+                          sx={{ borderRadius: 999, px: 1.75, py: 0.5, fontSize: 13, ...(quickTime !== t && { bgcolor: '#fff' }) }}
+                        >
+                          {formatTime12h(t)}
+                        </Button>
+                      ))}
+                    </Box>
+                  </Box>
+                )}
+                <Typography variant="caption" sx={{ color: brand.slate, mb: 1.75, display: 'block' }}>
+                  Pick a preferred time from our weekly hours — the clinic personally confirms every appointment.
+                </Typography>
+                <Stack direction="row" spacing={1.25} alignItems="center" sx={{ mt: 'auto' }}>
+                  <IconButton
+                    component="a"
+                    href={whatsappLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat on WhatsApp"
+                    sx={{ bgcolor: brand.cloud, color: brand.primary, width: 46, height: 46, borderRadius: '14px', '&:hover': { bgcolor: brand.line } }}
+                  >
+                    <WhatsAppIcon />
+                  </IconButton>
+                  <Button
+                    component={Link}
+                    to={`/book-appointment${quickDay ? `?date=${quickDay.format('YYYY-MM-DD')}${quickTime ? `&time=${quickTime}` : ''}` : ''}`}
+                    variant="contained"
+                    fullWidth
+                    startIcon={<CalendarMonthOutlinedIcon />}
+                    sx={{ py: 1.1 }}
+                  >
+                    Book Appointment
+                  </Button>
+                </Stack>
+              </Card>
+            </Reveal>
+          </Grid>
+        </Grid>
+      </Container>
 
       {/* ── About us (reference design) ── */}
       <Container sx={{ py: { xs: 5, md: 8 } }}>

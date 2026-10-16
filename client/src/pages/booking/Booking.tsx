@@ -60,8 +60,12 @@ export default function Booking() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [treatment, setTreatment] = useState(() => params.get('treatment') ?? '');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  // Date/time may arrive preselected from the homepage appointment quick-pick.
+  const [date, setDate] = useState(() => {
+    const d = params.get('date');
+    return d && dayjs(d).isValid() && !dayjs(d).isBefore(dayjs(), 'day') ? d : '';
+  });
+  const [time, setTime] = useState(() => params.get('time') ?? '');
   const [touched, setTouched] = useState(false);
 
   const today = dayjs().format('YYYY-MM-DD');

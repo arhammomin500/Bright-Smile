@@ -6,6 +6,28 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-10-16
+
+### Homepage rebuilt to the owner's app-style reference (blue theme)
+- **New studio photo of Dr. Khan** (black-background shot supplied by the
+  owner) cut out locally → `dr-afaque-khan-cutout-2.webp` (61 KB, alpha);
+  replaces the previous cutout in the hero.
+- **Hero** per the reference: "Trusted Dental Care" chip, "Healthy Smiles /
+  for a Brighter Tomorrow" headline (navy + blue), short tagline, doctor
+  name row (tooth mark, Dr. Afaque Khan, BDS MDS), single Book Appointment
+  button, doctor cutout right over a soft circle with the handwritten
+  "Healthy Smiles Happy Lives" note.
+- **New "Doctor Information" card**: 15+ Years / English · Hindi /
+  8:30 AM – 7 PM tiles (facts from `doctor.ts`).
+- **New "Appointment" quick-pick card**: next open day with time chips from
+  the clinic's PUBLISHED weekly hours (`getDaySlots` — honest, never "live
+  availability"), a confirmation disclaimer, a WhatsApp chat button, and
+  Book Appointment that carries the chosen date/time to `/book-appointment`
+  via query params (Booking now preselects them).
+- Trust strip retired (its facts moved into the Doctor Information card).
+- Verified: quick-pick → booking flow end-to-end at 412×915, desktop hero +
+  side-by-side cards at 1366, build + tsc clean.
+
 ## 2026-10-15
 
 ### Hero desktop polish + compact CTAs
