@@ -48,8 +48,8 @@ const fadeUp = (delay: number) => ({
 
 // Doctor-information tiles (reference design) — facts from data/doctor.ts
 const INFO_TILES = [
-  { icon: <BusinessCenterOutlinedIcon />, title: '15+ Years', caption: 'Experience' },
-  { icon: <TranslateOutlinedIcon />, title: 'English · Hindi', caption: 'Languages' },
+  { icon: <BusinessCenterOutlinedIcon />, title: '5+ Years', caption: 'Experience' },
+  { icon: <TranslateOutlinedIcon />, title: 'English · Hindi · Marathi', caption: 'Languages' },
   { icon: <AccessTimeOutlinedIcon />, title: '10–2:30 · 6–10:30', caption: 'Mon–Sat Hours' },
 ];
 
@@ -61,14 +61,14 @@ const ABOUT_FEATURES = [
   { icon: <StarRoundedIcon />, title: 'Trusted by Many', sub: 'Thousands of happy smiles' },
 ];
 
-// Featured services (slugs match data/treatments.ts) with the reference design's short taglines
+// Featured services (slugs match data/treatments.ts) with short taglines
 const FEATURED: { slug: string; tagline: string }[] = [
-  { slug: 'general-dentistry', tagline: 'Cleanings & check-ups' },
-  { slug: 'root-canal-treatment', tagline: 'Save your natural tooth' },
   { slug: 'dental-implants', tagline: 'Lasting smile solution' },
-  { slug: 'teeth-whitening', tagline: 'Brighter, whiter smile' },
-  { slug: 'invisible-aligners', tagline: 'Discreet teeth straightening' },
-  { slug: 'smile-makeover', tagline: 'Your complete transformation' },
+  { slug: 'root-canal-treatment', tagline: 'Save your natural tooth' },
+  { slug: 'braces-and-aligners', tagline: 'Straighten your smile' },
+  { slug: 'cosmetic-dentistry', tagline: 'Whitening & smile makeovers' },
+  { slug: 'teeth-cleaning-gum-care', tagline: 'Healthy gums, fresh breath' },
+  { slug: 'pediatric-dentistry', tagline: 'Gentle care for kids' },
 ];
 
 // Small tooth mark (matches the brand logo) used as a feature icon
@@ -248,7 +248,7 @@ export default function Home() {
                 <Box sx={{ lineHeight: 1.25 }}>
                   <Typography sx={{ fontWeight: 800, fontSize: { xs: 14.5, md: 16 } }}>Dr. Afaque Khan</Typography>
                   <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 12, md: 13 } }}>
-                    BDS, MDS
+                    BDS · Reg. No. A-47915
                   </Typography>
                 </Box>
               </Stack>

@@ -8,6 +8,26 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### Real doctor credentials, treatments catalog, Instagram (owner-supplied)
+- **Credentials corrected site-wide**: BDS (not "BDS, MDS"), Reg. No. A-47915
+  added, **5+ years** (not 15+), languages English/Hindi/Marathi. Updated
+  doctor.ts, hero, Doctor Information tiles, doctor section, Our Dentist
+  page, About stats and page meta.
+- **Clinic name** is now "Bright Smile Dental Clinic & Implant Centre" with
+  the tagline "Creating Healthy, Confident Smiles" (matches the logo).
+- **Treatments rewritten to the owner's real 12-service catalog** (implants,
+  RCT, braces & aligners, crowns & bridges, cosmetic, fillings, cleaning &
+  gum care, extraction & oral surgery, pediatric, dentures, preventive,
+  emergency), each with the owner's exact "what's included" procedure list
+  (new `includes` field + "Treatments Included" section on detail pages).
+  Prices intentionally show **"On consultation"** (INR formatting ready) until
+  the owner publishes fees. Old treatment URLs 301-style redirect to the
+  matching new service; sitemap regenerated (29 URLs).
+- **Instagram**: instagram.com/brightsmile.bhiwandi — placeholder Facebook/
+  YouTube/Twitter/LinkedIn links removed from the footer.
+- Verified: build + tsc clean, treatments list and detail pages render the
+  new catalog, legacy slug redirect works, no console errors.
+
 ### Official logo added
 - The owner's new logo lockup (tooth mark, "Dr. Afaque Khan", BrightSmile,
   "Dental Clinic & Implant Centre", tagline) now appears in the navbar and

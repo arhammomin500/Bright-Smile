@@ -56,20 +56,20 @@ Everything marked below is **realistic-looking dummy content**, not real clinic 
 4. **All photos** — stock dental photography (Unsplash). Replace with real clinic/doctor photos.
 5. **Email + social links** — `hello@brightsmile.example` and the facebook.com/instagram.com links are placeholders in `clinic.ts`. (Address, phone and hours are REAL — confirmed 16 Oct 2026.)
 6. **Doctor bio details** — verify qualifications, years of experience (currently "15+"), languages.
-7. **Treatment prices** — currently in US dollars with placeholder ranges; set real prices (or remove prices).
+7. **Treatment prices** — not published yet; every treatment shows "On consultation" (in ₹ once the owner provides fees).
 
 *(Invented stats counters, awards, and insurance-partner logos were already removed from the site entirely — they can return once real ones exist.)*
 
 ## 📋 Details to collect from the client (for the next improvement round)
 
 - [ ] Real clinic name confirmation + logo preference (current: BrightSmile tooth badge)
-- [ ] Doctor's exact qualifications, registration no., years of experience, languages
+- [x] Doctor confirmed: BDS, Reg. No. A-47915, 5+ years, English/Hindi/Marathi (16 Oct 2026)
 - [x] Clinic address + working hours confirmed (A-Wing, Kuwari Residency, G-2, Beside Alexis Hospital, Millat Nagar, Bhiwandi 421302 · Mon–Sat 10–2:30 & 6–10:30, Sun by appointment)
 - [ ] Clinic email address (and whether they want a professional `@brightsmiledent.in` email)
 - [ ] Real photos: clinic exterior/interior, treatment rooms, equipment, doctor portrait, team
 - [ ] 5–10 genuine patient reviews (text, name, consent)
-- [ ] Actual treatment list + prices in ₹ (or "price on consultation")
-- [ ] Social media links (or remove the icons)
+- [x] Treatment list confirmed (12 real services, 16 Oct 2026) — prices still pending, shown as "On consultation"
+- [x] Instagram confirmed: instagram.com/brightsmile.bhiwandi (other networks removed)
 - [ ] Any certifications/awards they can verify (to restore those sections)
 - [x] WhatsApp number confirmed: +91 93712 23464 (16 Oct 2026)
 

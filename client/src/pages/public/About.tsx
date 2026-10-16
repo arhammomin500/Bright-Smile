@@ -13,7 +13,7 @@ import { usePageMeta } from '@/lib/usePageMeta';
 
 // Stats supplied by the client's approved reference design.
 const STATS = [
-  { icon: <WorkspacePremiumOutlinedIcon />, value: '15+', label: 'Years of Experience' },
+  { icon: <WorkspacePremiumOutlinedIcon />, value: '5+', label: 'Years of Experience' },
   { icon: <PeopleAltOutlinedIcon />, value: '10K+', label: 'Happy Patients' },
   { icon: <HealthAndSafetyOutlinedIcon />, value: '100%', label: 'Safe & Hygienic' },
   { icon: <BiotechOutlinedIcon />, value: 'Modern', label: 'Technology' },

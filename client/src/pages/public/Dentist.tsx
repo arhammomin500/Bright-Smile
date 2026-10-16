@@ -17,7 +17,7 @@ import { usePageMeta } from '@/lib/usePageMeta';
 const NAVY = '#10213D';
 
 const CREDENTIALS = [
-  { icon: <WorkspacePremiumOutlinedIcon />, title: 'Certified & Experienced', sub: 'BDS, MDS' },
+  { icon: <WorkspacePremiumOutlinedIcon />, title: 'Certified & Experienced', sub: 'BDS · Reg. No. A-47915' },
   { icon: <BiotechOutlinedIcon />, title: 'Modern Techniques', sub: 'Advanced Digital Tools' },
   { icon: <VolunteerActivismOutlinedIcon />, title: 'Patient Focused', sub: 'Gentle & Caring' },
   { icon: <VerifiedOutlinedIcon />, title: 'Honest Advice', sub: 'Transparent Treatment Plans' },
@@ -31,7 +31,7 @@ const SPECIALTIES = ['General Dentistry', 'Cosmetic Dentistry', 'Implants', 'End
 export default function Dentist() {
   usePageMeta(
     'Dr. Afaque Khan — BrightSmile Dental Clinic',
-    'Meet Dr. Afaque Khan — BDS, MDS (Conservative Dentistry & Endodontics), 15+ years of gentle, painless and honest dental care in Bhiwandi.',
+    'Meet Dr. Afaque Khan — BDS, Dental Surgeon (Reg. No. A-47915), 5+ years of gentle, painless and honest dental care in Bhiwandi.',
   );
   const { data: doctors } = useDoctors();
   const doctor = doctors?.[0];
@@ -50,11 +50,11 @@ export default function Dentist() {
                 {doctor?.fullName ?? 'Dr. Afaque Khan'}
               </Typography>
               <Typography sx={{ color: '#9fc2ff', fontWeight: 700, mb: 2 }}>
-                {doctor?.qualification ?? 'BDS, MDS — Conservative Dentistry & Endodontics'}
+                {doctor?.qualification ?? 'BDS — Dental Surgeon (Reg. No. A-47915)'}
               </Typography>
               <Typography sx={{ color: 'rgba(255,255,255,0.8)', maxWidth: 540, mb: 3 }}>
                 Dr. Afaque Khan is the founder and principal dentist of BrightSmile Dental Clinic.
-                With over 15 years of experience across general, cosmetic, and implant dentistry, he
+                With over 5 years of experience across general, cosmetic, and implant dentistry, he
                 is known for gentle, painless treatment and honest, patient-first advice.
               </Typography>
               <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>

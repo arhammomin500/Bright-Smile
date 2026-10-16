@@ -9,16 +9,16 @@ import { useTreatments } from '@/lib/queries';
 import { Reveal } from '@/components/ui/Reveal';
 import { usePageMeta } from '@/lib/usePageMeta';
 
-// Photos for the featured six (reference design); others fall back in rotation.
-const CARD_PHOTOS: Record<string, string> = {
-  'general-dentistry': IMG.dentistExam,
-  'root-canal-treatment': IMG.procedure,
-  'dental-implants': IMG.surgery,
-  'teeth-whitening': IMG.smile,
-  'invisible-aligners': IMG.aligner,
-  'smile-makeover': IMG.smilingDentist,
-};
-const FALLBACKS = [IMG.dentistPatient, IMG.heroClinic, IMG.xray, IMG.clinicInterior, IMG.clinicReception];
+// Each treatment carries its own photo in the data; fall back in rotation.
+const FEATURED_ORDER = [
+  'dental-implants',
+  'root-canal-treatment',
+  'braces-and-aligners',
+  'cosmetic-dentistry',
+  'teeth-cleaning-gum-care',
+  'pediatric-dentistry',
+];
+const FALLBACKS = [IMG.dentistPatient, IMG.heroClinic, IMG.xray, IMG.clinicReception];
 
 export default function TreatmentsList() {
   usePageMeta(
@@ -26,7 +26,7 @@ export default function TreatmentsList() {
     'Comprehensive dental care for every smile: general dentistry, root canal, implants, whitening, aligners, smile makeovers and more.',
   );
   const { data: treatments } = useTreatments();
-  const featuredOrder = Object.keys(CARD_PHOTOS);
+  const featuredOrder = FEATURED_ORDER;
   const sorted = [...(treatments ?? [])].sort((a, b) => {
     const ai = featuredOrder.indexOf(a.slug);
     const bi = featuredOrder.indexOf(b.slug);
@@ -72,7 +72,7 @@ export default function TreatmentsList() {
                 <Card sx={{ height: '100%', overflow: 'hidden', transition: '.25s', '&:hover': { transform: 'translateY(-5px)', boxShadow: hoverShadow } }}>
                   <Box
                     component="img"
-                    src={CARD_PHOTOS[t.slug] ?? FALLBACKS[i % FALLBACKS.length]}
+                    src={t.imageUrl ?? FALLBACKS[i % FALLBACKS.length]}
                     alt={t.name}
                     loading="lazy"
                     sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}

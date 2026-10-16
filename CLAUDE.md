@@ -30,7 +30,10 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   flagged placeholder content.
 
 ## Owner preferences
-- Single-doctor clinic: **Dr. Afaque Khan** (BDS, MDS, 15+ yrs, Mon–Sat).
+- Single-doctor clinic: **Dr. Afaque Khan** (BDS, Reg. No. A-47915, 5+ yrs,
+  English/Hindi/Marathi, Mon–Sat 10–2:30 & 6–10:30, Sun by appointment) at
+  **Bright Smile Dental Clinic & Implant Centre**, Millat Nagar, Bhiwandi.
+  Treatment catalog (12 services) is owner-supplied — real, not placeholder.
 - Keep public flows minimal — the owner consistently rejects extra steps.
 - Design: since 2026-10-15 the **client's 7-page reference mockup is the
   source of truth** (palette #216CF3/#10213D/#F3F7FF, navy footer + navy

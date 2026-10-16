@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
@@ -48,9 +48,31 @@ const inquirySchema = z.object({
 });
 type InquiryForm = z.infer<typeof inquirySchema>;
 
+// Old catalog slugs (pre 16 Oct 2026, indexed by search engines) → the real
+// service that now covers them.
+const LEGACY_SLUGS: Record<string, string> = {
+  'general-dentistry': 'preventive-dentistry',
+  'teeth-whitening': 'cosmetic-dentistry',
+  'invisible-aligners': 'braces-and-aligners',
+  braces: 'braces-and-aligners',
+  'smile-makeover': 'cosmetic-dentistry',
+  veneers: 'cosmetic-dentistry',
+  'dental-cleaning': 'teeth-cleaning-gum-care',
+  'gum-treatment': 'teeth-cleaning-gum-care',
+  'dental-filling': 'tooth-coloured-fillings',
+  'tooth-extraction': 'tooth-extraction-oral-surgery',
+  'wisdom-tooth-removal': 'tooth-extraction-oral-surgery',
+  'full-mouth-rehabilitation': 'dental-implants',
+  'laser-dentistry': 'preventive-dentistry',
+};
+
 export default function TreatmentDetail() {
   const { slug } = useParams();
   const { data: treatment, isLoading, isError, error, refetch } = useTreatment(slug);
+
+  if (!treatment && slug && LEGACY_SLUGS[slug]) {
+    return <Navigate to={`/treatments/${LEGACY_SLUGS[slug]}`} replace />;
+  }
 
   if (isLoading) {
     return (
@@ -206,6 +228,37 @@ export default function TreatmentDetail() {
             </Reveal>
           </Grid>
         </Grid>
+
+        {/* ── What's included (owner-supplied procedure list) ────── */}
+        {treatment.includes && treatment.includes.length > 0 && (
+          <Box sx={{ mt: { xs: 7, md: 12 } }}>
+            <SectionHeading
+              eyebrow="What we offer"
+              title="Treatments Included"
+              subtitle="The procedures covered under this service at our clinic."
+              align="left"
+            />
+            <Grid container spacing={2}>
+              {treatment.includes.map((item, i) => (
+                <Grid key={i} size={{ xs: 12, sm: 6 }}>
+                  <Reveal delayIndex={i % 2}>
+                    <Stack
+                      direction="row"
+                      spacing={1.5}
+                      alignItems="flex-start"
+                      sx={{ p: 2.25, borderRadius: 3, bgcolor: brand.mist, height: '100%' }}
+                    >
+                      <CheckCircleIcon sx={{ color: brand.primary, mt: 0.2 }} />
+                      <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                        {item}
+                      </Typography>
+                    </Stack>
+                  </Reveal>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        )}
 
         {/* ── Signs & Symptoms ───────────────────────────────────── */}
         {treatment.symptoms?.length > 0 && (

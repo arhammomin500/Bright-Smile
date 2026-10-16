@@ -1,8 +1,8 @@
 // Static clinic details — phone, hours and address confirmed by the owner
 // (16 Oct 2026). Email and socials are still placeholders.
 export const CLINIC = {
-  name: 'Bright Smile Dental Clinic',
-  tagline: 'Where Every Smile Shines Brighter',
+  name: 'Bright Smile Dental Clinic & Implant Centre',
+  tagline: 'Creating Healthy, Confident Smiles',
   phone: '+91 93712 23464',
   phoneHref: 'tel:+919371223464',
   emergency: '+91 93712 23464',
@@ -18,11 +18,8 @@ export const CLINIC = {
     { day: 'Sunday', time: 'By appointment' },
   ],
   socials: {
-    facebook: 'https://facebook.com',
-    instagram: 'https://instagram.com',
-    twitter: 'https://twitter.com',
-    youtube: 'https://youtube.com',
-    linkedin: 'https://linkedin.com',
+    // Owner-confirmed (16 Oct 2026). Only Instagram for now.
+    instagram: 'https://instagram.com/brightsmile.bhiwandi',
   },
 };
 

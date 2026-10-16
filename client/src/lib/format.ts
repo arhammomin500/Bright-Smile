@@ -1,10 +1,12 @@
 
 export function formatMoney(n: number): string {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
 }
 
+// Treatment fees are quoted by the clinic after examination — prices are
+// published only when the owner confirms them (0/0 = on consultation).
 export function formatPriceRange(min: number, max: number): string {
-  if (!min && !max) return 'On request';
+  if (!min && !max) return 'On consultation';
   if (min === max) return formatMoney(min);
   return `${formatMoney(min)} – ${formatMoney(max)}`;
 }

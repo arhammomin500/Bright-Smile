@@ -12,11 +12,12 @@ export const DOCTOR: Doctor = {
   fullName: 'Dr. Afaque Khan',
   title: 'Dr.',
   photoUrl: '/images/dr-afaque-khan-2026.jpg', // the clinic's original photo (renamed to bust stale caches)
-  qualification: 'BDS, MDS — Conservative Dentistry & Endodontics',
+  // Owner-confirmed credentials (16 Oct 2026): BDS, Reg. No. A-47915, 5+ yrs.
+  qualification: 'BDS — Dental Surgeon (Reg. No. A-47915)',
   specialization: 'General, Cosmetic & Implant Dentistry',
-  experienceYears: 15,
-  languages: ['English', 'Hindi', 'Urdu', 'Arabic'],
-  bio: 'Dr. Afaque Khan is the founder and principal dentist of Bright Smile Dental Clinic. With over 15 years of experience across general, cosmetic, and implant dentistry, he is known for gentle, painless treatment and honest, patient-first advice. Dr. Khan has transformed thousands of smiles and believes every patient deserves clear explanations, transparent pricing, and care without anxiety. He regularly upgrades his practice with the latest digital dentistry — 3D imaging, laser treatments, and CAD/CAM restorations — so every visit is faster, safer, and more comfortable.',
+  experienceYears: 5,
+  languages: ['English', 'Hindi', 'Marathi'],
+  bio: 'Dr. Afaque Khan is the founder and principal dentist of Bright Smile Dental Clinic & Implant Centre, Bhiwandi. With over 5 years of experience across general, cosmetic, and implant dentistry, he is known for gentle, painless treatment and honest, patient-first advice. Dr. Khan believes every patient deserves clear explanations, transparent guidance, and care without anxiety — for children and adults alike.',
   availableDays: [1, 2, 3, 4, 5, 6],
   consultStart: '10:00',
   consultEnd: '22:30',

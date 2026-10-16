@@ -1,9 +1,7 @@
 import { Box, Container, Stack, Typography, IconButton, Divider, Link as MuiLink } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { Link } from 'react-router-dom';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import CallIcon from '@mui/icons-material/Call';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -23,17 +21,15 @@ const quickLinks = [
   { label: 'Contact', to: '/contact' },
 ];
 const treatmentLinks = [
-  { label: 'General Dentistry', to: '/treatments/general-dentistry' },
-  { label: 'Root Canal', to: '/treatments/root-canal-treatment' },
   { label: 'Dental Implants', to: '/treatments/dental-implants' },
-  { label: 'Teeth Whitening', to: '/treatments/teeth-whitening' },
-  { label: 'Clear Aligners', to: '/treatments/invisible-aligners' },
-  { label: 'Smile Makeover', to: '/treatments/smile-makeover' },
+  { label: 'Root Canal', to: '/treatments/root-canal-treatment' },
+  { label: 'Braces & Aligners', to: '/treatments/braces-and-aligners' },
+  { label: 'Cosmetic Dentistry', to: '/treatments/cosmetic-dentistry' },
+  { label: 'Teeth Cleaning', to: '/treatments/teeth-cleaning-gum-care' },
+  { label: "Children's Dentistry", to: '/treatments/pediatric-dentistry' },
 ];
 const socials = [
-  { icon: <FacebookIcon fontSize="small" />, href: CLINIC.socials.facebook, label: 'Facebook' },
   { icon: <InstagramIcon fontSize="small" />, href: CLINIC.socials.instagram, label: 'Instagram' },
-  { icon: <YouTubeIcon fontSize="small" />, href: CLINIC.socials.youtube, label: 'YouTube' },
 ];
 
 export function Footer() {
@@ -44,7 +40,7 @@ export function Footer() {
           <Grid size={{ xs: 12, md: 4 }}>
             <Logo light />
             <Typography variant="body2" sx={{ mt: 2, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
-              Healthy Teeth • Happy You
+              Creating Healthy, Confident Smiles
             </Typography>
             <Typography variant="body2" sx={{ mt: 1.5, maxWidth: 320, color: 'rgba(255,255,255,0.6)' }}>
               Gentle, modern dental care by Dr. Afaque Khan — from routine check-ups to complete

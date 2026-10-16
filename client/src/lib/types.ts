@@ -40,6 +40,8 @@ export interface Treatment {
   imageUrl?: string | null;
   shortDesc: string;
   overview: string;
+  /** The specific procedures this service covers (owner-supplied list). */
+  includes?: string[];
   symptoms: string[];
   process: { title: string; description: string }[];
   benefits: string[];
