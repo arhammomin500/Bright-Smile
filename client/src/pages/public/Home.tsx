@@ -50,7 +50,7 @@ const fadeUp = (delay: number) => ({
 const INFO_TILES = [
   { icon: <BusinessCenterOutlinedIcon />, title: '15+ Years', caption: 'Experience' },
   { icon: <TranslateOutlinedIcon />, title: 'English · Hindi', caption: 'Languages' },
-  { icon: <AccessTimeOutlinedIcon />, title: '8:30 AM – 7 PM', caption: 'Availability' },
+  { icon: <AccessTimeOutlinedIcon />, title: '10–2:30 · 6–10:30', caption: 'Mon–Sat Hours' },
 ];
 
 // About-us feature grid (reference design)

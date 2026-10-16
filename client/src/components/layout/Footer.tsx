@@ -84,7 +84,7 @@ export function Footer() {
             <Stack spacing={1.5}>
               <Row icon={<CallIcon sx={{ fontSize: 17 }} />} text={CLINIC.phone} href={CLINIC.phoneHref} />
               <Row icon={<EmailOutlinedIcon sx={{ fontSize: 17 }} />} text={CLINIC.email} href={`mailto:${CLINIC.email}`} />
-              <Row icon={<AccessTimeIcon sx={{ fontSize: 17 }} />} text="Mon–Fri: 8:30 AM – 7:00 PM · Sat: 9 AM – 6 PM" />
+              <Row icon={<AccessTimeIcon sx={{ fontSize: 17 }} />} text="Mon–Sat: 10 AM – 2:30 PM & 6 – 10:30 PM · Sun: by appointment" />
               <Row icon={<PlaceIcon sx={{ fontSize: 17 }} />} text={CLINIC.address} />
             </Stack>
           </Grid>

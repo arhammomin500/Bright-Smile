@@ -31,7 +31,7 @@ const SPECIALTIES = ['General Dentistry', 'Cosmetic Dentistry', 'Implants', 'End
 export default function Dentist() {
   usePageMeta(
     'Dr. Afaque Khan — BrightSmile Dental Clinic',
-    'Meet Dr. Afaque Khan — BDS, MDS (Conservative Dentistry & Endodontics), 15+ years of gentle, painless and honest dental care in Mumbai.',
+    'Meet Dr. Afaque Khan — BDS, MDS (Conservative Dentistry & Endodontics), 15+ years of gentle, painless and honest dental care in Bhiwandi.',
   );
   const { data: doctors } = useDoctors();
   const doctor = doctors?.[0];

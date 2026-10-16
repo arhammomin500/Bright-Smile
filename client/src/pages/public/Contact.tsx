@@ -34,7 +34,7 @@ const CHANNELS = [
 export default function Contact() {
   usePageMeta(
     'Contact Us — BrightSmile Dental Clinic',
-    "We're here to help — call, WhatsApp, email, or visit BrightSmile Dental Clinic in Andheri West, Mumbai.",
+    "We're here to help — call, WhatsApp, email, or visit BrightSmile Dental Clinic in Millat Nagar, Bhiwandi.",
   );
   const toast = useToast();
   const {

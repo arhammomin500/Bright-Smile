@@ -1,20 +1,21 @@
-// Static clinic details for the marketing site (dummy — replace later).
+// Static clinic details — phone, hours and address confirmed by the owner
+// (16 Oct 2026). Email and socials are still placeholders.
 export const CLINIC = {
   name: 'Bright Smile Dental Clinic',
   tagline: 'Where Every Smile Shines Brighter',
-  phone: '+91 93732 23464',
-  phoneHref: 'tel:+919373223464',
-  emergency: '+91 93732 23464',
-  emergencyHref: 'tel:+919373223464',
-  whatsapp: '919373223464',
+  phone: '+91 93712 23464',
+  phoneHref: 'tel:+919371223464',
+  emergency: '+91 93712 23464',
+  emergencyHref: 'tel:+919371223464',
+  whatsapp: '919371223464',
   email: 'hello@brightsmile.example',
-  address: 'Andheri West, Mumbai, Maharashtra',
-  addressShort: 'Andheri West, Mumbai',
-  mapQuery: 'Andheri West, Mumbai',
+  address: 'A-Wing, Kuwari Residency, Shop No. G-2, Beside Alexis Hospital, Millat Nagar, Bhiwandi, Maharashtra 421302',
+  addressShort: 'Millat Nagar, Bhiwandi',
+  mapQuery: 'Kuwari Residency, Beside Alexis Hospital, Millat Nagar, Bhiwandi, Maharashtra 421302',
   hours: [
-    { day: 'Monday – Friday', time: '8:30 AM – 7:00 PM' },
-    { day: 'Saturday', time: '9:00 AM – 6:00 PM' },
-    { day: 'Sunday', time: 'Closed' },
+    { day: 'Mon – Sat (Morning)', time: '10:00 AM – 2:30 PM' },
+    { day: 'Mon – Sat (Evening)', time: '6:00 PM – 10:30 PM' },
+    { day: 'Sunday', time: 'By appointment' },
   ],
   socials: {
     facebook: 'https://facebook.com',

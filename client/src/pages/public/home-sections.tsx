@@ -258,7 +258,7 @@ export function FaqSection() {
 export function ContactStrip() {
   const items = [
     { icon: <CallIcon />, title: CLINIC.phone, sub: 'Call or WhatsApp us', href: CLINIC.phoneHref },
-    { icon: <AccessTimeIcon />, title: 'Mon–Sat', sub: '8:30 AM – 7:00 PM · Sun closed' },
+    { icon: <AccessTimeIcon />, title: 'Mon–Sat', sub: '10 AM – 2:30 PM & 6 – 10:30 PM · Sun by appointment' },
     { icon: <PlaceIcon />, title: CLINIC.addressShort, sub: 'Easy to reach, parking nearby', href: `https://www.google.com/maps?q=${encodeURIComponent(CLINIC.mapQuery)}` },
   ];
   return (

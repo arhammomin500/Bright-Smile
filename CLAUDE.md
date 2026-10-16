@@ -22,7 +22,7 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   react-query signatures.
 - **Honest booking:** /book lets visitors pick a preferred day/time from the
   clinic's published weekly hours (never "live availability") and sends the
-  request via WhatsApp (+91 93732 23464), email, or call. Always disclose that
+  request via WhatsApp (+91 93712 23464), email, or call. Always disclose that
   the clinic confirms the appointment. Forms open the visitor's own
   email/WhatsApp app — the site stores and sends nothing.
 - **No invented claims:** no patient counts, review scores, awards, or
@@ -36,7 +36,7 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   source of truth** (palette #216CF3/#10213D/#F3F7FF, navy footer + navy
   dentist hero, blue CTA band on every page, "+ EYEBROW" labels, 3-step
   booking stepper, fixed mobile booking bar). Keep the BrightSmile
-  tooth-badge logo. Content in the mockup (stats, memberships, Mumbai
+  tooth-badge logo. Content in the mockup (stats, memberships
   address) is client-approved.
 
 ## Build & deploy

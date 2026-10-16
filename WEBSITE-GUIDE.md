@@ -6,7 +6,8 @@
 > reference design — pages: Home, About, Treatments, Our Dentist, Reviews,
 > Book Appointment, Contact (+ Privacy/Terms). Booking is a 3-step form that
 > hands the request to WhatsApp. Content from the mockup (15+ years, 10K+
-> patients, memberships, Andheri West Mumbai) is treated as client-approved.
+> patients, memberships) is treated as client-approved. Real phone/hours/address
+> confirmed by the owner on 16 Oct 2026 (Millat Nagar, Bhiwandi).
 
 ---
 
@@ -25,7 +26,7 @@
 
 ### What the website is (and isn't)
 - A **frontend-only static website** — no server, no database, no admin panel, nothing to maintain or that can "go down" on our side.
-- **Appointment requests are honest**: a visitor picks a preferred day/time (from the clinic's weekly hours), enters name + mobile, and sends the request themselves via **WhatsApp to +91 93732 23464** (or email/call). The site never claims an appointment is confirmed — the clinic confirms by replying.
+- **Appointment requests are honest**: a visitor picks a preferred day/time (from the clinic's weekly hours), enters name + mobile, and sends the request themselves via **WhatsApp to +91 93712 23464** (or email/call). The site never claims an appointment is confirmed — the clinic confirms by replying.
 - The contact form and treatment cost-enquiry work the same way: they open the visitor's own WhatsApp/email with the message pre-written.
 
 ---
@@ -53,7 +54,7 @@ Everything marked below is **realistic-looking dummy content**, not real clinic 
 2. **Team members** — invented names/photos in the About page.
 3. **Blog articles** — generic dental articles with stock images.
 4. **All photos** — stock dental photography (Unsplash). Replace with real clinic/doctor photos.
-5. **Email + address + social links** — `hello@brightsmile.example`, a New York address, and facebook.com/instagram.com links are placeholders in `clinic.ts`.
+5. **Email + social links** — `hello@brightsmile.example` and the facebook.com/instagram.com links are placeholders in `clinic.ts`. (Address, phone and hours are REAL — confirmed 16 Oct 2026.)
 6. **Doctor bio details** — verify qualifications, years of experience (currently "15+"), languages.
 7. **Treatment prices** — currently in US dollars with placeholder ranges; set real prices (or remove prices).
 
@@ -63,14 +64,14 @@ Everything marked below is **realistic-looking dummy content**, not real clinic 
 
 - [ ] Real clinic name confirmation + logo preference (current: BrightSmile tooth badge)
 - [ ] Doctor's exact qualifications, registration no., years of experience, languages
-- [ ] Real clinic address + Google Maps link + working hours
+- [x] Clinic address + working hours confirmed (A-Wing, Kuwari Residency, G-2, Beside Alexis Hospital, Millat Nagar, Bhiwandi 421302 · Mon–Sat 10–2:30 & 6–10:30, Sun by appointment)
 - [ ] Clinic email address (and whether they want a professional `@brightsmiledent.in` email)
 - [ ] Real photos: clinic exterior/interior, treatment rooms, equipment, doctor portrait, team
 - [ ] 5–10 genuine patient reviews (text, name, consent)
 - [ ] Actual treatment list + prices in ₹ (or "price on consultation")
 - [ ] Social media links (or remove the icons)
 - [ ] Any certifications/awards they can verify (to restore those sections)
-- [ ] WhatsApp number confirmation for bookings (current: +91 93732 23464)
+- [x] WhatsApp number confirmed: +91 93712 23464 (16 Oct 2026)
 
 ---
 

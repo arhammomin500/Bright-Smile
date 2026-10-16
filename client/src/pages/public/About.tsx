@@ -30,7 +30,7 @@ const WHY = [
 export default function About() {
   usePageMeta(
     'About Us — BrightSmile Dental Clinic',
-    'Your trusted dental care partner in Mumbai. Learn about BrightSmile Dental Clinic and our patient-first approach.',
+    'Your trusted dental care partner in Bhiwandi. Learn about BrightSmile Dental Clinic and our patient-first approach.',
   );
   return (
     <Box>
@@ -49,7 +49,7 @@ export default function About() {
               + ABOUT US
             </Typography>
             <Typography component="h1" sx={{ color: '#fff', fontWeight: 800, letterSpacing: '-0.02em', fontSize: { xs: '1.9rem', md: '2.6rem' }, lineHeight: 1.2, mb: 1.5 }}>
-              Your Trusted Dental Care Partner in Mumbai
+              Your Trusted Dental Care Partner in Bhiwandi
             </Typography>
             <Typography sx={{ color: 'rgba(255,255,255,0.85)', fontSize: { xs: '0.95rem', md: '1.02rem' } }}>
               At BrightSmile, we believe a healthy smile leads to a happier, more confident you. Our

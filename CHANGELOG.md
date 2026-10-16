@@ -8,6 +8,21 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### REAL clinic details from the owner 🎉 (phone, hours, address)
+- **Phone/WhatsApp**: +91 93712 23464 (replaces the placeholder 93732 number)
+  — updated in `clinic.ts`, used by every call button and WhatsApp handoff.
+- **Hours**: Mon–Sat split sessions 10:00 AM–2:30 PM and 6:00–10:30 PM
+  (modelled in `doctor.ts` with the afternoon gap as the break, so booking
+  time slots are generated correctly); **Sunday: by appointment** (no
+  published slots — visitors call/WhatsApp). Updated footer, contact page,
+  home contact strip and the Doctor Information tile.
+- **Address**: A-Wing, Kuwari Residency, Shop No. G-2, Beside Alexis
+  Hospital, Millat Nagar, Bhiwandi, Maharashtra 421302 — address, short
+  address and Google-Maps query updated; all "Mumbai/Andheri" copy and page
+  meta now says Bhiwandi.
+- CLAUDE.md + WEBSITE-GUIDE updated (address/phone/hours now ticked off the
+  client checklist; email and socials remain placeholders).
+
 ### Desktop hero spacing
 - On desktop/laptop the doctor (with his circle and handwritten note) moved in
   from the far right to sit close beside the text (right 6% → 15% of the
