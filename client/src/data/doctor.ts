@@ -12,8 +12,8 @@ export const DOCTOR: Doctor = {
   fullName: 'Dr. Afaque Khan',
   title: 'Dr.',
   photoUrl: '/images/dr-afaque-khan-2026.jpg', // the clinic's original photo (renamed to bust stale caches)
-  // Owner-confirmed credentials (16 Oct 2026): BDS, Reg. No. A-47915, 5+ yrs.
-  qualification: 'BDS — Dental Surgeon (Reg. No. A-47915)',
+  // Owner-confirmed credentials (16 Oct 2026): BDS (MUHS), Reg. No. A-47915, 5+ yrs.
+  qualification: 'BDS (MUHS) — Dental Surgeon (Reg. No. A-47915)',
   specialization: 'General, Cosmetic & Implant Dentistry',
   experienceYears: 5,
   languages: ['English', 'Hindi', 'Marathi'],

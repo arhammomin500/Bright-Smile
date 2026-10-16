@@ -248,7 +248,7 @@ export default function Home() {
                 <Box sx={{ lineHeight: 1.25 }}>
                   <Typography sx={{ fontWeight: 800, fontSize: { xs: 14.5, md: 16 } }}>Dr. Afaque Khan</Typography>
                   <Typography variant="caption" sx={{ color: brand.slate, fontSize: { xs: 12, md: 13 } }}>
-                    BDS · Reg. No. A-47915
+                    BDS (MUHS) · Reg. No. A-47915
                   </Typography>
                 </Box>
               </Stack>

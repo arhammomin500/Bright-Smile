@@ -135,7 +135,7 @@ export function DoctorSection() {
               <Eyebrow>MEET YOUR DOCTOR</Eyebrow>
               <Heading>{doctor?.fullName ?? 'Dr. Afaque Khan'}</Heading>
               <Typography sx={{ color: brand.primary, fontWeight: 700, mb: 1.75 }}>
-                {doctor?.qualification ?? 'BDS — Dental Surgeon (Reg. No. A-47915)'}
+                {doctor?.qualification ?? 'BDS (MUHS) — Dental Surgeon (Reg. No. A-47915)'}
               </Typography>
               <Typography color="text.secondary" sx={{ mb: 2.5, maxWidth: 520 }}>
                 The founder and principal dentist of BrightSmile. With over 5 years of experience

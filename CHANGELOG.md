@@ -8,6 +8,10 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### Degree updated to BDS (MUHS)
+- Owner clarified the degree: shown as "BDS (MUHS)" with the registration
+  number everywhere (hero, doctor section, Our Dentist page, page meta).
+
 ### Real doctor credentials, treatments catalog, Instagram (owner-supplied)
 - **Credentials corrected site-wide**: BDS (not "BDS, MDS"), Reg. No. A-47915
   added, **5+ years** (not 15+), languages English/Hindi/Marathi. Updated
