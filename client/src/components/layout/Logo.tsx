@@ -1,8 +1,25 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-// One-line brand lockup: gradient tooth badge + "BrightSmile" wordmark.
+// Brand lockup. The default (light backgrounds, e.g. the navbar) is the
+// owner's official logo image — tooth mark, "Dr. Afaque Khan", BrightSmile
+// wordmark, "Dental Clinic & Implant Centre" and tagline. The `light`
+// variant (navy footer) keeps the drawn white lockup, since the logo image's
+// dark parts would vanish on dark backgrounds.
 export function Logo({ light = false, compact = false }: { light?: boolean; compact?: boolean }) {
+  if (!light) {
+    return (
+      <Box component={Link} to="/" sx={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+        <Box
+          component="img"
+          src="/images/logo-brightsmile.webp"
+          alt="BrightSmile Dental Clinic & Implant Centre — Dr. Afaque Khan"
+          sx={{ height: compact ? 40 : { xs: 46, md: 56 }, width: 'auto', display: 'block' }}
+        />
+      </Box>
+    );
+  }
+
   return (
     <Box component={Link} to="/" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.1, textDecoration: 'none' }}>
       {/* Mark */}
@@ -41,11 +58,11 @@ export function Logo({ light = false, compact = false }: { light?: boolean; comp
             letterSpacing: '-0.03em',
             lineHeight: 1,
             whiteSpace: 'nowrap',
-            color: light ? '#fff' : 'text.primary',
+            color: '#fff',
           }}
         >
           Bright
-          <Box component="span" sx={{ color: light ? '#a8e0ff' : 'primary.main' }}>
+          <Box component="span" sx={{ color: '#a8e0ff' }}>
             Smile
           </Box>
         </Typography>

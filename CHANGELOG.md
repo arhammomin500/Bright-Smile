@@ -8,6 +8,14 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### Official logo added
+- The owner's new logo lockup (tooth mark, "Dr. Afaque Khan", BrightSmile,
+  "Dental Clinic & Implant Centre", tagline) now appears in the navbar and
+  mobile drawer — white background removed, trimmed, served as
+  `logo-brightsmile.webp` (140 KB, transparent). The navy footer keeps the
+  white drawn lockup since the logo's dark text would vanish on dark
+  backgrounds.
+
 ### REAL clinic details from the owner 🎉 (phone, hours, address)
 - **Phone/WhatsApp**: +91 93712 23464 (replaces the placeholder 93732 number)
   — updated in `clinic.ts`, used by every call button and WhatsApp handoff.
