@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### Hero figure straightened + nudged left (owner feedback)
+- The studio photo had the doctor leaning slightly; the cutout is now rotated
+  6° upright (`dr-afaque-khan-cutout-3.webp`) — same pose, straight stance —
+  and moved a little left of the screen edge on all breakpoints.
+
 ### Homepage rebuilt to the owner's app-style reference (blue theme)
 - **New studio photo of Dr. Khan** (black-background shot supplied by the
   owner) cut out locally → `dr-afaque-khan-cutout-2.webp` (61 KB, alpha);

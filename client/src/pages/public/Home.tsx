@@ -141,7 +141,7 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             sx={{
               position: 'absolute',
-              right: { xs: -26, sm: 0, md: '3%' },
+              right: { xs: 4, sm: 20, md: '6%' },
               bottom: 0,
               top: { xs: 34, sm: 24, md: 16 },
               zIndex: 1,
