@@ -4,8 +4,8 @@
 export const IMG = {
   // Dr. Afaque Khan — the clinic's original photo.
   doctorPortrait: '/images/dr-afaque-khan-2026.jpg',
-  // Background-removed cutout (hero) — owner's studio photo, straightened upright.
-  doctorCutout: '/images/dr-afaque-khan-cutout-3.webp',
+  // Background-removed cutout (hero) — owner's realistic studio photo.
+  doctorCutout: '/images/dr-afaque-khan-cutout-4.webp',
   heroClinic: '/images/hero-clinic-room.jpg',
   clinicReception: '/images/clinic-reception.jpg',
   clinicInterior: '/images/clinic-interior.jpg',

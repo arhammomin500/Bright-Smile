@@ -8,6 +8,11 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-10-16
 
+### More realistic hero photo (owner supplied a new render)
+- Owner generated a photorealistic studio shot (natural skin/fabric texture,
+  straight stance, gray studio background) from the spec we provided; cut out
+  → `dr-afaque-khan-cutout-4.webp` (65 KB), replacing the previous cutout.
+
 ### Hero figure straightened + nudged left (owner feedback)
 - The studio photo had the doctor leaning slightly; the cutout is now rotated
   6° upright (`dr-afaque-khan-cutout-3.webp`) — same pose, straight stance —
