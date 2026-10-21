@@ -22,7 +22,6 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import PaidIcon from '@mui/icons-material/Paid';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import HealingIcon from '@mui/icons-material/Healing';
@@ -35,7 +34,6 @@ import { TreatmentIcon } from '@/components/ui/TreatmentIcon';
 import { useTreatment } from '@/lib/queries';
 import { errorMessage } from '@/lib/api';
 import { whatsappLink } from '@/lib/clinic';
-import { formatPriceRange } from '@/lib/format';
 import { useToast } from '@/components/feedback/ToastProvider';
 import { brand, gradients } from '@/theme/theme';
 import type { Treatment } from '@/lib/types';
@@ -181,22 +179,6 @@ export default function TreatmentDetail() {
               ))}
 
               <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap sx={{ mt: 3 }}>
-                <Stack
-                  direction="row"
-                  spacing={1.25}
-                  alignItems="center"
-                  sx={{ px: 2.25, py: 1.25, borderRadius: 3, bgcolor: brand.mist }}
-                >
-                  <PaidIcon sx={{ color: brand.primary }} />
-                  <Box>
-                    <Typography variant="caption" sx={{ color: brand.slate, fontWeight: 700 }}>
-                      Price range
-                    </Typography>
-                    <Typography sx={{ fontWeight: 800, color: 'text.primary', lineHeight: 1.2 }}>
-                      {formatPriceRange(treatment.priceMin, treatment.priceMax)}
-                    </Typography>
-                  </Box>
-                </Stack>
                 <Stack
                   direction="row"
                   spacing={1.25}
@@ -519,7 +501,7 @@ function CostInquiryForm({ treatment }: { treatment: Treatment }) {
   // message prepared — nothing is stored or sent by the website itself.
   const onSubmit = (values: InquiryForm) => {
     const msg =
-      `Hi Bright Smile 👋 I'd like a cost estimate for *${treatment.name}*.\n\n` +
+      `Hi Bright Smile 👋 I have an enquiry about *${treatment.name}*.\n\n` +
       `Name: ${values.name}\nPhone: ${values.phone}` +
       (values.email ? `\nEmail: ${values.email}` : '') +
       (values.message ? `\n\n${values.message}` : '');
@@ -530,10 +512,10 @@ function CostInquiryForm({ treatment }: { treatment: Treatment }) {
   return (
     <Card sx={{ p: { xs: 3, md: 4 }, border: `1px solid ${brand.primary}1f` }}>
       <Typography variant="h5" sx={{ fontWeight: 800 }}>
-        Request a Cost Estimate
+        Ask About This Treatment
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-        Share your details and our team will get back to you with pricing for {treatment.name}.
+        Share your details and our team will get back to you about {treatment.name}.
       </Typography>
 
       <Divider sx={{ my: 2.5 }} />

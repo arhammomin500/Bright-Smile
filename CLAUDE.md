@@ -34,6 +34,7 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   English/Hindi/Marathi, Mon–Sat 10–2:30 & 6–10:30, Sun by appointment) at
   **Bright Smile Dental Clinic & Implant Centre**, Millat Nagar, Bhiwandi.
   Treatment catalog (12 services) is owner-supplied — real, not placeholder.
+  Owner decisions: NO treatment prices anywhere, NO memberships section.
 - Keep public flows minimal — the owner consistently rejects extra steps.
 - Design: since 2026-10-15 the **client's 7-page reference mockup is the
   source of truth** (palette #216CF3/#10213D/#F3F7FF, navy footer + navy

@@ -6,6 +6,17 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-10-21
+
+### Real email; memberships and prices removed (owner decisions)
+- **Email is real**: brightsmiledentalclinic23@gmail.com replaces the
+  placeholder across the contact page, footer and all email handoffs.
+- **Memberships removed**: the owner confirmed there are none — the
+  "Professional Memberships" card is gone from the Our Dentist page.
+- **No prices anywhere**: price row removed from treatment pages and the
+  enquiry form renamed "Ask About This Treatment" (was "Request a Cost
+  Estimate"); its WhatsApp message no longer mentions cost estimates.
+
 ## 2026-10-16
 
 ### Degree updated to BDS (MUHS)

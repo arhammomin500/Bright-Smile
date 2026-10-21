@@ -7,7 +7,6 @@ import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import { brand, hoverShadow } from '@/theme/theme';
 import { IMG } from '@/data/images';
 import { useDoctors } from '@/lib/queries';
@@ -22,9 +21,6 @@ const CREDENTIALS = [
   { icon: <VolunteerActivismOutlinedIcon />, title: 'Patient Focused', sub: 'Gentle & Caring' },
   { icon: <VerifiedOutlinedIcon />, title: 'Honest Advice', sub: 'Transparent Treatment Plans' },
 ];
-
-// Professional memberships from the client's approved reference design.
-const MEMBERSHIPS = ['Indian Dental Association (IDA)', 'Endodontic Society of India', 'ACFFI (Facial Aesthetics)'];
 
 const SPECIALTIES = ['General Dentistry', 'Cosmetic Dentistry', 'Implants', 'Endodontics'];
 
@@ -109,49 +105,26 @@ export default function Dentist() {
         </Grid>
       </Container>
 
-      {/* ── Approach + memberships ── */}
+      {/* ── Approach ── */}
       <Container sx={{ pb: { xs: 6, md: 9 } }}>
-        <Grid container spacing={2.5}>
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Reveal>
-              <Card sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
-                <Typography component="h2" sx={{ fontWeight: 800, fontSize: '1.3rem', mb: 2 }}>
-                  Dr. Khan's Approach
-                </Typography>
-                <Stack direction="row" spacing={1.5}>
-                  <FormatQuoteIcon sx={{ color: brand.cloud, fontSize: 44, flexShrink: 0 }} />
-                  <Typography sx={{ color: 'text.secondary', fontStyle: 'italic' }}>
-                    "I believe in creating a comfortable environment where every patient feels heard
-                    and valued. My goal is to provide the best possible care using modern techniques,
-                    ensuring long-lasting and healthy smiles."
-                  </Typography>
-                </Stack>
-                <Typography sx={{ mt: 2.5, fontFamily: 'cursive', fontSize: '1.4rem', color: brand.primary }}>
-                  Dr. Afaque Khan
-                </Typography>
-              </Card>
-            </Reveal>
-          </Grid>
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Reveal delayIndex={1}>
-              <Card sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
-                <Typography component="h2" sx={{ fontWeight: 800, fontSize: '1.3rem', mb: 2 }}>
-                  Professional Memberships
-                </Typography>
-                <Stack spacing={1.75}>
-                  {MEMBERSHIPS.map((m) => (
-                    <Stack key={m} direction="row" spacing={1.5} alignItems="center">
-                      <Box sx={{ width: 36, height: 36, borderRadius: '9px', bgcolor: brand.cloud, color: brand.primary, display: 'grid', placeItems: 'center', flexShrink: 0 }}>
-                        <GroupsOutlinedIcon sx={{ fontSize: 19 }} />
-                      </Box>
-                      <Typography sx={{ fontWeight: 600, fontSize: 14.5 }}>{m}</Typography>
-                    </Stack>
-                  ))}
-                </Stack>
-              </Card>
-            </Reveal>
-          </Grid>
-        </Grid>
+        <Reveal>
+          <Card sx={{ p: { xs: 3, md: 4 } }}>
+            <Typography component="h2" sx={{ fontWeight: 800, fontSize: '1.3rem', mb: 2 }}>
+              Dr. Khan's Approach
+            </Typography>
+            <Stack direction="row" spacing={1.5}>
+              <FormatQuoteIcon sx={{ color: brand.cloud, fontSize: 44, flexShrink: 0 }} />
+              <Typography sx={{ color: 'text.secondary', fontStyle: 'italic', maxWidth: 680 }}>
+                "I believe in creating a comfortable environment where every patient feels heard
+                and valued. My goal is to provide the best possible care using modern techniques,
+                ensuring long-lasting and healthy smiles."
+              </Typography>
+            </Stack>
+            <Typography sx={{ mt: 2.5, fontFamily: 'cursive', fontSize: '1.4rem', color: brand.primary }}>
+              Dr. Afaque Khan
+            </Typography>
+          </Card>
+        </Reveal>
 
         {/* ── Consultation CTA ── */}
         <Reveal sx={{ mt: 2.5 }}>
