@@ -31,9 +31,7 @@ import { usePageMeta } from '@/lib/usePageMeta';
 const FILTERS: { value: string; label: string; match: (t: string) => boolean }[] = [
   { value: 'ALL', label: 'All', match: () => true },
   { value: 'CLINIC', label: 'Clinic', match: (t) => t === 'PHOTO' || t === 'ROOM' },
-  { value: 'EQUIPMENT', label: 'Equipment', match: (t) => t === 'EQUIPMENT' },
   { value: 'BEFORE_AFTER', label: 'Before & After', match: (t) => t === 'BEFORE_AFTER' },
-  { value: 'VIDEO', label: 'Video', match: (t) => t === 'VIDEO' },
 ];
 
 export default function Gallery() {

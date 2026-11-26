@@ -56,8 +56,8 @@ export default function Reviews() {
             <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
                 component="img"
-                src={IMG.happyPatient}
-                alt="A bright, healthy smile"
+                src={IMG.realSmile}
+                alt="A healthy smile after treatment at Bright Smile"
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: '16px', boxShadow: softShadow, display: 'block' }}
               />
             </Grid>

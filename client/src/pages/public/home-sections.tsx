@@ -200,8 +200,8 @@ export function TestimonialsSection() {
             <Box sx={{ position: 'relative', maxWidth: 440, mx: 'auto' }}>
               <Box
                 component="img"
-                src={IMG.happyPatient}
-                alt="Happy patient with a bright smile"
+                src={IMG.clinicDesk}
+                alt="The Bright Smile reception desk with the Review-us-on-Google stand"
                 sx={{
                   width: '100%',
                   aspectRatio: '1/1',

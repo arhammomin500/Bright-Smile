@@ -8,6 +8,27 @@ Every code/content/config change must add an entry under the current date
 
 ## 2026-11-26
 
+### REAL clinic photos replace all stock imagery 📸
+- The 194px thumbnails the user saved from Google were too small, so the
+  full-size originals (up to 1600px) were pulled straight from the listing's
+  public photo gallery on Google's CDN — 16 real photos, optimized to WEBP in
+  `client/public/images/clinic/`.
+- Gallery page rebuilt with ONLY real content: treatment room, waiting area,
+  reception desk, entrance (day + night signboard), logo walls, wall quote,
+  certificate shelves, and two genuine before/after cases (the combined
+  before/after photos were split into proper Before|After pairs). The fake
+  "CBCT scanner / laser" equipment tiles, fake before/afters made of random
+  stock pairs, and the placeholder w3schools video are gone; filter tabs
+  reduced to All / Clinic / Before & After.
+- Real photos now also used on: homepage About section (treatment room —
+  the fake "Watch Clinic Tour" button and its stock video were removed,
+  `/videos/hero-clinic.mp4` deleted), About page (entrance banner + logo
+  wall), Contact page (entrance, so visitors recognise the shopfront),
+  Reviews hero (real post-treatment smile), and homepage testimonials
+  (reception desk with the Review-us-on-Google stand).
+- Stock photos remain ONLY as generic illustrative images on treatment
+  cards/booking — nothing stock is presented as the clinic itself anymore.
+
 ### REAL Google reviews replace all fake testimonials 🎉
 - The clinic now has a Google Business listing ("Dr Afaque's Bright Smile
   Dental Clinic And Implant Centre", **5.0★, 32 reviews**). Pulled the five

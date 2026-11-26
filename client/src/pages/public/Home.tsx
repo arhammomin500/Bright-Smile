@@ -5,7 +5,6 @@ import {
   Card,
   CardActionArea,
   Container,
-  Dialog,
   IconButton,
   Stack,
   Typography,
@@ -22,8 +21,6 @@ import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlin
 import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
 import dayjs from 'dayjs';
 
@@ -92,7 +89,6 @@ export default function Home() {
     const t = treatments?.find((x) => x.slug === f.slug);
     return t ? { ...t, tagline: f.tagline } : null;
   }).filter(Boolean);
-  const [tourOpen, setTourOpen] = useState(false);
 
   // Appointment quick-pick: the next day with published hours, and its times.
   const quickDay = useMemo(() => {
@@ -369,8 +365,8 @@ export default function Home() {
               <Box sx={{ position: 'relative' }}>
                 <Box
                   component="img"
-                  src={IMG.heroClinic}
-                  alt="Modern treatment room at BrightSmile Dental Clinic"
+                  src={IMG.clinicTreatmentRoom}
+                  alt="The treatment room at Bright Smile Dental Clinic"
                   sx={{
                     width: '100%',
                     aspectRatio: '4/3',
@@ -381,32 +377,6 @@ export default function Home() {
                     display: 'block',
                   }}
                 />
-                {/* Watch the clinic tour video */}
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  alignItems="center"
-                  onClick={() => setTourOpen(true)}
-                  sx={{
-                    position: 'absolute',
-                    left: 14,
-                    bottom: 14,
-                    bgcolor: 'rgba(255,255,255,0.95)',
-                    borderRadius: 999,
-                    pl: 0.75,
-                    pr: 1.75,
-                    py: 0.75,
-                    cursor: 'pointer',
-                    boxShadow: hoverShadow,
-                    transition: '.2s',
-                    '&:hover': { bgcolor: '#fff', transform: 'translateY(-2px)' },
-                  }}
-                >
-                  <Box sx={{ width: 32, height: 32, borderRadius: '50%', bgcolor: brand.primary, color: '#fff', display: 'grid', placeItems: 'center' }}>
-                    <PlayArrowRoundedIcon sx={{ fontSize: 22 }} />
-                  </Box>
-                  <Typography sx={{ fontWeight: 700, fontSize: 13.5 }}>Watch Clinic Tour</Typography>
-                </Stack>
               </Box>
             </Reveal>
           </Grid>
@@ -532,20 +502,6 @@ export default function Home() {
       <TestimonialsSection />
       <FaqSection />
       <ContactStrip />
-
-      {/* Clinic tour video dialog */}
-      <Dialog open={tourOpen} onClose={() => setTourOpen(false)} maxWidth="md" fullWidth PaperProps={{ sx: { bgcolor: '#000', borderRadius: '14px', position: 'relative' } }}>
-        <IconButton
-          onClick={() => setTourOpen(false)}
-          aria-label="Close video"
-          sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1, color: '#fff', bgcolor: 'rgba(0,0,0,0.4)' }}
-        >
-          <CloseIcon />
-        </IconButton>
-        {tourOpen && (
-          <Box component="video" src="/videos/hero-clinic.mp4" autoPlay controls playsInline sx={{ width: '100%', display: 'block' }} />
-        )}
-      </Dialog>
     </Box>
   );
 }

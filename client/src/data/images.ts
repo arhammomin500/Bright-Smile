@@ -18,4 +18,19 @@ export const IMG = {
   xray: '/images/dental-xray-review.jpg',
   surgery: '/images/dental-surgery.jpg',
   procedure: '/images/dental-procedure.jpg',
+
+  // ── Real clinic photos (from the clinic's own Google listing, Nov 2026) ──
+  clinicEntrance: '/images/clinic/entrance-day.webp',
+  clinicEntranceSteps: '/images/clinic/entrance-steps.webp',
+  clinicSignboard: '/images/clinic/signboard-night.webp',
+  clinicLogoWall: '/images/clinic/logo-wall.webp',
+  clinicLogoMarble: '/images/clinic/logo-marble.webp',
+  clinicQuoteWall: '/images/clinic/wall-quote.webp',
+  clinicTreatmentRoom: '/images/clinic/treatment-room.webp',
+  clinicCeiling: '/images/clinic/treatment-ceiling.webp',
+  clinicWaiting: '/images/clinic/waiting-area.webp',
+  clinicDesk: '/images/clinic/reception-desk.webp',
+  clinicCertificatesWide: '/images/clinic/certificates-wide.webp',
+  clinicCertificatesShelf: '/images/clinic/certificates-shelf.webp',
+  realSmile: '/images/clinic/result-smile.webp',
 };

@@ -38,8 +38,8 @@ export default function About() {
       <Box sx={{ position: 'relative', mt: { xs: '62px', md: '72px' }, overflow: 'hidden' }}>
         <Box
           component="img"
-          src={IMG.clinicReception}
-          alt="BrightSmile Dental Clinic"
+          src={IMG.clinicEntrance}
+          alt="The entrance of Bright Smile Dental Clinic in Millat Nagar, Bhiwandi"
           sx={{ width: '100%', height: { xs: 320, md: 420 }, objectFit: 'cover', display: 'block' }}
         />
         <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(16,33,61,0.82) 0%, rgba(16,33,61,0.5) 55%, rgba(16,33,61,0.2) 100%)' }} />
@@ -90,8 +90,8 @@ export default function About() {
             <Reveal>
               <Box
                 component="img"
-                src={IMG.clinicInterior}
-                alt="Inside the BrightSmile clinic"
+                src={IMG.clinicLogoWall}
+                alt="The Bright Smile logo wall inside the clinic"
                 sx={{
                   width: '100%',
                   aspectRatio: '4/3',

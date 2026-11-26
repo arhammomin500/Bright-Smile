@@ -79,8 +79,8 @@ export default function Contact() {
             <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
                 component="img"
-                src={IMG.clinicReception}
-                alt="BrightSmile clinic reception"
+                src={IMG.clinicEntrance}
+                alt="The entrance of Bright Smile Dental Clinic — look for this signboard"
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: '16px', boxShadow: softShadow, display: 'block' }}
               />
             </Grid>
