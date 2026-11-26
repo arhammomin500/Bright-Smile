@@ -183,7 +183,7 @@ export default function Home() {
             background: 'linear-gradient(180deg, rgba(10,27,51,0.58) 0%, rgba(10,27,51,0.6) 50%, rgba(10,27,51,0.78) 100%)',
           }}
         />
-        <Container sx={{ position: 'relative', pt: { xs: 2, md: 0 }, pb: { xs: '72px', md: 4 } }}>
+        <Container sx={{ position: 'relative', pt: { xs: 1, md: 0 }, pb: { xs: '160px', md: '96px' } }}>
           <Reveal>
             <Box
               sx={{
@@ -211,9 +211,9 @@ export default function Home() {
                 fontWeight: 800,
                 letterSpacing: '-0.025em',
                 lineHeight: 1.08,
-                fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.8rem' },
-                maxWidth: 640,
-                mb: 1.75,
+                fontSize: { xs: '2.85rem', sm: '3.4rem', md: '4rem' },
+                maxWidth: 680,
+                mb: 2,
                 textShadow: '0 2px 18px rgba(10,27,51,0.45)',
               }}
             >
@@ -231,7 +231,7 @@ export default function Home() {
               Modern, painless dentistry by Dr. Afaque Khan — Dental Surgeon &amp; Implantologist,
               Millat Nagar, Bhiwandi.
             </Typography>
-            <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mb: 2.25 }}>
+            <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap>
               <Button
                 component={Link}
                 to="/book-appointment"
@@ -261,17 +261,44 @@ export default function Home() {
                 Call Now
               </Button>
             </Stack>
-            <Stack direction="row" spacing={0.9} alignItems="center">
-              <StarRoundedIcon sx={{ color: '#FFC93C', fontSize: 19 }} />
-              <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: 14 }}>
-                {CLINIC.googleRating}
-              </Typography>
-              <Typography sx={{ color: 'rgba(255,255,255,0.8)', fontSize: 13.5, fontWeight: 600 }}>
-                on Google · {CLINIC.googleReviewCount} patient reviews
-              </Typography>
-            </Stack>
           </Reveal>
         </Container>
+
+        {/* Bottom glass stat strip (fills the lower hero space) */}
+        <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: { xs: 86, md: 26 } }}>
+          <Container>
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr 0.9fr 1.25fr', md: 'repeat(3, 1fr)' },
+                gap: { xs: 0.75, md: 2 },
+                bgcolor: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.25)',
+                backdropFilter: 'blur(8px)',
+                borderRadius: '18px',
+                pl: { xs: 1.5, md: 3 },
+                pr: { xs: 7, md: 3 },
+                py: { xs: 1.5, md: 2 },
+              }}
+            >
+              <HeroStat
+                icon={<StarRoundedIcon sx={{ color: '#FFC93C' }} />}
+                value={`${CLINIC.googleRating}★`}
+                label="Google Rating"
+              />
+              <HeroStat
+                icon={<MedicalServicesOutlinedIcon />}
+                value="12"
+                label="Treatments"
+              />
+              <HeroStat
+                icon={<AccessTimeIcon />}
+                value="Mon–Sat"
+                label="10–2:30 · 6–10:30"
+              />
+            </Box>
+          </Container>
+        </Box>
       </Box>
 
       {/* ═══ 2 · ABOUT — doctor photo + intro (reference) ═══ */}
@@ -656,6 +683,24 @@ export default function Home() {
         </Container>
       </Box>
     </Box>
+  );
+}
+
+function HeroStat({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
+  return (
+    <Stack direction="row" spacing={1.25} alignItems="center" justifyContent="center">
+      <Box sx={{ color: '#fff', display: 'grid', placeItems: 'center', '& svg': { fontSize: { xs: 20, md: 24 } } }}>
+        {icon}
+      </Box>
+      <Box sx={{ minWidth: 0 }}>
+        <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: 13.5, md: 16 }, lineHeight: 1.2, whiteSpace: 'nowrap' }}>
+          {value}
+        </Typography>
+        <Typography sx={{ color: 'rgba(255,255,255,0.8)', fontSize: { xs: 10.5, md: 12.5 }, fontWeight: 600, lineHeight: 1.25 }}>
+          {label}
+        </Typography>
+      </Box>
+    </Stack>
   );
 }
 

@@ -29,6 +29,12 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Hero filled out; review count removed (owner feedback)
+- Bigger headline, content sits upper-centre, and a frosted stat strip now
+  fills the bottom of the full-screen hero: 5.0★ Google Rating · 12
+  Treatments · Mon–Sat hours. The "32 patient reviews" count is gone —
+  only the rating shows.
+
 ### Hero text vertically centered (owner feedback)
 - Hero content moved up from the bottom edge to the vertical center of the
   full-screen video, with a slightly more even dark overlay.
