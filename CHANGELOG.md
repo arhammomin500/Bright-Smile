@@ -29,6 +29,17 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Hero and sticky button redesigned again (owner: "still very bad")
+- Hero: brand-blue duotone overlay over the video (instead of grey-navy),
+  a thin-line "DENTAL CLINIC & IMPLANT CENTRE" eyebrow, larger headline
+  with "Dental Care" in a light-blue gradient, two equal-width 54px buttons
+  (white "Book Visit" + outlined "Call Clinic"), and a solid white stat
+  card anchored at the bottom (5.0★ Google Rating · 5+ Years · Mon–Sat).
+- Sticky mobile button: now a compact, centred, gradient-blue floating pill
+  that slides up only after scrolling past the hero (no duplicate CTA on
+  the first screen); WhatsApp bubble aligns beside it and also waits until
+  the hero is scrolled past on the homepage.
+
 ### Sticky booking bar restyled to the reference; hero strip refined
 - The mobile sticky bar is now a flat, flush, full-width solid blue bar
   ("Book Your Appointment", like the reference site) instead of a floating

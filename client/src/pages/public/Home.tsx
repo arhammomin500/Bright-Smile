@@ -152,16 +152,16 @@ export default function Home() {
 
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      {/* ═══ 1 · HERO — full-screen looping video, big headline (reference) ═══ */}
+      {/* ═══ 1 · HERO — full-screen video, brand-blue duotone, white stat card ═══ */}
       <Box
         sx={{
           position: 'relative',
           mt: { xs: '62px', md: '72px' },
-          height: { xs: 'calc(100svh - 62px)', md: 'calc(100svh - 72px)' },
-          minHeight: { xs: 520, md: 560 },
+          minHeight: { xs: 'calc(100svh - 62px)', md: 'calc(100svh - 72px)' },
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: 'column',
           overflow: 'hidden',
+          bgcolor: '#0B1E4A',
         }}
       >
         <Box
@@ -176,129 +176,139 @@ export default function Home() {
           aria-hidden="true"
           sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
+        {/* Brand-blue duotone overlay */}
         <Box
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(10,27,51,0.58) 0%, rgba(10,27,51,0.6) 50%, rgba(10,27,51,0.78) 100%)',
+            background:
+              'linear-gradient(165deg, rgba(23,78,200,0.78) 0%, rgba(12,40,110,0.82) 50%, rgba(7,20,52,0.94) 100%)',
           }}
         />
-        <Container sx={{ position: 'relative', pt: { xs: 1, md: 0 }, pb: { xs: '160px', md: '96px' } }}>
-          <Reveal>
-            <Box
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 0.8,
-                bgcolor: 'rgba(255,255,255,0.14)',
-                border: '1px solid rgba(255,255,255,0.3)',
-                backdropFilter: 'blur(6px)',
-                borderRadius: 999,
-                px: 1.75,
-                py: 0.6,
-                mb: 2,
-              }}
-            >
-              <Box sx={{ color: '#7fd1ff', fontSize: 13, lineHeight: 1 }}>✦</Box>
-              <Typography sx={{ color: '#fff', fontWeight: 700, fontSize: 12.5, letterSpacing: '0.06em' }}>
-                Trusted Dental Care in Bhiwandi
-              </Typography>
-            </Box>
-            <Typography
-              component="h1"
-              sx={{
-                color: '#fff',
-                fontWeight: 800,
-                letterSpacing: '-0.025em',
-                lineHeight: 1.08,
-                fontSize: { xs: '2.85rem', sm: '3.4rem', md: '4rem' },
-                maxWidth: 680,
-                mb: 2,
-                textShadow: '0 2px 18px rgba(10,27,51,0.45)',
-              }}
-            >
-              Gentle Ways in Dental Care
-            </Typography>
-            <Typography
-              sx={{
-                color: 'rgba(255,255,255,0.88)',
-                fontSize: { xs: 15, md: 17 },
-                maxWidth: 460,
-                mb: 3,
-                lineHeight: 1.6,
-              }}
-            >
-              Modern, painless dentistry by Dr. Afaque Khan — Dental Surgeon &amp; Implantologist,
-              Millat Nagar, Bhiwandi.
-            </Typography>
-            <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap>
-              <Button
-                component={Link}
-                to="/book-appointment"
-                variant="contained"
-                size="large"
-                endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 19 }} />}
-                sx={{ px: { xs: 2.25, md: 3.25 }, fontSize: { xs: 14.5, md: 16 }, whiteSpace: 'nowrap', boxShadow: '0 10px 26px rgba(10,27,51,0.4)' }}
-              >
-                Book Appointment
-              </Button>
-              <Button
-                component="a"
-                href={CLINIC.phoneHref}
-                size="large"
-                startIcon={<CallIcon sx={{ fontSize: 19 }} />}
-                sx={{
-                  color: '#fff',
-                  px: { xs: 2.25, md: 3 },
-                  fontSize: { xs: 14.5, md: 16 },
-                  whiteSpace: 'nowrap',
-                  bgcolor: 'rgba(255,255,255,0.12)',
-                  border: '1px solid rgba(255,255,255,0.45)',
-                  backdropFilter: 'blur(6px)',
-                  '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
-                }}
-              >
-                Call Now
-              </Button>
-            </Stack>
-          </Reveal>
-        </Container>
+        {/* Soft glow accents */}
+        <Box
+          sx={{
+            position: 'absolute',
+            width: 360,
+            height: 360,
+            borderRadius: '50%',
+            top: -120,
+            right: -120,
+            background: 'radial-gradient(circle, rgba(92,155,255,0.45) 0%, rgba(92,155,255,0) 70%)',
+          }}
+        />
 
-        {/* Bottom glass stat strip (fills the lower hero space) */}
-        <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: { xs: 70, md: 26 } }}>
-          <Container>
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr 0.9fr 1.25fr', md: 'repeat(3, 1fr)' },
-                gap: { xs: 0.75, md: 2 },
-                bgcolor: 'rgba(10,27,51,0.5)',
-                border: '1px solid rgba(255,255,255,0.16)',
-                backdropFilter: 'blur(8px)',
-                borderRadius: '18px',
-                pl: { xs: 1.5, md: 3 },
-                pr: { xs: 7, md: 3 },
-                py: { xs: 1.5, md: 2 },
-              }}
-            >
-              <HeroStat
-                icon={<StarRoundedIcon sx={{ color: '#FFC93C' }} />}
-                value={`${CLINIC.googleRating}★`}
-                label="Google Rating"
-              />
-              <HeroStat
-                icon={<MedicalServicesOutlinedIcon />}
-                value="12"
-                label="Treatments"
-              />
-              <HeroStat
-                icon={<AccessTimeIcon />}
-                value="Mon–Sat"
-                label="10–2:30 · 6–10:30"
-              />
+        {/* Headline block — vertically centred in the space above the card */}
+        <Box sx={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+          <Container sx={{ py: { xs: 5, md: 6 } }}>
+            <Box sx={{ maxWidth: 640 }}>
+              <Reveal>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2.5 }}>
+                  <Box sx={{ width: 28, height: 2, bgcolor: '#8EC1FF', borderRadius: 2 }} />
+                  <Typography sx={{ color: '#BFDBFF', fontWeight: 700, fontSize: 12.5, letterSpacing: '0.2em' }}>
+                    DENTAL CLINIC &amp; IMPLANT CENTRE
+                  </Typography>
+                </Stack>
+                <Typography
+                  component="h1"
+                  sx={{
+                    color: '#fff',
+                    fontWeight: 800,
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1.05,
+                    fontSize: { xs: '3rem', sm: '3.6rem', md: '4.4rem' },
+                    mb: 2.25,
+                  }}
+                >
+                  Gentle Ways in{' '}
+                  <Box
+                    component="span"
+                    sx={{
+                      background: 'linear-gradient(90deg, #9CCBFF 0%, #E3F0FF 100%)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                    }}
+                  >
+                    Dental Care
+                  </Box>
+                </Typography>
+                <Typography
+                  sx={{ color: 'rgba(255,255,255,0.86)', fontSize: { xs: 15.5, md: 18 }, lineHeight: 1.65, maxWidth: 480, mb: 3.5 }}
+                >
+                  Modern, painless dentistry by <b style={{ color: '#fff' }}>Dr. Afaque Khan</b> — Dental
+                  Surgeon &amp; Implantologist in Millat Nagar, Bhiwandi.
+                </Typography>
+
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr 1fr', sm: 'auto auto' },
+                    justifyContent: { sm: 'start' },
+                    gap: 1.5,
+                    maxWidth: { xs: '100%', sm: 'none' },
+                  }}
+                >
+                  <Button
+                    component={Link}
+                    to="/book-appointment"
+                    startIcon={<EventAvailableOutlinedIcon />}
+                    sx={{
+                      height: 54,
+                      px: { sm: 3.5 },
+                      bgcolor: '#fff',
+                      color: brand.primary,
+                      fontWeight: 800,
+                      fontSize: { xs: 15, md: 16 },
+                      whiteSpace: 'nowrap',
+                      boxShadow: '0 14px 30px rgba(3,12,35,0.35)',
+                      '&:hover': { bgcolor: '#EEF4FF', transform: 'translateY(-2px)' },
+                    }}
+                  >
+                    Book Visit
+                  </Button>
+                  <Button
+                    component="a"
+                    href={CLINIC.phoneHref}
+                    startIcon={<CallIcon />}
+                    sx={{
+                      height: 54,
+                      px: { sm: 3.5 },
+                      color: '#fff',
+                      fontWeight: 800,
+                      fontSize: { xs: 15, md: 16 },
+                      whiteSpace: 'nowrap',
+                      border: '1.5px solid rgba(255,255,255,0.55)',
+                      bgcolor: 'rgba(255,255,255,0.06)',
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.16)', borderColor: '#fff' },
+                    }}
+                  >
+                    Call Clinic
+                  </Button>
+                </Box>
+              </Reveal>
             </Box>
           </Container>
         </Box>
+
+        {/* White stat card anchored to the bottom of the hero */}
+        <Container sx={{ position: 'relative', pb: { xs: 2.5, md: 4 } }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              bgcolor: '#fff',
+              borderRadius: '20px',
+              boxShadow: '0 20px 50px rgba(3,12,35,0.35)',
+              py: { xs: 1.75, md: 2.5 },
+              '& > *:not(:last-child)': { borderRight: `1px solid ${brand.line}` },
+            }}
+          >
+            <HeroStat icon={<StarRoundedIcon sx={{ color: '#F5B400' }} />} value={`${CLINIC.googleRating} ★`} label="Google Rating" />
+            <HeroStat icon={<WorkspacePremiumOutlinedIcon />} value="5+ Years" label="Experience" />
+            <HeroStat icon={<AccessTimeIcon />} value="Mon–Sat" label="Open 6 Days" />
+          </Box>
+        </Container>
       </Box>
 
       {/* ═══ 2 · ABOUT — doctor photo + intro (reference) ═══ */}
@@ -688,15 +698,32 @@ export default function Home() {
 
 function HeroStat({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
-    <Stack direction="row" spacing={1.25} alignItems="center" justifyContent="center">
-      <Box sx={{ color: '#fff', display: 'grid', placeItems: 'center', '& svg': { fontSize: { xs: 20, md: 24 } } }}>
+    <Stack
+      direction={{ xs: 'column', md: 'row' }}
+      spacing={{ xs: 0.5, md: 1.5 }}
+      alignItems="center"
+      justifyContent="center"
+      sx={{ px: 1, textAlign: { xs: 'center', md: 'left' } }}
+    >
+      <Box
+        sx={{
+          width: { xs: 34, md: 44 },
+          height: { xs: 34, md: 44 },
+          borderRadius: '12px',
+          bgcolor: brand.cloud,
+          color: brand.primary,
+          display: 'grid',
+          placeItems: 'center',
+          '& svg': { fontSize: { xs: 19, md: 24 } },
+        }}
+      >
         {icon}
       </Box>
       <Box sx={{ minWidth: 0 }}>
-        <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: 13.5, md: 16 }, lineHeight: 1.2, whiteSpace: 'nowrap' }}>
+        <Typography sx={{ color: brand.ink, fontWeight: 800, fontSize: { xs: 14.5, md: 17 }, lineHeight: 1.2, whiteSpace: 'nowrap' }}>
           {value}
         </Typography>
-        <Typography sx={{ color: 'rgba(255,255,255,0.8)', fontSize: { xs: 10.5, md: 12.5 }, fontWeight: 600, lineHeight: 1.25 }}>
+        <Typography sx={{ color: brand.slate, fontSize: { xs: 11.5, md: 13 }, fontWeight: 600, lineHeight: 1.3, whiteSpace: 'nowrap' }}>
           {label}
         </Typography>
       </Box>

@@ -12,6 +12,14 @@ export function FloatingActions() {
   const location = useLocation();
   const [showTop, setShowTop] = useState(false);
   const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 400 });
+  // On the homepage, keep the first screen (hero) clean — the bubble appears
+  // together with the booking pill once the visitor scrolls past it.
+  const isHome = location.pathname === '/';
+  const pastHero = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: typeof window !== 'undefined' ? Math.round(window.innerHeight * 0.75) : 600,
+  });
+  const showChat = !isHome || pastHero;
 
   useEffect(() => setShowTop(scrolled), [scrolled]);
 
@@ -23,7 +31,7 @@ export function FloatingActions() {
         position: 'fixed',
         right: { xs: 14, md: 24 },
         // Clear the mobile booking bar (~56px + safe area) on phones.
-        bottom: { xs: 'calc(62px + env(safe-area-inset-bottom))', md: 28 },
+        bottom: { xs: 'calc(17px + env(safe-area-inset-bottom))', md: 28 },
         zIndex: 1250,
         display: 'flex',
         flexDirection: 'column',
@@ -42,6 +50,7 @@ export function FloatingActions() {
         </Fab>
       </Zoom>
 
+      <Zoom in={showChat}>
       <Tooltip title="Chat on WhatsApp" placement="left" arrow>
         <Fab
           component="a"
@@ -61,6 +70,7 @@ export function FloatingActions() {
           <WhatsAppIcon />
         </Fab>
       </Tooltip>
+      </Zoom>
     </Box>
   );
 }
