@@ -29,6 +29,10 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Invented "10K+ Happy Patients" stat removed
+- The About-page stat tile now shows the verifiable **5.0★ Google Rating**
+  instead of the mockup's made-up patient count (owner request).
+
 ### REAL Google reviews replace all fake testimonials 🎉
 - The clinic now has a Google Business listing ("Dr Afaque's Bright Smile
   Dental Clinic And Implant Centre", **5.0★, 32 reviews**). Pulled the five

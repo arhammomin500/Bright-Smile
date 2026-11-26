@@ -2,7 +2,7 @@ import { Box, Card, Container, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -14,7 +14,7 @@ import { usePageMeta } from '@/lib/usePageMeta';
 // Stats supplied by the client's approved reference design.
 const STATS = [
   { icon: <WorkspacePremiumOutlinedIcon />, value: '5+', label: 'Years of Experience' },
-  { icon: <PeopleAltOutlinedIcon />, value: '10K+', label: 'Happy Patients' },
+  { icon: <StarRoundedIcon />, value: '5.0★', label: 'Google Rating' },
   { icon: <HealthAndSafetyOutlinedIcon />, value: '100%', label: 'Safe & Hygienic' },
   { icon: <BiotechOutlinedIcon />, value: 'Modern', label: 'Technology' },
 ];
