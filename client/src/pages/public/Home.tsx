@@ -58,7 +58,7 @@ const ABOUT_FEATURES = [
   { icon: <ToothMark />, title: 'Advanced Technology', sub: 'For accurate & comfortable treatment' },
   { icon: <PersonOutlineOutlinedIcon />, title: 'Personalized Care', sub: 'Every smile is unique' },
   { icon: <VerifiedUserOutlinedIcon />, title: 'Safe & Hygienic', sub: 'Clean, modern clinic' },
-  { icon: <StarRoundedIcon />, title: 'Trusted by Many', sub: 'Thousands of happy smiles' },
+  { icon: <StarRoundedIcon />, title: '5.0★ on Google', sub: 'Rated by our patients' },
 ];
 
 // Featured services (slugs match data/treatments.ts) with short taglines

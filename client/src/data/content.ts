@@ -3,14 +3,54 @@ import type {Testimonial, Faq, GalleryItem, TeamMember } from '@/lib/types';
 
 // PLACEHOLDER reviews — replace with real patient reviews before public launch.
 export const TESTIMONIALS: Testimonial[] = [
-  // PLACEHOLDER reviews (names/text from the client's approved mockup) —
-  // replace with real, consented patient reviews before promotion.
-  { id: 1, patientName: 'Emily Richardson', avatarUrl: '/images/avatar-5.jpg', location: 'New York, USA', rating: 5, content: 'I was terrified of getting an implant, but Dr. Khan and the team made it completely painless. The clinic feels like a retreat and everyone is so kind. My new tooth looks and feels totally natural!', treatment: 'Dental Implants' },
-  { id: 2, patientName: 'Marcus Lee', avatarUrl: '/images/avatar-12.jpg', location: 'Toronto, Canada', rating: 5, content: 'Six months with invisible aligners and my smile is completely transformed. Dr. Khan showed me a 3D preview on day one and the result matched it perfectly. Worth every penny.', treatment: 'Clear Aligners' },
-  { id: 3, patientName: 'Priya Sharma', avatarUrl: '/images/avatar-47.jpg', location: 'London, UK', rating: 5, content: 'Professional, gentle, and thorough. I actually look forward to my cleanings now. Everything was explained clearly and my teeth have never felt cleaner.', treatment: 'Dental Cleaning' },
-  { id: 4, patientName: 'David Thompson', avatarUrl: '/images/avatar-15.jpg', location: 'Sydney, Australia', rating: 5, content: 'Cracked a tooth on a Saturday night and they saw me within the hour. Calm, quick, and completely professional. This is how healthcare should feel.', treatment: 'Emergency Care' },
-  { id: 5, patientName: 'Sofia Martinez', avatarUrl: '/images/avatar-32.jpg', location: 'Madrid, Spain', rating: 5, content: 'Dr. Khan is magical with children. My two little ones now ask when their next visit is! The gentle approach makes all the difference.', treatment: 'Pediatric Dentistry' },
-  { id: 6, patientName: 'Robert Kim', avatarUrl: '/images/avatar-59.jpg', location: 'Los Angeles, USA', rating: 5, content: 'The full smile makeover was a life-changing experience. From consultation to the final reveal, every step was meticulously planned. I cannot stop smiling in photos now.', treatment: 'Smile Makeover' },
+  // REAL patient reviews from the clinic's Google Business listing
+  // ("Dr Afaque's Bright Smile Dental Clinic And Implant Centre", 5.0 stars,
+  // 32 reviews — pulled 26 Nov 2026). Wording as posted by the reviewers.
+  {
+    id: 1,
+    patientName: 'Asad Ansari',
+    rating: 5,
+    content:
+      'The doctor is very humble and friendly. I really appreciate the way everything was explained before starting the treatment. The overall experience was smooth and comfortable. Definitely a good place for dental treatment.',
+    location: 'Google review',
+    source: 'Google',
+  },
+  {
+    id: 2,
+    patientName: 'Mohammed Narvel',
+    rating: 5,
+    content:
+      'I had a wonderful experience with the dentist. They were very professional, friendly, and caring throughout the treatment. They explained everything clearly, made me feel comfortable, and ensured that I was well taken care of. The clinic was clean and well-maintained, and the staff was also very helpful. Very satisfied with the service. Highly recommended!',
+    location: 'Google review',
+    source: 'Google',
+  },
+  {
+    id: 3,
+    patientName: 'Momin Tamsil',
+    rating: 5,
+    content:
+      'Had a very good experience with the doctor. Very humble, patient, and professional. The doctor listens to your concerns carefully and makes you feel comfortable throughout the treatment. Really appreciate the care and service.',
+    location: 'Google review',
+    source: 'Google',
+  },
+  {
+    id: 4,
+    patientName: 'Anjum Ansari',
+    rating: 5,
+    content: 'Dr Afaque has done my filling very perfect. Must visit this clinic — great experience.',
+    treatment: 'Tooth Filling',
+    location: 'Google review',
+    source: 'Google',
+  },
+  {
+    id: 5,
+    patientName: 'Faiz Ansari',
+    rating: 5,
+    content: 'Best dental clinic. Cleaning top level 🙏',
+    treatment: 'Teeth Cleaning',
+    location: 'Google review',
+    source: 'Google',
+  },
 ];
 
 
@@ -119,33 +159,4 @@ export const GALLERY: GalleryItem[] = [
 
 
 
-export const TEAM: TeamMember[] = [
-  {
-    id: 1,
-    name: 'Grace Whitfield',
-    role: 'Clinic Manager',
-    photoUrl: '/images/avatar-41.jpg',
-    bio: 'Grace keeps Bright Smile running seamlessly, ensuring every patient feels welcomed and cared for from the moment they walk in.',
-  },
-  {
-    id: 2,
-    name: 'Leo Martinez',
-    role: 'Lead Dental Hygienist',
-    photoUrl: '/images/avatar-51.jpg',
-    bio: 'Leo is our preventive-care expert, helping patients maintain healthy gums and bright smiles between visits.',
-  },
-  {
-    id: 3,
-    name: 'Hannah Cole',
-    role: 'Patient Coordinator',
-    photoUrl: '/images/avatar-24.jpg',
-    bio: 'Hannah guides patients through treatment plans, insurance, and scheduling with warmth and clarity.',
-  },
-  {
-    id: 4,
-    name: 'Omar Farouk',
-    role: 'Sterilisation & Safety Lead',
-    photoUrl: '/images/avatar-60.jpg',
-    bio: 'Omar ensures our clinic meets the highest standards of hygiene and safety, so you can relax with total peace of mind.',
-  },
-];
+// (Fake "team" placeholder data removed 26 Nov 2026 — single-doctor clinic.)

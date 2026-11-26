@@ -6,6 +6,25 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-11-26
+
+### REAL Google reviews replace all fake testimonials 🎉
+- The clinic now has a Google Business listing ("Dr Afaque's Bright Smile
+  Dental Clinic And Implant Centre", **5.0★, 32 reviews**). Pulled the five
+  full-text five-star reviews visible without sign-in (Asad Ansari, Mohammed
+  Narvel, Momin Tamsil, Anjum Ansari, Faiz Ansari) and replaced ALL invented
+  testimonials with them, labelled "Google review"; stock avatar photos
+  deleted; dead fake TEAM data removed.
+- Reviews page now shows the real 5.0 · 32-review badge, "See all on Google"
+  and "Review Us on Google" buttons; homepage review section shows the real
+  rating line; the About feature "Thousands of happy smiles" became
+  "5.0★ on Google — rated by our patients" (verifiable).
+- Map links now point to the clinic's exact Google listing
+  (maps.google.com/?cid=…) instead of an address text search.
+- Clinic PHOTOS on the Google listing are still pending — Google hides the
+  photo gallery behind sign-in for automated/limited sessions, so the owner's
+  photos must come via chat/Chrome (see session notes).
+
 ## 2026-10-21
 
 ### Real email; memberships and prices removed (owner decisions)

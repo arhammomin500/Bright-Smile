@@ -28,7 +28,7 @@ const CHANNELS = [
   { icon: <CallIcon />, title: CLINIC.phone, sub: 'Call us for immediate assistance', href: CLINIC.phoneHref },
   { icon: <WhatsAppIcon />, title: 'Chat on WhatsApp', sub: 'Quick & easy booking', href: whatsappLink(), green: true },
   { icon: <EmailOutlinedIcon />, title: CLINIC.email, sub: 'We reply within 24 hours', href: `mailto:${CLINIC.email}` },
-  { icon: <PlaceIcon />, title: CLINIC.addressShort, sub: 'Visit us at our clinic', href: `https://www.google.com/maps?q=${encodeURIComponent(CLINIC.mapQuery)}` },
+  { icon: <PlaceIcon />, title: CLINIC.addressShort, sub: 'Visit us at our clinic', href: CLINIC.mapsUrl },
 ];
 
 export default function Contact() {
@@ -168,7 +168,7 @@ export default function Contact() {
                   <Button
                     startIcon={<MapOutlinedIcon />}
                     component="a"
-                    href={`https://www.google.com/maps?q=${encodeURIComponent(CLINIC.mapQuery)}`}
+                    href={CLINIC.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{ borderRadius: 0, py: 1.25 }}

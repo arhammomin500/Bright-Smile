@@ -170,7 +170,12 @@ export function TestimonialsSection() {
           <Reveal>
             <Eyebrow>PATIENT REVIEWS</Eyebrow>
             <Heading>Real Stories. Real Smiles.</Heading>
-            <Rating value={featured.rating} readOnly size="small" sx={{ mb: 1.5 }} />
+            <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+              <Rating value={featured.rating} readOnly size="small" />
+              <Typography variant="caption" sx={{ color: brand.slate, fontWeight: 700 }}>
+                {CLINIC.googleRating}★ on Google · {CLINIC.googleReviewCount} reviews
+              </Typography>
+            </Stack>
             <Typography sx={{ color: 'text.secondary', fontStyle: 'italic', mb: 2.5, maxWidth: 520 }}>
               "{featured.content}"
             </Typography>
@@ -181,7 +186,7 @@ export function TestimonialsSection() {
                   {featured.patientName}
                 </Typography>
                 <Typography variant="caption" color="text.secondary" noWrap sx={{ display: 'block' }}>
-                  {featured.location} · {featured.treatment}
+                  {[featured.treatment, featured.location].filter(Boolean).join(' · ')}
                 </Typography>
               </Box>
             </Stack>
@@ -259,7 +264,7 @@ export function ContactStrip() {
   const items = [
     { icon: <CallIcon />, title: CLINIC.phone, sub: 'Call or WhatsApp us', href: CLINIC.phoneHref },
     { icon: <AccessTimeIcon />, title: 'Mon–Sat', sub: '10 AM – 2:30 PM & 6 – 10:30 PM · Sun by appointment' },
-    { icon: <PlaceIcon />, title: CLINIC.addressShort, sub: 'Easy to reach, parking nearby', href: `https://www.google.com/maps?q=${encodeURIComponent(CLINIC.mapQuery)}` },
+    { icon: <PlaceIcon />, title: CLINIC.addressShort, sub: 'Easy to reach, parking nearby', href: CLINIC.mapsUrl },
   ];
   return (
     <Container sx={{ py: { xs: 5, md: 7 } }}>

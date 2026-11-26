@@ -4,7 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { brand, softShadow, hoverShadow } from '@/theme/theme';
 import { IMG } from '@/data/images';
 import { useTestimonials } from '@/lib/queries';
-import { whatsappLink } from '@/lib/clinic';
+import { CLINIC, whatsappLink } from '@/lib/clinic';
 import { Reveal } from '@/components/ui/Reveal';
 import { usePageMeta } from '@/lib/usePageMeta';
 
@@ -28,15 +28,35 @@ export default function Reviews() {
               <Typography component="h1" sx={{ fontWeight: 800, letterSpacing: '-0.025em', fontSize: { xs: '1.9rem', md: '2.6rem' }, lineHeight: 1.18, color: 'text.primary', mb: 1.5 }}>
                 Real Stories. Real Smiles.
               </Typography>
-              <Typography sx={{ color: 'text.secondary', maxWidth: 520 }}>
+              <Typography sx={{ color: 'text.secondary', maxWidth: 520, mb: 2 }}>
                 We are grateful for the trust our patients place in us. Here are some of their
-                experiences at BrightSmile.
+                experiences at BrightSmile, straight from our Google reviews.
               </Typography>
+              <Stack direction="row" spacing={1.25} alignItems="center" flexWrap="wrap" useFlexGap>
+                <Stack direction="row" spacing={0.75} alignItems="center" sx={{ bgcolor: '#fff', border: `1px solid ${brand.line}`, borderRadius: 999, px: 1.75, py: 0.6 }}>
+                  <Rating value={5} readOnly size="small" />
+                  <Typography sx={{ fontWeight: 800, fontSize: 14 }}>{CLINIC.googleRating}</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    · {CLINIC.googleReviewCount} Google reviews
+                  </Typography>
+                </Stack>
+                <Button
+                  size="small"
+                  variant="text"
+                  component="a"
+                  href={CLINIC.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ fontWeight: 700 }}
+                >
+                  See all on Google
+                </Button>
+              </Stack>
             </Grid>
             <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
                 component="img"
-                src={IMG.smile}
+                src={IMG.happyPatient}
                 alt="A bright, healthy smile"
                 sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: '16px', boxShadow: softShadow, display: 'block' }}
               />
@@ -64,7 +84,7 @@ export default function Reviews() {
                           {t.patientName}
                         </Typography>
                         <Typography variant="caption" color="text.secondary" noWrap sx={{ display: 'block' }}>
-                          {t.location} · {t.treatment}
+                          {[t.treatment, t.location].filter(Boolean).join(' · ')}
                         </Typography>
                       </Box>
                     </Stack>
@@ -76,17 +96,29 @@ export default function Reviews() {
         </Grid>
 
         <Stack alignItems="center" sx={{ mt: { xs: 4, md: 5 } }}>
-          <Button
-            variant="outlined"
-            size="large"
-            endIcon={<ArrowForwardIcon />}
-            component="a"
-            href={whatsappLink('Hi Bright Smile 👋 I would love to share my experience / read more patient stories.')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Share Your Story
-          </Button>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
+            <Button
+              variant="contained"
+              size="large"
+              endIcon={<ArrowForwardIcon />}
+              component="a"
+              href={CLINIC.writeReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Review Us on Google
+            </Button>
+            <Button
+              variant="outlined"
+              size="large"
+              component="a"
+              href={whatsappLink('Hi Bright Smile 👋 I would love to share my experience.')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Share on WhatsApp
+            </Button>
+          </Stack>
         </Stack>
       </Container>
     </Box>

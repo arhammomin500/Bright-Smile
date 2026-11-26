@@ -12,6 +12,11 @@ export const CLINIC = {
   address: 'A-Wing, Kuwari Residency, Shop No. G-2, Beside Alexis Hospital, Millat Nagar, Bhiwandi, Maharashtra 421302',
   addressShort: 'Millat Nagar, Bhiwandi',
   mapQuery: 'Kuwari Residency, Beside Alexis Hospital, Millat Nagar, Bhiwandi, Maharashtra 421302',
+  // The clinic's Google Business listing (verified 26 Nov 2026).
+  mapsUrl: 'https://maps.google.com/?cid=13779343778781843818',
+  writeReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJaz84nBK95zsRatFHJCkQOr8',
+  googleRating: '5.0',
+  googleReviewCount: 32,
   hours: [
     { day: 'Mon – Sat (Morning)', time: '10:00 AM – 2:30 PM' },
     { day: 'Mon – Sat (Evening)', time: '6:00 PM – 10:30 PM' },
