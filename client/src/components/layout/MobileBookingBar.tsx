@@ -1,41 +1,40 @@
-import { Box, Button } from '@mui/material';
+import { ButtonBase, Typography } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link, useLocation } from 'react-router-dom';
+import { brand } from '@/theme/theme';
 
-// Fixed bottom "Book Appointment" action on phones (hidden on the booking
-// page itself and on larger screens). Respects the mobile safe area.
+// Fixed bottom booking bar on phones — flat, flush, solid blue, like the
+// owner's reference site. Hidden on the booking page and larger screens.
 export function MobileBookingBar() {
   const location = useLocation();
   if (location.pathname.startsWith('/book-appointment')) return null;
 
   return (
-    <Box
+    <ButtonBase
+      component={Link}
+      to="/book-appointment"
       sx={{
         position: 'fixed',
         left: 0,
         right: 0,
         bottom: 0,
         zIndex: 1200,
-        display: { xs: 'block', md: 'none' },
-        bgcolor: 'rgba(255,255,255,0.97)',
-        backdropFilter: 'blur(10px)',
-        borderTop: '1px solid #DFE8F7',
-        px: 2,
-        pt: 0.75,
-        pb: 'calc(6px + env(safe-area-inset-bottom))',
-        boxShadow: '0 -6px 20px rgba(16,33,61,0.1)',
+        display: { xs: 'flex', md: 'none' },
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1,
+        bgcolor: brand.primary,
+        color: '#fff',
+        pt: 1.4,
+        pb: 'calc(11px + env(safe-area-inset-bottom))',
+        boxShadow: '0 -6px 20px rgba(16,33,61,0.18)',
+        '&:active': { bgcolor: brand.primaryDark },
       }}
     >
-      <Button
-        component={Link}
-        to="/book-appointment"
-        variant="contained"
-        fullWidth
-        startIcon={<CalendarMonthIcon />}
-        sx={{ py: 1, fontSize: '0.95rem' }}
-      >
-        Book Appointment
-      </Button>
-    </Box>
+      <CalendarMonthIcon sx={{ fontSize: 19 }} />
+      <Typography sx={{ fontWeight: 800, fontSize: 15, letterSpacing: '0.01em' }}>
+        Book Your Appointment
+      </Typography>
+    </ButtonBase>
   );
 }

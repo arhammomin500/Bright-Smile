@@ -265,15 +265,15 @@ export default function Home() {
         </Container>
 
         {/* Bottom glass stat strip (fills the lower hero space) */}
-        <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: { xs: 86, md: 26 } }}>
+        <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: { xs: 70, md: 26 } }}>
           <Container>
             <Box
               sx={{
                 display: 'grid',
                 gridTemplateColumns: { xs: '1fr 0.9fr 1.25fr', md: 'repeat(3, 1fr)' },
                 gap: { xs: 0.75, md: 2 },
-                bgcolor: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.25)',
+                bgcolor: 'rgba(10,27,51,0.5)',
+                border: '1px solid rgba(255,255,255,0.16)',
                 backdropFilter: 'blur(8px)',
                 borderRadius: '18px',
                 pl: { xs: 1.5, md: 3 },

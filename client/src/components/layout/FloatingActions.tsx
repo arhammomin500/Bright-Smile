@@ -23,7 +23,7 @@ export function FloatingActions() {
         position: 'fixed',
         right: { xs: 14, md: 24 },
         // Clear the mobile booking bar (~56px + safe area) on phones.
-        bottom: { xs: 'calc(66px + env(safe-area-inset-bottom))', md: 28 },
+        bottom: { xs: 'calc(62px + env(safe-area-inset-bottom))', md: 28 },
         zIndex: 1250,
         display: 'flex',
         flexDirection: 'column',

@@ -29,6 +29,13 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Sticky booking bar restyled to the reference; hero strip refined
+- The mobile sticky bar is now a flat, flush, full-width solid blue bar
+  ("Book Your Appointment", like the reference site) instead of a floating
+  white pill container; WhatsApp bubble offset adjusted to sit above it.
+- Hero stat strip switched to navy glass for better contrast and nudged to
+  fit the slimmer bar.
+
 ### Hero filled out; review count removed (owner feedback)
 - Bigger headline, content sits upper-centre, and a frosted stat strip now
   fills the bottom of the full-screen hero: 5.0★ Google Rating · 12
