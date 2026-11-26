@@ -160,7 +160,7 @@ export default function Home() {
           height: { xs: 'calc(100svh - 62px)', md: 'calc(100svh - 72px)' },
           minHeight: { xs: 520, md: 560 },
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           overflow: 'hidden',
         }}
       >
@@ -180,10 +180,10 @@ export default function Home() {
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(10,27,51,0.5) 0%, rgba(10,27,51,0.56) 45%, rgba(10,27,51,0.88) 100%)',
+            background: 'linear-gradient(180deg, rgba(10,27,51,0.58) 0%, rgba(10,27,51,0.6) 50%, rgba(10,27,51,0.78) 100%)',
           }}
         />
-        <Container sx={{ position: 'relative', pb: { xs: '118px', md: 10 } }}>
+        <Container sx={{ position: 'relative', pt: { xs: 2, md: 0 }, pb: { xs: '72px', md: 4 } }}>
           <Reveal>
             <Box
               sx={{

@@ -29,6 +29,10 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Hero text vertically centered (owner feedback)
+- Hero content moved up from the bottom edge to the vertical center of the
+  full-screen video, with a slightly more even dark overlay.
+
 ### Hero polished to a professional layout (owner feedback)
 - Stronger dark overlay for contrast over the bright video; glass
   "Trusted Dental Care in Bhiwandi" chip; subtitle with the doctor's
