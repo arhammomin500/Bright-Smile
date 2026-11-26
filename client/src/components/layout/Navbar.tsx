@@ -13,21 +13,16 @@ import {
   Toolbar,
   useScrollTrigger,
   Divider,
-  Typography,
-  Link as MuiLink,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import CallIcon from '@mui/icons-material/Call';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Logo } from './Logo';
 import { CLINIC } from '@/lib/clinic';
 import { brand } from '@/theme/theme';
 
-// Reference header: light info bar (email · phone · socials) on top of a
-// white navbar with pill CTA + rounded-square hamburger.
+// White navbar with pill CTA + rounded-square hamburger (owner: no info bar).
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
@@ -37,50 +32,6 @@ const NAV_LINKS = [
   { label: 'Reviews', to: '/reviews' },
   { label: 'Contact', to: '/contact' },
 ];
-
-function TopBar() {
-  return (
-    <Box sx={{ bgcolor: brand.cloud, borderBottom: `1px solid ${brand.line}` }}>
-      <Container>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent={{ xs: 'center', md: 'space-between' }}
-          spacing={2}
-          sx={{ minHeight: 34 }}
-        >
-          <Stack direction="row" spacing={{ xs: 2, md: 3 }} alignItems="center">
-            <MuiLink
-              href={`mailto:${CLINIC.email}`}
-              underline="none"
-              sx={{ display: { xs: 'none', sm: 'inline-flex' }, alignItems: 'center', gap: 0.6 }}
-            >
-              <EmailOutlinedIcon sx={{ fontSize: 15, color: brand.primary }} />
-              <Typography sx={{ fontSize: 12.5, fontWeight: 700, color: brand.primary }}>
-                {CLINIC.email}
-              </Typography>
-            </MuiLink>
-            <MuiLink href={CLINIC.phoneHref} underline="none" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.6 }}>
-              <CallIcon sx={{ fontSize: 15, color: brand.primary }} />
-              <Typography sx={{ fontSize: 12.5, fontWeight: 700, color: brand.primary }}>
-                {CLINIC.phone}
-              </Typography>
-            </MuiLink>
-          </Stack>
-          <MuiLink
-            href={CLINIC.socials.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            sx={{ display: 'inline-flex', alignItems: 'center', color: brand.primary }}
-          >
-            <InstagramIcon sx={{ fontSize: 17 }} />
-          </MuiLink>
-        </Stack>
-      </Container>
-    </Box>
-  );
-}
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -99,7 +50,6 @@ export function Navbar() {
           transition: 'border-color .3s ease',
         }}
       >
-        <TopBar />
         <Container>
           <Toolbar disableGutters sx={{ minHeight: { xs: 62, md: 72 }, gap: 1.5 }}>
             <Logo />

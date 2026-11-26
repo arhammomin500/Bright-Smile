@@ -35,7 +35,7 @@ export default function Dentist() {
   return (
     <Box>
       {/* ── Navy hero ── */}
-      <Box sx={{ bgcolor: NAVY, pt: { xs: '120px', md: '150px' }, pb: { xs: 0, md: 0 }, overflow: 'hidden' }}>
+      <Box sx={{ bgcolor: NAVY, pt: { xs: '86px', md: '116px' }, pb: { xs: 0, md: 0 }, overflow: 'hidden' }}>
         <Container>
           <Grid container spacing={{ xs: 3, md: 6 }} alignItems="flex-end">
             <Grid size={{ xs: 12, md: 7 }} sx={{ pb: { xs: 4, md: 7 } }}>

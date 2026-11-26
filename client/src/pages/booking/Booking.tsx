@@ -106,7 +106,7 @@ export default function Booking() {
 
   return (
     <Box sx={{ bgcolor: brand.mist, minHeight: '100vh' }}>
-      <Container sx={{ pt: { xs: '120px', md: '150px' }, pb: { xs: 6, md: 9 } }}>
+      <Container sx={{ pt: { xs: '86px', md: '116px' }, pb: { xs: 6, md: 9 } }}>
         <Grid container spacing={{ xs: 3, md: 4 }} alignItems="stretch">
           {/* ── Left: photo + reassurance ── */}
           <Grid size={{ xs: 12, md: 5 }}>

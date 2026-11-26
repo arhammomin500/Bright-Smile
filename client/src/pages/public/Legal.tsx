@@ -6,7 +6,7 @@ import { usePageMeta } from '@/lib/usePageMeta';
 function LegalShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <Box>
-      <Box sx={{ bgcolor: brand.mist, pt: { xs: '120px', md: '150px' }, pb: 4, borderBottom: `1px solid ${brand.line}` }}>
+      <Box sx={{ bgcolor: brand.mist, pt: { xs: '86px', md: '116px' }, pb: 4, borderBottom: `1px solid ${brand.line}` }}>
         <Container>
           <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '1.8rem', md: '2.3rem' }, color: 'text.primary' }}>
             {title}

@@ -29,6 +29,14 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Full-screen video hero; info bar removed (owner feedback)
+- The email/phone/Instagram strip above the navbar is gone; page top-offsets
+  reverted to the plain-navbar values.
+- The homepage hero now fills the entire phone screen (100svh minus the
+  navbar) with a looping, muted dental-room video (restored from git
+  history; decorative backdrop only, no "clinic tour" claim) under a dark
+  gradient — the doctor/About section starts right after the first scroll.
+
 ### Complete redesign to the owner's new reference site (dentech.co.in), in brand blue
 - The owner supplied https://dentech.co.in/ as the new design reference:
   same layout, our existing blue palette instead of its green/cyan.

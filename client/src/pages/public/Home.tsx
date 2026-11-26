@@ -152,20 +152,38 @@ export default function Home() {
 
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      {/* ═══ 1 · HERO — full-bleed clinic photo, big headline (reference) ═══ */}
+      {/* ═══ 1 · HERO — full-screen looping video, big headline (reference) ═══ */}
       <Box
         sx={{
           position: 'relative',
-          mt: { xs: '96px', md: '106px' },
-          minHeight: { xs: 520, md: 580 },
+          mt: { xs: '62px', md: '72px' },
+          height: { xs: 'calc(100svh - 62px)', md: 'calc(100svh - 72px)' },
+          minHeight: { xs: 520, md: 560 },
           display: 'flex',
           alignItems: 'flex-end',
-          backgroundImage: `linear-gradient(180deg, rgba(10,27,51,0.45) 0%, rgba(10,27,51,0.72) 100%), url(${IMG.clinicTreatmentRoom})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 62%',
+          overflow: 'hidden',
         }}
       >
-        <Container sx={{ pb: { xs: 7, md: 9 }, pt: 8 }}>
+        <Box
+          component="video"
+          src="/videos/hero-clinic.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={IMG.clinicTreatmentRoom}
+          aria-hidden="true"
+          sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(10,27,51,0.3) 0%, rgba(10,27,51,0.45) 55%, rgba(10,27,51,0.8) 100%)',
+          }}
+        />
+        <Container sx={{ position: 'relative', pb: { xs: 9, md: 10 } }}>
           <Reveal>
             <Typography
               component="h1"
