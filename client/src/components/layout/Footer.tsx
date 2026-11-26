@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Typography, IconButton, Divider, Link as MuiLink } from '@mui/material';
+import { Box, Button, Container, Stack, Typography, IconButton, Divider, Link as MuiLink } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { Link } from 'react-router-dom';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -8,9 +8,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Logo } from './Logo';
 import { CLINIC } from '@/lib/clinic';
-
-// Dark navy footer, per the client's reference design.
-const NAVY = '#10213D';
+import { gradients } from '@/theme/theme';
 
 const quickLinks = [
   { label: 'Home', to: '/' },
@@ -34,7 +32,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <Box component="footer" sx={{ bgcolor: NAVY, color: 'rgba(255,255,255,0.75)', mt: 'auto' }}>
+    <Box component="footer" sx={{ background: gradients.sky, color: 'rgba(255,255,255,0.85)', mt: 'auto' }}>
       <Container sx={{ pt: { xs: 5, md: 7 }, pb: 3 }}>
         <Grid container spacing={{ xs: 4, md: 6 }}>
           <Grid size={{ xs: 12, md: 4 }}>
@@ -58,8 +56,8 @@ export function Footer() {
                   size="small"
                   sx={{
                     color: '#fff',
-                    bgcolor: 'rgba(255,255,255,0.1)',
-                    '&:hover': { bgcolor: '#216CF3' },
+                    bgcolor: 'rgba(255,255,255,0.14)',
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.3)' },
                   }}
                 >
                   {s.icon}
@@ -82,6 +80,23 @@ export function Footer() {
               <Row icon={<EmailOutlinedIcon sx={{ fontSize: 17 }} />} text={CLINIC.email} href={`mailto:${CLINIC.email}`} />
               <Row icon={<AccessTimeIcon sx={{ fontSize: 17 }} />} text="Mon–Sat: 10 AM – 2:30 PM & 6 – 10:30 PM · Sun: by appointment" />
               <Row icon={<PlaceIcon sx={{ fontSize: 17 }} />} text={CLINIC.address} />
+              <Button
+                component="a"
+                href={CLINIC.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="small"
+                sx={{
+                  alignSelf: 'flex-start',
+                  bgcolor: '#fff',
+                  color: 'primary.main',
+                  px: 2.25,
+                  fontWeight: 800,
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.88)' },
+                }}
+              >
+                Get Directions
+              </Button>
             </Stack>
           </Grid>
         </Grid>
@@ -129,7 +144,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; to
 function Row({ icon, text, href }: { icon: React.ReactNode; text: string; href?: string }) {
   const content = (
     <Stack direction="row" spacing={1.25} alignItems="flex-start">
-      <Box sx={{ color: '#5c9bff', mt: 0.25 }}>{icon}</Box>
+      <Box sx={{ color: 'rgba(255,255,255,0.95)', mt: 0.25 }}>{icon}</Box>
       <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.65)' }}>
         {text}
       </Typography>

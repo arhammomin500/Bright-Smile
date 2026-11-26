@@ -35,7 +35,7 @@ export default function About() {
   return (
     <Box>
       {/* ── Banner with overlay ── */}
-      <Box sx={{ position: 'relative', mt: { xs: '62px', md: '72px' }, overflow: 'hidden' }}>
+      <Box sx={{ position: 'relative', mt: { xs: '96px', md: '106px' }, overflow: 'hidden' }}>
         <Box
           component="img"
           src={IMG.clinicEntrance}

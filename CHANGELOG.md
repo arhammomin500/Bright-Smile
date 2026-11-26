@@ -29,6 +29,24 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Complete redesign to the owner's new reference site (dentech.co.in), in brand blue
+- The owner supplied https://dentech.co.in/ as the new design reference:
+  same layout, our existing blue palette instead of its green/cyan.
+- New fixed header: light info bar (email · phone · Instagram) above the
+  white navbar; mobile hamburger is now a rounded blue square; pill-shaped
+  buttons site-wide; all page top-offsets bumped for the taller header.
+- Homepage rebuilt in the reference's section order: full-bleed photo hero
+  ("Gentle Ways in Dental Care") over the real treatment-room photo → About
+  (doctor photo + blue heading + "Read More About Us" pill) → blue-gradient
+  Clinic Highlights with six glassy stat cards (all honest: 5.0★, 32+
+  reviews, 5+ yrs, 12 treatments, 6 days, 3 languages) → scrolling Google
+  reviews → all 12 services as minimal icon cards → "Visit Clinic" photo
+  banner → Unique Features around the tooth mark → FAQ → Google-Maps embed
+  with address card → honest "Appointment Request" card (date + published
+  time chips → WhatsApp handoff, with the confirmation disclaimer).
+- Footer restyled to the reference's blue gradient with a Get Directions
+  button. Old mockup-42 hero (doctor cutout + quick-pick card) retired.
+
 ### Reviews shown as a scrolling strip, photos removed from review sections
 - Homepage review section redesigned (owner request): no photo — a
   continuously auto-scrolling strip of all five Google reviews (pauses on

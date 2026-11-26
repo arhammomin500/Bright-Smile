@@ -21,6 +21,8 @@ export const brand = {
 // itself stays light — use `brand.mist`/`brand.cloud` tints there instead.
 export const gradients = {
   primary: `linear-gradient(135deg, ${brand.primary} 0%, ${brand.primaryDark} 100%)`,
+  // Rich blue band used by the highlights section + footer (reference design).
+  sky: 'linear-gradient(135deg, #1550C8 0%, #216CF3 48%, #4D93FF 100%)',
   hero: `linear-gradient(135deg, #1f6feb 0%, #0a4bc2 55%, #06b6d4 140%)`,
   soft: `linear-gradient(180deg, ${brand.mist} 0%, #ffffff 100%)`,
   glass: `linear-gradient(135deg, ${alpha('#ffffff', 0.92)} 0%, ${alpha('#ffffff', 0.7)} 100%)`,
@@ -80,8 +82,8 @@ const baseOptions: ThemeOptions = {
       defaultProps: { disableElevation: true },
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          paddingInline: 22,
+          borderRadius: 999,
+          paddingInline: 24,
           paddingBlock: 10,
           fontWeight: 700,
           transition: 'transform .18s ease, box-shadow .18s ease, background-color .18s ease',

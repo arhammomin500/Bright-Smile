@@ -61,7 +61,7 @@ export default function Contact() {
   return (
     <Box>
       {/* ── Page hero ── */}
-      <Box sx={{ bgcolor: brand.mist, pt: { xs: '86px', md: '116px' }, pb: { xs: 4, md: 6 }, borderBottom: `1px solid ${brand.line}` }}>
+      <Box sx={{ bgcolor: brand.mist, pt: { xs: '120px', md: '150px' }, pb: { xs: 4, md: 6 }, borderBottom: `1px solid ${brand.line}` }}>
         <Container>
           <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
             <Grid size={{ xs: 12, md: 7 }}>

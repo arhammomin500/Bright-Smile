@@ -40,9 +40,9 @@ function Eyebrow({ children }: { children: string }) {
     </Typography>
   );
 }
-function Heading({ children }: { children: string }) {
+function Heading({ children, sx }: { children: string; sx?: object }) {
   return (
-    <Typography component="h2" sx={{ fontWeight: 800, letterSpacing: '-0.02em', fontSize: { xs: '1.7rem', md: '2.1rem' }, color: 'text.primary', mb: 1.25 }}>
+    <Typography component="h2" sx={{ fontWeight: 800, letterSpacing: '-0.02em', fontSize: { xs: '1.7rem', md: '2.1rem' }, color: 'text.primary', mb: 1.25, ...sx }}>
       {children}
     </Typography>
   );
@@ -166,9 +166,12 @@ export function TestimonialsSection() {
   return (
     <Box sx={{ py: { xs: 6, md: 9 }, overflow: 'hidden' }}>
       <Container sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
-        <Eyebrow>PATIENT REVIEWS</Eyebrow>
-        <Heading>Real Stories. Real Smiles.</Heading>
-        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 1 }}>
+        <Eyebrow>TESTIMONIALS</Eyebrow>
+        <Heading sx={{ color: brand.primary }}>Real Stories From Our Patients</Heading>
+        <Typography sx={{ color: 'text.secondary', maxWidth: 560, mx: 'auto', mt: 1.25 }}>
+          Hear directly from patients who trusted Bright Smile for comfortable, expert dental care.
+        </Typography>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 1.5 }}>
           <Rating value={5} readOnly size="small" />
           <Typography variant="caption" sx={{ color: brand.slate, fontWeight: 700 }}>
             {CLINIC.googleRating}★ on Google · {CLINIC.googleReviewCount} reviews
@@ -226,8 +229,18 @@ export function TestimonialsSection() {
         ))}
       </Box>
 
-      <Stack alignItems="center" sx={{ mt: { xs: 3.5, md: 4.5 } }}>
-        <Button component={Link} to="/reviews" variant="outlined" endIcon={<ArrowForwardIcon />}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems="center" justifyContent="center" sx={{ mt: { xs: 3.5, md: 4.5 } }}>
+        <Button
+          variant="contained"
+          component="a"
+          href={CLINIC.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          endIcon={<ArrowForwardIcon />}
+        >
+          See All Reviews on Google
+        </Button>
+        <Button component={Link} to="/reviews" variant="outlined">
           Read More Reviews
         </Button>
       </Stack>
