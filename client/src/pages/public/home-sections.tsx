@@ -158,80 +158,80 @@ export function DoctorSection() {
   );
 }
 
-// ── Patient reviews — featured review + photo (reference design) ────────
+// ── Patient reviews — auto-scrolling strip of Google reviews (no photos) ──
 export function TestimonialsSection() {
   const { data: testimonials } = useTestimonials();
-  const featured = (testimonials ?? [])[0];
-  if (!featured) return null;
+  const reviews = testimonials ?? [];
+  if (reviews.length === 0) return null;
   return (
-    <Container sx={{ py: { xs: 6, md: 9 } }}>
-      <Grid container spacing={{ xs: 4, md: 7 }} alignItems="center">
-        <Grid size={{ xs: 12, md: 6.5 }}>
-          <Reveal>
-            <Eyebrow>PATIENT REVIEWS</Eyebrow>
-            <Heading>Real Stories. Real Smiles.</Heading>
-            <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
-              <Rating value={featured.rating} readOnly size="small" />
-              <Typography variant="caption" sx={{ color: brand.slate, fontWeight: 700 }}>
-                {CLINIC.googleRating}★ on Google · {CLINIC.googleReviewCount} reviews
-              </Typography>
-            </Stack>
-            <Typography sx={{ color: 'text.secondary', fontStyle: 'italic', mb: 2.5, maxWidth: 520 }}>
-              "{featured.content}"
+    <Box sx={{ py: { xs: 6, md: 9 }, overflow: 'hidden' }}>
+      <Container sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
+        <Eyebrow>PATIENT REVIEWS</Eyebrow>
+        <Heading>Real Stories. Real Smiles.</Heading>
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 1 }}>
+          <Rating value={5} readOnly size="small" />
+          <Typography variant="caption" sx={{ color: brand.slate, fontWeight: 700 }}>
+            {CLINIC.googleRating}★ on Google · {CLINIC.googleReviewCount} reviews
+          </Typography>
+        </Stack>
+      </Container>
+
+      {/* Continuously scrolling review cards (pauses on hover/touch) */}
+      <Box
+        sx={{
+          display: 'flex',
+          width: 'max-content',
+          gap: { xs: 2, md: 2.5 },
+          pl: { xs: 2, md: 2.5 },
+          animation: 'reviews-marquee 45s linear infinite',
+          '&:hover': { animationPlayState: 'paused' },
+          '@keyframes reviews-marquee': {
+            from: { transform: 'translateX(0)' },
+            to: { transform: 'translateX(-50%)' },
+          },
+          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+        }}
+      >
+        {[...reviews, ...reviews].map((t, i) => (
+          <Card
+            key={`${t.id}-${i}`}
+            sx={{
+              width: { xs: 290, md: 340 },
+              flexShrink: 0,
+              p: 2.75,
+              display: 'flex',
+              flexDirection: 'column',
+              textAlign: 'left',
+            }}
+            aria-hidden={i >= reviews.length}
+          >
+            <Rating value={t.rating} readOnly size="small" sx={{ mb: 1.25 }} />
+            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2, flex: 1 }}>
+              "{t.content}"
             </Typography>
-            <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
-              <Avatar src={featured.avatarUrl ?? undefined} alt={featured.patientName} sx={{ width: 44, height: 44 }} />
+            <Stack direction="row" spacing={1.5} alignItems="center">
+              <Avatar alt={t.patientName} sx={{ width: 40, height: 40, bgcolor: brand.cloud, color: brand.primary, fontWeight: 800 }}>
+                {t.patientName.charAt(0)}
+              </Avatar>
               <Box sx={{ minWidth: 0 }}>
-                <Typography sx={{ fontWeight: 800, fontSize: 14.5 }} noWrap>
-                  {featured.patientName}
+                <Typography sx={{ fontWeight: 800, fontSize: 14 }} noWrap>
+                  {t.patientName}
                 </Typography>
                 <Typography variant="caption" color="text.secondary" noWrap sx={{ display: 'block' }}>
-                  {[featured.treatment, featured.location].filter(Boolean).join(' · ')}
+                  {[t.treatment, t.location].filter(Boolean).join(' · ')}
                 </Typography>
               </Box>
             </Stack>
-            <Button component={Link} to="/reviews" variant="outlined" endIcon={<ArrowForwardIcon />}>
-              Read More Reviews
-            </Button>
-          </Reveal>
-        </Grid>
-        <Grid size={{ xs: 12, md: 5.5 }}>
-          <Reveal delayIndex={1}>
-            <Box sx={{ position: 'relative', maxWidth: 440, mx: 'auto' }}>
-              <Box
-                component="img"
-                src={IMG.clinicDesk}
-                alt="The Bright Smile reception desk with the Review-us-on-Google stand"
-                sx={{
-                  width: '100%',
-                  aspectRatio: '1/1',
-                  objectFit: 'cover',
-                  borderRadius: '48% 52% 46% 54% / 58% 54% 46% 42%',
-                  border: `1px solid ${brand.line}`,
-                  display: 'block',
-                }}
-              />
-              <Typography
-                sx={{
-                  position: 'absolute',
-                  top: { xs: -6, md: 2 },
-                  right: { xs: 0, md: -10 },
-                  fontFamily: 'cursive',
-                  color: brand.primary,
-                  fontSize: { xs: 15, md: 17 },
-                  lineHeight: 1.3,
-                  transform: 'rotate(6deg)',
-                  textAlign: 'center',
-                  maxWidth: 140,
-                }}
-              >
-                Because you deserve a great smile
-              </Typography>
-            </Box>
-          </Reveal>
-        </Grid>
-      </Grid>
-    </Container>
+          </Card>
+        ))}
+      </Box>
+
+      <Stack alignItems="center" sx={{ mt: { xs: 3.5, md: 4.5 } }}>
+        <Button component={Link} to="/reviews" variant="outlined" endIcon={<ArrowForwardIcon />}>
+          Read More Reviews
+        </Button>
+      </Stack>
+    </Box>
   );
 }
 

@@ -1,8 +1,7 @@
 import { Box, Avatar, Button, Card, CardContent, Container, Rating, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { brand, softShadow, hoverShadow } from '@/theme/theme';
-import { IMG } from '@/data/images';
+import { brand, hoverShadow } from '@/theme/theme';
 import { useTestimonials } from '@/lib/queries';
 import { CLINIC, whatsappLink } from '@/lib/clinic';
 import { Reveal } from '@/components/ui/Reveal';
@@ -21,7 +20,7 @@ export default function Reviews() {
       <Box sx={{ bgcolor: brand.mist, pt: { xs: '86px', md: '116px' }, pb: { xs: 4, md: 6 }, borderBottom: `1px solid ${brand.line}` }}>
         <Container>
           <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
-            <Grid size={{ xs: 12, md: 7 }}>
+            <Grid size={{ xs: 12, md: 9 }}>
               <Typography sx={{ color: brand.primary, fontWeight: 700, letterSpacing: '0.2em', fontSize: 12.5, mb: 1 }}>
                 + PATIENT REVIEWS
               </Typography>
@@ -53,14 +52,6 @@ export default function Reviews() {
                 </Button>
               </Stack>
             </Grid>
-            <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
-              <Box
-                component="img"
-                src={IMG.realSmile}
-                alt="A healthy smile after treatment at Bright Smile"
-                sx={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', borderRadius: '16px', boxShadow: softShadow, display: 'block' }}
-              />
-            </Grid>
           </Grid>
         </Container>
       </Box>
@@ -78,7 +69,9 @@ export default function Reviews() {
                       "{t.content}"
                     </Typography>
                     <Stack direction="row" spacing={1.5} alignItems="center">
-                      <Avatar src={t.avatarUrl ?? undefined} alt={t.patientName} sx={{ width: 42, height: 42 }} />
+                      <Avatar alt={t.patientName} sx={{ width: 42, height: 42, bgcolor: brand.cloud, color: brand.primary, fontWeight: 800 }}>
+                        {t.patientName.charAt(0)}
+                      </Avatar>
                       <Box sx={{ minWidth: 0 }}>
                         <Typography sx={{ fontWeight: 700, fontSize: 14.5, lineHeight: 1.3 }} noWrap>
                           {t.patientName}

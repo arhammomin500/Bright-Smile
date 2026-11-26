@@ -29,6 +29,13 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Reviews shown as a scrolling strip, photos removed from review sections
+- Homepage review section redesigned (owner request): no photo — a
+  continuously auto-scrolling strip of all five Google reviews (pauses on
+  hover, respects reduced-motion), with the 5.0★ badge centered above.
+- Reviews page: hero photo removed (text-only hero, full width); grey empty
+  avatars replaced with branded initial letters.
+
 ### Invented "10K+ Happy Patients" stat removed
 - The About-page stat tile now shows the verifiable **5.0★ Google Rating**
   instead of the mockup's made-up patient count (owner request).
