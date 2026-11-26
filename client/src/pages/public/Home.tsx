@@ -180,11 +180,30 @@ export default function Home() {
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, rgba(10,27,51,0.3) 0%, rgba(10,27,51,0.45) 55%, rgba(10,27,51,0.8) 100%)',
+            background: 'linear-gradient(180deg, rgba(10,27,51,0.5) 0%, rgba(10,27,51,0.56) 45%, rgba(10,27,51,0.88) 100%)',
           }}
         />
-        <Container sx={{ position: 'relative', pb: { xs: 9, md: 10 } }}>
+        <Container sx={{ position: 'relative', pb: { xs: '118px', md: 10 } }}>
           <Reveal>
+            <Box
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 0.8,
+                bgcolor: 'rgba(255,255,255,0.14)',
+                border: '1px solid rgba(255,255,255,0.3)',
+                backdropFilter: 'blur(6px)',
+                borderRadius: 999,
+                px: 1.75,
+                py: 0.6,
+                mb: 2,
+              }}
+            >
+              <Box sx={{ color: '#7fd1ff', fontSize: 13, lineHeight: 1 }}>✦</Box>
+              <Typography sx={{ color: '#fff', fontWeight: 700, fontSize: 12.5, letterSpacing: '0.06em' }}>
+                Trusted Dental Care in Bhiwandi
+              </Typography>
+            </Box>
             <Typography
               component="h1"
               sx={{
@@ -192,14 +211,65 @@ export default function Home() {
                 fontWeight: 800,
                 letterSpacing: '-0.025em',
                 lineHeight: 1.08,
-                fontSize: { xs: '2.9rem', sm: '3.4rem', md: '4rem' },
+                fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.8rem' },
                 maxWidth: 640,
-                mb: 3.5,
+                mb: 1.75,
+                textShadow: '0 2px 18px rgba(10,27,51,0.45)',
               }}
             >
               Gentle Ways in Dental Care
             </Typography>
-            <PillButton label="Book Appointment" to="/book-appointment" />
+            <Typography
+              sx={{
+                color: 'rgba(255,255,255,0.88)',
+                fontSize: { xs: 15, md: 17 },
+                maxWidth: 460,
+                mb: 3,
+                lineHeight: 1.6,
+              }}
+            >
+              Modern, painless dentistry by Dr. Afaque Khan — Dental Surgeon &amp; Implantologist,
+              Millat Nagar, Bhiwandi.
+            </Typography>
+            <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mb: 2.25 }}>
+              <Button
+                component={Link}
+                to="/book-appointment"
+                variant="contained"
+                size="large"
+                endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 19 }} />}
+                sx={{ px: { xs: 2.25, md: 3.25 }, fontSize: { xs: 14.5, md: 16 }, whiteSpace: 'nowrap', boxShadow: '0 10px 26px rgba(10,27,51,0.4)' }}
+              >
+                Book Appointment
+              </Button>
+              <Button
+                component="a"
+                href={CLINIC.phoneHref}
+                size="large"
+                startIcon={<CallIcon sx={{ fontSize: 19 }} />}
+                sx={{
+                  color: '#fff',
+                  px: { xs: 2.25, md: 3 },
+                  fontSize: { xs: 14.5, md: 16 },
+                  whiteSpace: 'nowrap',
+                  bgcolor: 'rgba(255,255,255,0.12)',
+                  border: '1px solid rgba(255,255,255,0.45)',
+                  backdropFilter: 'blur(6px)',
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.22)' },
+                }}
+              >
+                Call Now
+              </Button>
+            </Stack>
+            <Stack direction="row" spacing={0.9} alignItems="center">
+              <StarRoundedIcon sx={{ color: '#FFC93C', fontSize: 19 }} />
+              <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: 14 }}>
+                {CLINIC.googleRating}
+              </Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.8)', fontSize: 13.5, fontWeight: 600 }}>
+                on Google · {CLINIC.googleReviewCount} patient reviews
+              </Typography>
+            </Stack>
           </Reveal>
         </Container>
       </Box>

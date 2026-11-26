@@ -29,6 +29,13 @@ Every code/content/config change must add an entry under the current date
 - Stock photos remain ONLY as generic illustrative images on treatment
   cards/booking — nothing stock is presented as the clinic itself anymore.
 
+### Hero polished to a professional layout (owner feedback)
+- Stronger dark overlay for contrast over the bright video; glass
+  "Trusted Dental Care in Bhiwandi" chip; subtitle with the doctor's
+  credentials; blue contained "Book Appointment" + glass "Call Now" side by
+  side; "★ 5.0 on Google · 32 patient reviews" trust line; clear gap above
+  the fixed bottom booking bar so buttons no longer stack.
+
 ### Full-screen video hero; info bar removed (owner feedback)
 - The email/phone/Instagram strip above the navbar is gone; page top-offsets
   reverted to the plain-navbar values.
