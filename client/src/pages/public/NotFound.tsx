@@ -11,7 +11,7 @@ export default function NotFound() {
         <Typography sx={{ fontSize: { xs: '6rem', md: '9rem' }, fontWeight: 900, lineHeight: 1, background: gradients.primary, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           404
         </Typography>
-        <Typography variant="h4" sx={{ mb: 1.5 }}>
+        <Typography variant="h4" component="h1" sx={{ mb: 1.5 }}>
           Page not found
         </Typography>
         <Typography color="text.secondary" sx={{ mb: 4 }}>

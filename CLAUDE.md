@@ -26,8 +26,9 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   the clinic confirms the appointment. Forms open the visitor's own
   email/WhatsApp app — the site stores and sends nothing.
 - **No invented claims:** no patient counts, review scores, awards, or
-  insurance partners unless the owner confirms them. Testimonials/blog are
-  flagged placeholder content.
+  insurance partners unless the owner confirms them. Owner-confirmed so far:
+  5.0★ Google rating (32 reviews), **400+ patients** (confirmed 2026-11-27),
+  5+ years. Testimonials are real Google reviews; blog is placeholder content.
 
 ## Owner preferences
 - Single-doctor clinic: **Dr. Afaque Khan** (BDS, Reg. No. A-47915, 5+ yrs,
@@ -36,12 +37,17 @@ recorded in `CHANGELOG.md` **in the same session the change is made**:
   Treatment catalog (12 services) is owner-supplied — real, not placeholder.
   Owner decisions: NO treatment prices anywhere, NO memberships section.
 - Keep public flows minimal — the owner consistently rejects extra steps.
-- Design: since 2026-10-15 the **client's 7-page reference mockup is the
-  source of truth** (palette #216CF3/#10213D/#F3F7FF, navy footer + navy
-  dentist hero, blue CTA band on every page, "+ EYEBROW" labels, 3-step
-  booking stepper, fixed mobile booking bar). Keep the BrightSmile
-  tooth-badge logo. Content in the mockup (stats, memberships
-  address) is client-approved.
+- Design (since 2026-11-27): the **homepage** recreates the layout of
+  ceramcodentalclinic.com/home-mobile.php (owner's chosen reference) in the
+  Bright Smile **logo blue #0562D0** (+ #0447A3 for gradients) —
+  self-contained module `client/src/pages/public/reference/` (RefHome +
+  scoped `reference.css`, Poppins, own fixed header / slide-out menu / blue
+  footer / fixed Call·WhatsApp·Book bar that appears once the hero buttons
+  scroll away). Layout only: never copy the reference clinic's photos or text.
+  Breakpoints mirror the reference (≥400px phones get the taller hero/photos).
+  Inner pages still use the older layout (PublicLayout/Navbar/Footer,
+  palette #216CF3) — owner chose to go live without restyling them.
+  Keep the BrightSmile tooth-badge logo.
 
 ## Build & deploy
 - `npm run build` → `client/dist`. Deploy: push to `main` → **GitHub Pages** via `.github/workflows/deploy.yml` (repo is public; 404.html = SPA fallback).

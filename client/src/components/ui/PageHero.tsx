@@ -66,7 +66,7 @@ export function PageHero({ title, subtitle, crumbs = [] }: { title: string; subt
             ),
           )}
         </Breadcrumbs>
-        <Typography variant="h2" sx={{ fontSize: { xs: '1.9rem', sm: '2.4rem', md: '2.9rem' }, maxWidth: 820, color: 'text.primary' }}>
+        <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '1.9rem', sm: '2.4rem', md: '2.9rem' }, maxWidth: 820, color: 'text.primary' }}>
           {title}
         </Typography>
         {subtitle && (

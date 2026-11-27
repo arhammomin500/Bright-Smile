@@ -27,6 +27,8 @@ export const IMG = {
   clinicLogoMarble: '/images/clinic/logo-marble.webp',
   clinicQuoteWall: '/images/clinic/wall-quote.webp',
   clinicTreatmentRoom: '/images/clinic/treatment-room.webp',
+  // Owner-edited wide version of the treatment room (Nov 2026)
+  clinicTreatmentRoomWide: '/images/clinic/treatment-room-wide.webp',
   clinicCeiling: '/images/clinic/treatment-ceiling.webp',
   clinicWaiting: '/images/clinic/waiting-area.webp',
   clinicDesk: '/images/clinic/reception-desk.webp',

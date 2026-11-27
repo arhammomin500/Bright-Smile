@@ -6,6 +6,95 @@ Every code/content/config change must add an entry under the current date
 
 ---
 
+## 2026-11-27
+
+### Homepage rebuilt on the ceramcodentalclinic.com mobile layout
+- Built and reviewed locally first (branch `reference-recreation-local`,
+  previewed on the owner's phone over Wi-Fi), then merged and deployed after
+  the owner's go-ahead: owner asked for a recreation of
+  https://ceramcodentalclinic.com/home-mobile.php in our own colours/content.
+  Owner chose to go live with the homepage only (inner pages keep the older
+  layout) and confirmed the 400+ patients figure.
+- New self-contained module `client/src/pages/public/reference/`
+  (RefHome, RefSlider, CompareSlider, scoped reference.css) reproducing the
+  reference's 16 sections in order with its measured values: Poppins
+  13/16/20/28px type scale, navy #1C3B69 + green #018242, 8px cards with
+  0 8px 16px shadows, fixed header with round menu button and full-screen
+  slide-out menu, overlapping badge card, auto-playing 3-up/2-up sliders
+  with round arrows, accordion, drag before/after slider, navy footer,
+  back-to-top button and fixed Call / WhatsApp / Book bottom bar.
+- Layout and styling only: Ceramco's own photos and copy are their
+  copyrighted content and were NOT copied — every slot uses Bright Smile's
+  real photos, treatments, reviews and details instead.
+- `/` now renders the recreation (own header/footer); every other page and
+  the shared layout are untouched. Added @fontsource/poppins and a local
+  `.claude/launch.json` dev-server config.
+- Owner-edited wide treatment-room photo (from Downloads) added as
+  `images/clinic/treatment-room-wide.webp` (2 MB PNG → 68 KB) and used for
+  the recreation's hero background, first clinic-slider tile and first
+  equipment card; Gallery and other pages keep the original photo.
+- Owner feedback on the recreation: hero made taller (176 → 210px, the
+  badge card still overlaps by 25px as in the reference); Google badge now
+  uses the full-colour "G"; stats card follows the reference's 3-number
+  layout — 12+ Treatments · 400+ Patients · 5+ Years (the 400+ figure was
+  confirmed by the owner);
+  badge item 4 changed to "6 Days · Open a Week" so 12 Treatments isn't
+  shown twice.
+- Found and copied the reference's second phone breakpoint (400px+,
+  i.e. most Android phones; the first pass was measured at 390px): hero
+  250px with centred text, doctor photos 225px, clinic-slider tiles 213px,
+  treatment tiles 130px, before/after 190px.
+- Colour: the reference navy (#1C3B69) replaced everywhere by the Bright
+  Smile logo blue #0562D0 (sampled from the logo file) with a deeper
+  #0447A3 for gradients — buttons, numbers, headings, icons, emergency
+  band, review cards, footer (text lightened for contrast), menu button and
+  back-to-top. The green eyebrows/WhatsApp button stay as in the reference.
+- Sticky contact bar redesigned (owner found the dark bar too heavy): light
+  frosted bar with rounded top, Call (blue chip) and WhatsApp (green chip)
+  icons, and a gradient-blue "Book Now" button as the main action.
+- Stats card redesigned: each number gets a gradient logo-blue icon tile
+  (tooth = Treatments, people = Happy Patients, medal = Years Experience),
+  bolder 21px numbers that count up when the card scrolls into view
+  (instant with reduced-motion), softer grey labels.
+- Sticky contact bar now a floating rounded dock (light-blue Call, green
+  WhatsApp, gradient-blue Book Now) that stays hidden while the hero's own
+  Book/WhatsApp buttons are on screen and slides up once they scroll away.
+- Owner feedback: stats icons replaced by real round photos (treatment
+  room · a real patient smile from the Google listing · Dr. Afaque); the
+  sticky contact bar now uses the reference's own design (full-width 64px
+  bar, icon above label, Call / WhatsApp / Book) in the logo blue, still
+  appearing only after the hero's buttons scroll away.
+- Owner reverted the stats photos: the card is back to the gradient
+  logo-blue icon tiles (tooth / people / medal) with count-up numbers; the
+  reference-style bottom bar is kept.
+- "Meet Your Dentist": the clinic/View Gallery card is removed; Dr. Afaque
+  now has a single profile card — large portrait with a "5.0 Google" chip
+  and a verified "Reg. No. A-47915" badge, name, "Dental Surgeon &
+  Implantologist", BDS (MUHS) line, facts strip (5+ years · BDS MUHS · 3
+  languages), short intro, treatment tags, and View Profile / Book a Visit
+  buttons (photo-left layout on desktop).
+- Reviews redesigned: white cards (gold stars, colour Google "G", text
+  trimmed to 3 lines ending in "…", initial avatar, verified "Google review"
+  line) that auto-scroll every 4 s with pagination dots instead of arrows;
+  the slider component gained optional dots / arrow-free modes.
+- Footer restyled light (owner found the solid blue footer too heavy):
+  #F4F8FE background with a thin logo-blue accent line, colour logo (no
+  white box), round social buttons, headings with short blue underlines,
+  contact details in a white card with icon chips, full-width Get
+  Directions button, grey copyright with blue legal links.
+- Owner reverted the light footer — back to the logo-blue gradient footer.
+- Fix: at the very bottom on phones the fixed bottom bar (plus the gesture-bar
+  safe area) and back-to-top button covered the copyright/legal links; the
+  footer now reserves 64px + safe area + 64px below its last line.
+- Pre-launch QA: production build passes; automated sweep of 19 routes at
+  360 / 412 / 768 / 1280px (76 page loads) found no horizontal scroll,
+  off-screen elements, broken images or script errors; legacy /book and
+  /doctors redirects work. Booking flow tested end to end (validation, Mon–Sat
+  time slots, review step, WhatsApp to 919371223464, email). Fixes: Sunday
+  message now says "by appointment" (was "closed"); a typed +91/0 prefix is
+  no longer doubled ("+91 +91 …") in the review and WhatsApp message; inner
+  pages, blog posts and the 404 page now have a proper <h1> (same look).
+
 ## 2026-11-26
 
 ### REAL clinic photos replace all stock imagery 📸

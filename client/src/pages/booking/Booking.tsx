@@ -78,6 +78,8 @@ export default function Booking() {
   }, [doctor, date]);
 
   const nameOk = name.trim().length >= 2;
+  // The field shows a +91 prefix, so drop a typed country code / leading 0 for display and the message.
+  const phoneLocal = phone.trim().replace(/^(\+?91[\s-]?|0)(?=\d)/, '');
   const phoneOk = /^[+\d][\d\s()-]{7,16}$/.test(phone.trim());
   const dateObj = dayjs(date);
   const dateOk = !!date && dateObj.isValid() && !dateObj.isBefore(dayjs(), 'day');
@@ -90,7 +92,7 @@ export default function Booking() {
   const treatmentName = treatments?.find((t) => t.slug === treatment)?.name;
   const message =
     `Hi Bright Smile 👋 I'd like to request an appointment.\n\n` +
-    `Name: ${name.trim()}\nMobile: ${phone.trim()}\n` +
+    `Name: ${name.trim()}\nMobile: +91 ${phoneLocal}\n` +
     (treatmentName ? `Treatment: ${treatmentName}\n` : '') +
     `Preferred day: ${dateObj.isValid() ? dateObj.format('dddd, D MMMM YYYY') : ''}\n` +
     `Preferred time: ${time ? formatTime12h(time) : ''}\n\n` +
@@ -220,7 +222,7 @@ export default function Booking() {
                       touched && !dateOk
                         ? 'Please pick a date from today onwards'
                         : date && dateOk && !dayOpen
-                          ? 'The clinic is closed on Sundays — please pick another day'
+                          ? 'Sundays are by appointment only — please call or WhatsApp the clinic, or pick Mon–Sat'
                           : ' '
                     }
                   />
@@ -259,7 +261,7 @@ export default function Booking() {
                   <Card sx={{ p: 2.25, bgcolor: brand.mist, boxShadow: 'none', border: `1px solid ${brand.line}` }}>
                     <Stack spacing={1}>
                       <Row label="Name" value={name.trim()} />
-                      <Row label="Mobile" value={`+91 ${phone.trim()}`} />
+                      <Row label="Mobile" value={`+91 ${phoneLocal}`} />
                       <Row label="Treatment" value={treatmentName ?? 'General consultation'} />
                       <Row label="Day" value={dateObj.isValid() ? dateObj.format('dddd, D MMMM YYYY') : ''} />
                       <Row label="Time" value={time ? formatTime12h(time) : ''} />

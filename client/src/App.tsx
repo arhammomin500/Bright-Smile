@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ScrollManager } from './components/layout/ScrollManager';
 import { PublicLayout } from './components/layout/PublicLayout';
 
-import Home from './pages/public/Home';
+import RefHome from './pages/public/reference/RefHome';
 import About from './pages/public/About';
 import TreatmentsList from './pages/public/TreatmentsList';
 import TreatmentDetail from './pages/public/TreatmentDetail';
@@ -22,8 +22,9 @@ export default function App() {
     <>
       <ScrollManager />
       <Routes>
+        {/* Local reference recreation — renders its own header/footer/bottom bar */}
+        <Route path="/" element={<RefHome />} />
         <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/treatments" element={<TreatmentsList />} />
           <Route path="/treatments/:slug" element={<TreatmentDetail />} />

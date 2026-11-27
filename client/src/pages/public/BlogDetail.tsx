@@ -93,7 +93,7 @@ export default function BlogDetail() {
             label={post.category}
             sx={{ mb: 2.5, bgcolor: 'rgba(255,255,255,0.18)', color: '#fff', fontWeight: 700, backdropFilter: 'blur(4px)' }}
           />
-          <Typography variant="h2" sx={{ fontSize: { xs: '1.9rem', sm: '2.5rem', md: '3rem' }, mb: 3 }}>
+          <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '1.9rem', sm: '2.5rem', md: '3rem' }, mb: 3 }}>
             {post.title}
           </Typography>
           <Stack direction="row" spacing={{ xs: 2, sm: 3 }} sx={{ flexWrap: 'wrap', rowGap: 1, color: 'rgba(255,255,255,0.9)' }}>
